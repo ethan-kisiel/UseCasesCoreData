@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="22A5295i" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BaseModel" representedClassName="BaseModel" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="Category" representedClassName="Category" parentEntity="BaseModel" syncable="YES">
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project"/>
+        <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UseCase"/>
+    </entity>
+    <entity name="Project" representedClassName="Project" parentEntity="BaseModel" syncable="YES">
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category"/>
+    </entity>
+    <entity name="Step" representedClassName="Step" parentEntity="BaseModel" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCase"/>
+    </entity>
+    <entity name="UseCase" representedClassName="UseCase" parentEntity="BaseModel" syncable="YES">
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
+        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Step"/>
+    </entity>
 </model>
