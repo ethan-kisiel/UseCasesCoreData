@@ -18,6 +18,7 @@
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCase"/>
     </entity>
     <entity name="UseCase" representedClassName="UseCase" parentEntity="BaseModel" syncable="YES">
+        <attribute name="priority" optional="YES" attributeType="String"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
         <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Step"/>
     </entity>
