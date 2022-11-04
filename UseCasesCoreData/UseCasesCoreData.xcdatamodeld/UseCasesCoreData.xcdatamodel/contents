@@ -7,18 +7,19 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Category" representedClassName="Category" parentEntity="BaseModel" syncable="YES">
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project"/>
-        <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UseCase"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="categories" inverseEntity="Project"/>
+        <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UseCase" inverseName="parent" inverseEntity="UseCase"/>
     </entity>
     <entity name="Project" representedClassName="Project" parentEntity="BaseModel" syncable="YES">
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="parent" inverseEntity="Category"/>
     </entity>
     <entity name="Step" representedClassName="Step" parentEntity="BaseModel" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCase"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCase" inverseName="steps" inverseEntity="UseCase"/>
     </entity>
     <entity name="UseCase" representedClassName="UseCase" parentEntity="BaseModel" syncable="YES">
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
-        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Step"/>
+        <attribute name="priority" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="useCases" inverseEntity="Category"/>
+        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Step" inverseName="parent" inverseEntity="Step"/>
     </entity>
 </model>

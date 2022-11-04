@@ -1,0 +1,48 @@
+//
+//  CategoryListView.swift
+//  UseCasesLocalRealm
+//
+//  Created by Ethan Kisiel on 8/7/22.
+//
+
+import SwiftUI
+
+struct CategoryListView: View {
+    @Environment(\.managedObjectContext) var moc
+    
+    @FetchRequest var projectCategories: FetchedResults<Category>
+    
+    var project: Project
+
+    @State var showUseCases: Bool = false
+    
+    init(project: Project)
+    {
+        self.project = project
+        
+        _projectCategories = FetchRequest<Category>(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)],
+        predicate: NSPredicate(format: "parent == %@", project),
+        animation: .default)
+    }
+
+    var body: some View {
+        List
+        {
+            ForEach(projectCategories, id: \.id)
+            { category in
+                CategoryCellView(category: category)
+                    .environment(\.managedObjectContext, moc)
+            }
+            .onDelete(perform: {_ in return })
+        }
+        .listStyle(.plain)
+    }
+}
+
+struct CategoryListView_Previews: PreviewProvider {
+    static var previews: some View {
+        var moc = PersistenceController.shared.container.viewContext
+        CategoryListView(project: Project(context: moc))
+    }
+}

@@ -16,6 +16,7 @@ extension UseCase {
         return NSFetchRequest<UseCase>(entityName: "UseCase")
     }
 
+    @NSManaged public var priority: String?
     @NSManaged public var parent: Category?
     @NSManaged public var steps: NSSet?
 
