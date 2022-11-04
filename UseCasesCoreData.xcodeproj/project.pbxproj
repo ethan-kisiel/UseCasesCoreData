@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		880A041E29155D10001C8E6B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A041D29155D10001C8E6B /* Constants.swift */; };
 		883F448F2912A5C600284B2F /* UseCasesCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */; };
 		883F44912912A5C600284B2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44902912A5C600284B2F /* ContentView.swift */; };
 		883F44932912A5C600284B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44922912A5C600284B2F /* Assets.xcassets */; };
@@ -39,10 +38,10 @@
 		88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88815D302914077E00B0CF40 /* String+Extensions.swift */; };
 		88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */; };
 		88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */; };
+		88951CF72915DE79007081D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF62915DE79007081D3 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		880A041D29155D10001C8E6B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../../UseCasesLocalRealm/UseCasesLocalRealm/Constants.swift; sourceTree = "<group>"; };
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesCoreDataApp.swift; sourceTree = "<group>"; };
 		883F44902912A5C600284B2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		88815D302914077E00B0CF40 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		88951CF62915DE79007081D3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +107,6 @@
 		883F448D2912A5C600284B2F /* UseCasesCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				880A041D29155D10001C8E6B /* Constants.swift */,
 				88815D2F2914074B00B0CF40 /* Extensions */,
 				883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */,
 				883F44B82912C1D100284B2F /* Views */,
@@ -118,6 +117,7 @@
 				883F44992912A5C600284B2F /* UseCasesCoreData.xcdatamodeld */,
 				883F44972912A5C600284B2F /* Persistence.swift */,
 				883F44942912A5C600284B2F /* Preview Content */,
+				88951CF62915DE79007081D3 /* Constants.swift */,
 			);
 			path = UseCasesCoreData;
 			sourceTree = "<group>";
@@ -286,8 +286,8 @@
 				883F44B52912B76C00284B2F /* Category+CoreDataProperties.swift in Sources */,
 				883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
-				880A041E29155D10001C8E6B /* Constants.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
+				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
 				883F44AF2912B76C00284B2F /* BaseModel+CoreDataProperties.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,
