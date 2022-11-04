@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880A041E29155D10001C8E6B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A041D29155D10001C8E6B /* Constants.swift */; };
 		883F448F2912A5C600284B2F /* UseCasesCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */; };
 		883F44912912A5C600284B2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44902912A5C600284B2F /* ContentView.swift */; };
 		883F44932912A5C600284B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44922912A5C600284B2F /* Assets.xcassets */; };
@@ -34,14 +35,14 @@
 		883F44CF2912D38B00284B2F /* StepCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44C32912D38B00284B2F /* StepCellView.swift */; };
 		883F44D02912D38B00284B2F /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44C42912D38B00284B2F /* CategoryListView.swift */; };
 		883F44D92912D5BA00284B2F /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = 883F44D82912D5BA00284B2F /* Neumorphic */; };
-		883F44FA2912EE9B00284B2F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44F92912EE9B00284B2F /* Constants.swift */; };
-		883F44FF2912EF8A00284B2F /* UseCase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44FD2912EF8A00284B2F /* UseCase+CoreDataClass.swift */; };
-		883F45002912EF8A00284B2F /* UseCase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44FE2912EF8A00284B2F /* UseCase+CoreDataProperties.swift */; };
 		883F450229131A5D00284B2F /* TextInputFieldWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */; };
 		88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88815D302914077E00B0CF40 /* String+Extensions.swift */; };
+		88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */; };
+		88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		880A041D29155D10001C8E6B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../../UseCasesLocalRealm/UseCasesLocalRealm/Constants.swift; sourceTree = "<group>"; };
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesCoreDataApp.swift; sourceTree = "<group>"; };
 		883F44902912A5C600284B2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,11 +70,10 @@
 		883F44C22912D38B00284B2F /* UseCaseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseDetailsView.swift; sourceTree = "<group>"; };
 		883F44C32912D38B00284B2F /* StepCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCellView.swift; sourceTree = "<group>"; };
 		883F44C42912D38B00284B2F /* CategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
-		883F44F92912EE9B00284B2F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../UseCasesLocalRealm/UseCasesLocalRealm/Constants.swift; sourceTree = "<group>"; };
-		883F44FD2912EF8A00284B2F /* UseCase+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataClass.swift"; sourceTree = "<group>"; };
-		883F44FE2912EF8A00284B2F /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputFieldWithFocus.swift; sourceTree = "<group>"; };
 		88815D302914077E00B0CF40 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataClass.swift"; sourceTree = "<group>"; };
+		88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +107,9 @@
 		883F448D2912A5C600284B2F /* UseCasesCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				880A041D29155D10001C8E6B /* Constants.swift */,
 				88815D2F2914074B00B0CF40 /* Extensions */,
 				883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */,
-				883F44F92912EE9B00284B2F /* Constants.swift */,
 				883F44B82912C1D100284B2F /* Views */,
 				883F44A12912A60000284B2F /* DatabaseModels */,
 				883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */,
@@ -133,8 +133,8 @@
 		883F44A12912A60000284B2F /* DatabaseModels */ = {
 			isa = PBXGroup;
 			children = (
-				883F44FD2912EF8A00284B2F /* UseCase+CoreDataClass.swift */,
-				883F44FE2912EF8A00284B2F /* UseCase+CoreDataProperties.swift */,
+				88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */,
+				88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */,
 				883F44A42912B76C00284B2F /* BaseModel+CoreDataClass.swift */,
 				883F44A52912B76C00284B2F /* BaseModel+CoreDataProperties.swift */,
 				883F44A82912B76C00284B2F /* Step+CoreDataClass.swift */,
@@ -286,22 +286,22 @@
 				883F44B52912B76C00284B2F /* Category+CoreDataProperties.swift in Sources */,
 				883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
-				883F45002912EF8A00284B2F /* UseCase+CoreDataProperties.swift in Sources */,
+				880A041E29155D10001C8E6B /* Constants.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				883F44AF2912B76C00284B2F /* BaseModel+CoreDataProperties.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,
 				883F44C82912D38B00284B2F /* CategoryCellView.swift in Sources */,
 				883F449B2912A5C600284B2F /* UseCasesCoreData.xcdatamodeld in Sources */,
-				883F44FA2912EE9B00284B2F /* Constants.swift in Sources */,
 				883F44CD2912D38B00284B2F /* CategoryDetailsView.swift in Sources */,
 				883F450229131A5D00284B2F /* TextInputFieldWithFocus.swift in Sources */,
 				883F44D02912D38B00284B2F /* CategoryListView.swift in Sources */,
 				883F44C72912D38B00284B2F /* ProjectListView.swift in Sources */,
+				88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */,
 				883F44982912A5C600284B2F /* Persistence.swift in Sources */,
-				883F44FF2912EF8A00284B2F /* UseCase+CoreDataClass.swift in Sources */,
 				883F44C62912D38B00284B2F /* StepListView.swift in Sources */,
 				883F44C92912D38B00284B2F /* UseCaseCellView.swift in Sources */,
+				88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */,
 				883F44912912A5C600284B2F /* ContentView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
 				883F44AE2912B76C00284B2F /* BaseModel+CoreDataClass.swift in Sources */,

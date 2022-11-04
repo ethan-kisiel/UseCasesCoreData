@@ -2,7 +2,7 @@
 //  UseCase+CoreDataProperties.swift
 //  UseCasesCoreData
 //
-//  Created by Ethan Kisiel on 11/2/22.
+//  Created by Ethan Kisiel on 11/4/22.
 //
 //
 
@@ -17,6 +17,7 @@ extension UseCase {
     }
 
     @NSManaged public var priority: String?
+    @NSManaged public var isComplete: Bool
     @NSManaged public var parent: Category?
     @NSManaged public var steps: NSSet?
 

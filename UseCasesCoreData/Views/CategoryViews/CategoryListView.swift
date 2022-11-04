@@ -13,36 +13,57 @@ struct CategoryListView: View {
     @FetchRequest var projectCategories: FetchedResults<Category>
     
     var project: Project
-
+    
     @State var showUseCases: Bool = false
     
     init(project: Project)
     {
         self.project = project
-        
         _projectCategories = FetchRequest<Category>(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)],
-        predicate: NSPredicate(format: "parent == %@", project),
-        animation: .default)
+            sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)],
+            predicate: NSPredicate(format: "parent == %@", project),
+            animation: .default)
     }
-
+    
     var body: some View {
-        List
+        if projectCategories.isEmpty
         {
-            ForEach(projectCategories, id: \.id)
-            { category in
-                CategoryCellView(category: category)
-                    .environment(\.managedObjectContext, moc)
-            }
-            .onDelete(perform: {_ in return })
+            Text("No categories to show.")
         }
-        .listStyle(.plain)
+        else
+        {
+            List
+            {
+                ForEach(projectCategories, id: \.id)
+                { category in
+                    CategoryCellView(category: category)
+                        .environment(\.managedObjectContext, moc)
+                }
+                .onDelete(perform: deleteCategory)
+            }
+            .listStyle(.plain)
+        }
+    }
+    private func deleteCategory(indexSet: IndexSet)
+    {
+        withAnimation
+        {
+            indexSet.map{ projectCategories[$0] }.forEach(moc.delete)
+        }
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
     }
 }
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
-        var moc = PersistenceController.shared.container.viewContext
+        let moc = PersistenceController.shared.container.viewContext
         CategoryListView(project: Project(context: moc))
     }
 }

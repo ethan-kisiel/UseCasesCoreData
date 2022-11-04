@@ -25,6 +25,7 @@ struct ProjectDetailsView: View
     {
         HStack(alignment: .top)
         {
+            Text("**\(project.name ?? EMPTY_STRING)** Categories:")
             Spacer()
             Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                 .onTapGesture
@@ -55,7 +56,7 @@ struct ProjectDetailsView: View
                     isFocused = false
                 })
                 {
-                    Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary : .primary)
+                    Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary: NM_SEC)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
@@ -63,17 +64,9 @@ struct ProjectDetailsView: View
             }.padding()
         }
         Spacer()
-        if project.categories?.count == 0
-        {
-            Text("No categories to display.")
-        }
-        else
-        {
-            CategoryListView(project: project)
-        }
-            
+        CategoryListView(project: project)
         Spacer()
-            .navigationTitle((project.name?.shorten(by: DISP_SHORT))!)
+            .navigationTitle("Categories")
             .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -103,7 +96,6 @@ struct ProjectDetailsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let project = Project()
-        ProjectDetailsView(project: project)
+        ProjectDetailsView(project: Project())
     }
 }

@@ -10,20 +10,21 @@ import SwiftUI
 
 struct UseCaseDetailsView: View
 {
-    @State var useCase: UseCase
+    @Environment(\.managedObjectContext) var moc
+    
+    let useCase: UseCase
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
 
+    @State var name: String = EMPTY_STRING
     @State var text: String = EMPTY_STRING
     @State var stepId: String = EMPTY_STRING
 
     var body: some View
     {
-        /*
         HStack(alignment: .top)
         {
-            Text("ID: \(useCase.caseId)")
-                .fontWeight(.semibold)
+            Text("**\(useCase.name ?? EMPTY_STRING)** Steps:")
             Spacer()
             Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                 .onTapGesture
@@ -38,7 +39,7 @@ struct UseCaseDetailsView: View
             {
                 withAnimation
                 {
-                    TextInputFieldWithFocus("Step", text: $text, isFocused: $isFocused).padding(8)
+                    TextInputFieldWithFocus("Step", text: $name, isFocused: $isFocused).padding(8)
                 }
                 withAnimation
                 {
@@ -47,10 +48,9 @@ struct UseCaseDetailsView: View
 
                 Button(action:
                     {
-                        let step = Step(text: text)
-                        step.stepId = stepId
-                        //StepManager.shared.addStep(useCase: useCase, step: step)
-                        text = EMPTY_STRING
+                        addStep()
+
+                        name = EMPTY_STRING
                         stepId = EMPTY_STRING
                         isFocused = false
                     })
@@ -59,15 +59,36 @@ struct UseCaseDetailsView: View
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(text.isEmpty)
+                .disabled(name.isEmpty)
             }.padding()
         }
         Spacer()
         StepListView(useCase: useCase)
-        //Spacer().navigationTitle("(Use Case) " + useCase.caseId.shorten(by: DISP_SHORT))
-            .navigationBarTitleDisplayMode(.inline)*/
-        
-        Text("UseCaseDetailsView")
+            .environment(\.managedObjectContext, moc)
+        Spacer()
+            .navigationTitle("Steps")
+            .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func addStep()
+    {
+        withAnimation
+        {
+            let step = Step(context: moc)
+            step.id = UUID()
+            step.name = name
+            step.created = Date()
+            step.lastUpdated = step.created
+            step.parent = useCase
+        }
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
     }
 }
 

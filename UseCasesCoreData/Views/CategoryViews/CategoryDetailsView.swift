@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CategoryDetailsView: View {
+    @Environment(\.managedObjectContext) var moc
+    
     let category: Category
     
     @State var priority: Priority = .medium
@@ -25,9 +27,7 @@ struct CategoryDetailsView: View {
         // This is the
         HStack(alignment: .top)
         {
-            // TODO: Add user made id for category
-            //Text("ID: \(category.id)")
-                //.fontWeight(.semibold)
+            Text("**\(category.name ?? EMPTY_STRING)** Use Cases:")
             Spacer()
             Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                 .onTapGesture
@@ -62,8 +62,8 @@ struct CategoryDetailsView: View {
 
                 Button(action:
                 {
-                    /*useCase = UseCase(title: title, priority: priority)
-                    useCase!.caseId = caseId*/
+                    addUseCase()
+                    
                     title = EMPTY_STRING
                     caseId = EMPTY_STRING
                     priority = .medium
@@ -80,8 +80,33 @@ struct CategoryDetailsView: View {
         Spacer()
         UseCaseListView(category: category)
         Spacer()
-            //.navigationTitle("(Cateogry) " + category.title.shorten(by: DISP_SHORT))
+            .navigationTitle("Use Cases")
             .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func addUseCase()
+    {
+        withAnimation
+        {
+            let useCase = UseCase(context: moc)
+            useCase.id = UUID()
+            useCase.name = title
+            useCase.priority = priority.rawValue
+            useCase.isComplete = false
+            useCase.created = Date()
+            useCase.lastUpdated = useCase.created
+            useCase.parent = category
+
+            do
+            {
+                try moc.save()
+                print("Successfully saved use case")
+            }
+            catch
+            {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
