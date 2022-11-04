@@ -38,6 +38,7 @@
 		883F44FF2912EF8A00284B2F /* UseCase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44FD2912EF8A00284B2F /* UseCase+CoreDataClass.swift */; };
 		883F45002912EF8A00284B2F /* UseCase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44FE2912EF8A00284B2F /* UseCase+CoreDataProperties.swift */; };
 		883F450229131A5D00284B2F /* TextInputFieldWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */; };
+		88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88815D302914077E00B0CF40 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		883F44FD2912EF8A00284B2F /* UseCase+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataClass.swift"; sourceTree = "<group>"; };
 		883F44FE2912EF8A00284B2F /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputFieldWithFocus.swift; sourceTree = "<group>"; };
+		88815D302914077E00B0CF40 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		883F448D2912A5C600284B2F /* UseCasesCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				88815D2F2914074B00B0CF40 /* Extensions */,
 				883F450129131A5D00284B2F /* TextInputFieldWithFocus.swift */,
 				883F44F92912EE9B00284B2F /* Constants.swift */,
 				883F44B82912C1D100284B2F /* Views */,
@@ -193,6 +196,14 @@
 				883F44BA2912D38A00284B2F /* StepListView.swift */,
 			);
 			path = StepViews;
+			sourceTree = "<group>";
+		};
+		88815D2F2914074B00B0CF40 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				88815D302914077E00B0CF40 /* String+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +306,7 @@
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
 				883F44AE2912B76C00284B2F /* BaseModel+CoreDataClass.swift in Sources */,
 				883F44CB2912D38B00284B2F /* UseCaseListView.swift in Sources */,
+				88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */,
 				883F44CE2912D38B00284B2F /* UseCaseDetailsView.swift in Sources */,
 				883F44CC2912D38B00284B2F /* ProjectDetailsView.swift in Sources */,
 				883F44CF2912D38B00284B2F /* StepCellView.swift in Sources */,

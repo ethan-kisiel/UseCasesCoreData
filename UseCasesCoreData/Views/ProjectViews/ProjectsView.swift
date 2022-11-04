@@ -18,7 +18,6 @@ struct ProjectsView: View
     
     @State var title: String = EMPTY_STRING
     @State var projectId: String = EMPTY_STRING
-    @State var project: Project?
 
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
@@ -78,11 +77,11 @@ struct ProjectsView: View
     {
         withAnimation
         {
-            project = Project(context: moc)
-            project?.id = UUID()
-            project?.created = Date()
-            project?.lastUpdated = project?.created
-            project?.name = title
+            let project = Project(context: moc)
+            project.id = UUID()
+            project.created = Date()
+            project.lastUpdated = project.created
+            project.name = title
             
             do
             {

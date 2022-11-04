@@ -6,31 +6,35 @@
 //
 
 import SwiftUI
-/*
+
 struct CategoryListView: View {
-    @State var project: Project
-    @ObservedResults(Category.self) var categories: Results<Category>
+    @Environment(\.managedObjectContext) var moc
     
-    var projectCategories: Results<Category>
-    {
-        categories.where { $0.parentProject._id == project._id }
-    }
+    @FetchRequest var projectCategories: FetchedResults<Category>
+    
+    var project: Project
+
     @State var showUseCases: Bool = false
+    
+    init(project: Project)
+    {
+        self.project = project
+        
+        _projectCategories = FetchRequest<Category>(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)],
+        predicate: NSPredicate(format: "parent == %@", project),
+        animation: .default)
+    }
+
     var body: some View {
         List
         {
-            ForEach(projectCategories, id: \._id)
+            ForEach(projectCategories, id: \.id)
             { category in
                 CategoryCellView(category: category)
+                    .environment(\.managedObjectContext, moc)
             }
-            .onDelete
-            { indexSet in
-                indexSet.forEach
-                { index in
-                    CategoryManager.shared.deleteCategory(projectCategories[index])
-                }
-                
-            }
+            .onDelete(perform: {_ in return })
         }
         .listStyle(.plain)
     }
@@ -38,7 +42,7 @@ struct CategoryListView: View {
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryListView(project: Project())
+        var moc = PersistenceController.shared.container.viewContext
+        CategoryListView(project: Project(context: moc))
     }
 }
-*/

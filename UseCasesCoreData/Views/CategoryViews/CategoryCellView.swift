@@ -7,8 +7,13 @@
 
 import CoreData
 import SwiftUI
-/*
+
 struct CategoryCellView: View {
+    @Environment(\.managedObjectContext) var moc
+
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    private var categories: FetchedResults<Category>
+    
     let category: Category
     @State var trashIsEnabled: Bool = false
     var body: some View
@@ -19,22 +24,41 @@ struct CategoryCellView: View {
             {
                 Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
                     .disabled(trashIsEnabled)
-                    .onLongPressGesture(minimumDuration: 0.8)
-                {
-                    trashIsEnabled.toggle()
-                }
                 .onTapGesture
                 {
                     if trashIsEnabled
                     {
-                        CategoryManager.shared.deleteCategory(category)
+                        deleteCategory(category)
                     }
                 }
-                Text(category.title)
+                .onLongPressGesture(minimumDuration: 0.8)
+                {
+                    trashIsEnabled.toggle()
+                }
+                Text(category.name ?? EMPTY_STRING)
                 Spacer()
                 // TODO: change this to user made category id
-                let categoryId = category._id.stringValue
-                Text(categoryId.shorten(by: 3))
+                let categoryId = category.id?.uuidString ?? EMPTY_STRING
+                Text(categoryId.shorten(by: 3) + "...")
+            }
+        }
+    }
+    
+    private func deleteCategory(_ category: Category)
+    {
+        if let deleteIndex = categories.firstIndex(where: { $0.id == category.id })
+        {
+            withAnimation
+            {
+                moc.delete(categories[deleteIndex])
+                do
+                {
+                    try moc.save()
+                }
+                catch
+                {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -42,7 +66,7 @@ struct CategoryCellView: View {
 
 struct CategoryCellView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryCellView(category: Category(title: "Preview"))
+        //CategoryCellView(category: Category(title: "Preview"))
+        Text("Preview")
     }
 }
-*/

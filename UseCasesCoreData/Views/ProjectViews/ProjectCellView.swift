@@ -16,8 +16,8 @@ struct ProjectCellView: View
     private var projects: FetchedResults<Project>
     
     @State var trashIsEnabled: Bool = false
-
     let project: Project
+    
     var body: some View
     {
         NavigationLink(value: Route.project(project))
@@ -45,10 +45,10 @@ struct ProjectCellView: View
                         print("TeSTTESTTETST")
                     }
     
-                Text(project.name ?? "NOne")
+                Text(project.name ?? EMPTY_STRING)
                 Spacer()
-                let projectId = project.id?.uuidString ?? "MISSING ID"
-                //Text(projectId.shorten(by: 3))
+                let projectId = project.id?.uuidString ?? EMPTY_STRING
+                Text(projectId.shorten(by: 3) + "...")
             }
         }
     }

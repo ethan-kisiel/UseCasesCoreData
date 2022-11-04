@@ -10,6 +10,10 @@ import SwiftUI
 
 struct ProjectDetailsView: View
 {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    private var categories: FetchedResults<Category>
+    
     @State var project: Project
     // add inline picker for the category selection
     @State var categoryTitle: String = EMPTY_STRING
@@ -21,8 +25,6 @@ struct ProjectDetailsView: View
     {
         HStack(alignment: .top)
         {
-            Text("ID: \(project.id?.uuidString ?? "None")")
-                .fontWeight(.semibold)
             Spacer()
             Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                 .onTapGesture
@@ -47,15 +49,8 @@ struct ProjectDetailsView: View
                     // the use case is added to that category
                     // otherwise, a category is created
                     // and the use case is added
-                    /*if let targetCategory = categories.first(where: { $0.title == categoryTitle })
-                    {
-                        return
-                    }
-                    else
-                    {
-                        let categoryToAdd = Category(title: categoryTitle)
-                        CategoryManager.shared.addCategory(project: project, category: categoryToAdd)
-                    }*/
+                    addCategory(name: categoryTitle)
+                    
                     categoryTitle = EMPTY_STRING
                     isFocused = false
                 })
@@ -68,10 +63,39 @@ struct ProjectDetailsView: View
             }.padding()
         }
         Spacer()
-        //CategoryListView(project: project)
+        if project.categories?.count == 0
+        {
+            Text("No categories to display.")
+        }
+        else
+        {
+            CategoryListView(project: project)
+        }
+            
         Spacer()
-            .navigationTitle("project.title.shorten(by: DISP_SHORT)")
+            .navigationTitle((project.name?.shorten(by: DISP_SHORT))!)
             .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    
+    func addCategory(name: String)
+    {
+        let category = Category(context: moc)
+        category.id = UUID()
+        category.created = Date()
+        category.lastUpdated = Date()
+        category.name = name
+        category.parent = project
+        
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print("UNABLE TO SAVE")
+            print(error.localizedDescription)
+        }
     }
 }
 
