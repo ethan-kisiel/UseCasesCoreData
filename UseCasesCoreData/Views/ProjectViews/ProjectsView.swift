@@ -99,6 +99,8 @@ struct ProjectsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
+        let moc = PersistenceController.shared.container.viewContext
         ProjectsView()
+            .environment(\.managedObjectContext, moc)
     }
 }

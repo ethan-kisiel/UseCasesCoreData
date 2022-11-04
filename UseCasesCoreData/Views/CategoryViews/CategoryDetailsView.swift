@@ -80,7 +80,7 @@ struct CategoryDetailsView: View {
         Spacer()
         UseCaseListView(category: category)
         Spacer()
-            .navigationTitle("Category")
+            .navigationTitle("Use Cases")
             .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -92,12 +92,15 @@ struct CategoryDetailsView: View {
             useCase.id = UUID()
             useCase.name = title
             useCase.priority = priority.rawValue
+            useCase.isComplete = false
             useCase.created = Date()
             useCase.lastUpdated = useCase.created
+            useCase.parent = category
 
             do
             {
                 try moc.save()
+                print("Successfully saved use case")
             }
             catch
             {

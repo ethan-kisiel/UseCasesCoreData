@@ -14,26 +14,26 @@ enum Sections: String, CaseIterable
 
 struct UseCaseListView: View
 {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest var categoryUseCases: FetchedResults<UseCase>
     // takes category for filter query purposes
     var category: Category
     
-    /*
-    var categoryUseCases: Results<UseCase>
+    init(category: Category)
     {
-        // filter observed results to get only project cases
-        return useCases.where { $0.parentCategory._id == category._id }
+        self.category = category
+        _categoryUseCases = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath:\UseCase.name, ascending: true)], predicate: NSPredicate(format: "parent == %@", category), animation: .default)
     }
-
-    var completeUseCases: Results<UseCase>
+    var completeUseCases: [UseCase]
     {
-        return categoryUseCases.where { $0.isComplete == true }
+        return categoryUseCases.filter({ $0.isComplete == true })
     }
-
-    var incompleteUseCases: Results<UseCase>
+    
+    var incompleteUseCases: [UseCase]
     {
-        return categoryUseCases.where { $0.isComplete == false }
+        return categoryUseCases.filter({ $0.isComplete == false })
     }
-    */
+    
     var body: some View
     {
         List
@@ -41,12 +41,11 @@ struct UseCaseListView: View
             ForEach(Sections.allCases, id: \.self)
             {
                 section in
-                //let filteredCases = section == .incomplete ? incompleteUseCases : completeUseCases
+                let filteredCases = section == .incomplete ? incompleteUseCases : completeUseCases
                 Spacer()
-                
                 Section
                 {
-                    /*if filteredCases.isEmpty
+                    if filteredCases.isEmpty
                     {
                         Text("No \(section.rawValue) use cases to display.")
                             .foregroundColor(.secondary)
@@ -67,26 +66,33 @@ struct UseCaseListView: View
                         }
                         
                         ForEach(filteredCases, id: \.self)
-                        {
-                            useCase in
+                        { useCase in
+                            //Text("\(useCase.name ?? "NO NAME")")
                             UseCaseCellView(useCase: useCase)
                         }
-                        /*
-                        .onDelete
-                        {
-                            indexSet in
-                            indexSet.forEach
-                            {
-                                index in
-                                UseCaseManager.shared.deleteUseCase(filteredCases[index])
-                            }
-                        }*/
-                    }*/
+                        .onDelete(perform: deleteUseCase)
+                    }
                 }
             }
         }
         .listStyle(.plain)
         .padding()
+    }
+    
+    private func deleteUseCase(indexSet: IndexSet)
+    {
+        withAnimation
+        {
+            indexSet.map { categoryUseCases[$0] }.forEach(moc.delete)
+        }
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
     }
 }
 

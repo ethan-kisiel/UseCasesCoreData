@@ -10,8 +10,12 @@ import SwiftUI
 
 struct UseCaseCellView: View
 {
-
-    @State var useCase: UseCase
+    @Environment(\.managedObjectContext) var moc
+    
+    @FetchRequest(sortDescriptors: [], animation: .default)
+    var useCases: FetchedResults<UseCase>
+    
+    let useCase: UseCase
     
     private func priorityBackground(_ priority: Priority) -> Color
     {
@@ -25,25 +29,54 @@ struct UseCaseCellView: View
             return .red
         }
     }
-
+    
     var body: some View
     {
         NavigationLink(value: Route.useCase(useCase))
         {
             HStack
             {
-                //Image(systemName: useCase.isComplete ? CHECKED_ICON : UNCHECKED_ICON)
-
-                Text("useCase.title")
+                Image(systemName: useCase.isComplete ? CHECKED_ICON : UNCHECKED_ICON)
+                    .onTapGesture
+                {
+                    updateIsComplete(useCase)
+                }
+                
+                Text("\(useCase.name ?? EMPTY_STRING)")
                 Spacer()
                 Text(useCase.priority ?? "None")
                     .padding(5)
                     .frame(width: 75)
-                    //.background(priorityBackground(useCase.priority))
+                    .background(
+                        priorityBackground(Priority(rawValue: useCase.priority!) ?? .low))
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }
+    }
+    
+    private func updateIsComplete(_ useCase: UseCase)
+    {
+        if let useCaseIndex = useCases.firstIndex(where: { $0.id == useCase.id })
+        {
+            withAnimation
+            {
+                useCases[useCaseIndex].isComplete.toggle()
+            }
+            do
+            {
+                try moc.save()
+            }
+            catch
+            {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func deleteUseCase(_ useCase: UseCase)
+    {
+        
     }
 }
 
