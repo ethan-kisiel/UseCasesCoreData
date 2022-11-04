@@ -51,14 +51,14 @@ struct CategoryCellView: View {
             withAnimation
             {
                 moc.delete(categories[deleteIndex])
-                do
-                {
-                    try moc.save()
-                }
-                catch
-                {
-                    print(error.localizedDescription)
-                }
+            }
+            do
+            {
+                try moc.save()
+            }
+            catch
+            {
+                print(error.localizedDescription)
             }
         }
     }

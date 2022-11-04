@@ -63,15 +63,7 @@ struct ProjectDetailsView: View
             }.padding()
         }
         Spacer()
-        if project.categories?.count == 0
-        {
-            Text("No categories to display.")
-        }
-        else
-        {
-            CategoryListView(project: project)
-        }
-            
+        CategoryListView(project: project)
         Spacer()
             .navigationTitle((project.name?.shorten(by: DISP_SHORT))!)
             .navigationBarTitleDisplayMode(.inline)

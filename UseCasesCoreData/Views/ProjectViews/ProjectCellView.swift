@@ -61,14 +61,14 @@ struct ProjectCellView: View
             withAnimation
             {
                 moc.delete(projects[deleteIndex])
-                do
-                {
-                    try moc.save()
-                }
-                catch
-                {
-                    print(error.localizedDescription)
-                }
+            }
+            do
+            {
+                try moc.save()
+            }
+            catch
+            {
+                print(error.localizedDescription)
             }
         }
     }

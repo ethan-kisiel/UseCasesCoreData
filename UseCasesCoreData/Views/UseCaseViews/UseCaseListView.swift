@@ -15,9 +15,9 @@ enum Sections: String, CaseIterable
 struct UseCaseListView: View
 {
     // takes category for filter query purposes
-    @State var category: Category
+    var category: Category
+    
     /*
-    @ObservedResults(UseCase.self) var useCases: Results<UseCase>
     var categoryUseCases: Results<UseCase>
     {
         // filter observed results to get only project cases
@@ -33,7 +33,7 @@ struct UseCaseListView: View
     {
         return categoryUseCases.where { $0.isComplete == false }
     }
-*/
+    */
     var body: some View
     {
         List
