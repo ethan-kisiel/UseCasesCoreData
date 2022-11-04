@@ -39,7 +39,7 @@ struct CategoryListView: View {
                     CategoryCellView(category: category)
                         .environment(\.managedObjectContext, moc)
                 }
-                .onDelete(perform: {_ in return })
+                .onDelete(perform: deleteCategory)
             }
             .listStyle(.plain)
         }

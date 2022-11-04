@@ -2,7 +2,7 @@
 //  UseCase+CoreDataClass.swift
 //  UseCasesCoreData
 //
-//  Created by Ethan Kisiel on 11/2/22.
+//  Created by Ethan Kisiel on 11/4/22.
 //
 //
 
