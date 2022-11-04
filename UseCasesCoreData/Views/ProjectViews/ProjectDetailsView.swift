@@ -56,7 +56,7 @@ struct ProjectDetailsView: View
                     isFocused = false
                 })
                 {
-                    Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary : .primary)
+                    Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary: NM_SEC)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))

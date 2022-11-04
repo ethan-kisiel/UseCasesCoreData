@@ -21,7 +21,7 @@ enum Route: Hashable
 struct UseCasesCoreDataApp: App
 {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene
     {
         WindowGroup

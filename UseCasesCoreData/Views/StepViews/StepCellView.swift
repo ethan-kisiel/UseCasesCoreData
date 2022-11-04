@@ -9,7 +9,11 @@ import SwiftUI
 
 struct StepCellView: View
 {
-    var step: Step
+    @Environment(\.managedObjectContext) var moc
+    
+    @FetchRequest(sortDescriptors: []) var steps: FetchedResults<Step>
+    
+    let step: Step
     @State var trashIsEnabled: Bool = false
     var body: some View
     {
@@ -18,25 +22,38 @@ struct StepCellView: View
             // Constants.TRASH_ICON: String
             Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
                 .disabled(trashIsEnabled)
-                .onLongPressGesture(minimumDuration: 0.8)
-                {
-                    trashIsEnabled.toggle()
-                }
-            /*
                 .onTapGesture
                 {
                     if trashIsEnabled
                     {
-                        StepManager.shared.deleteStep(step: step)
+                        deleteStep(step)
                     }
                 }
+                .onLongPressGesture(minimumDuration: 0.8)
+                {
+                    trashIsEnabled.toggle()
+                }
     
-            Text(step.text)
+            Text(step.name ?? "NO NAME")
             Spacer()
-            let stepId = step.stepId.shorten(by: 3)
-
-            Text(stepId)
-             */
+        }
+    }
+    private func deleteStep(_ step: Step)
+    {
+        if let deleteIndex = steps.firstIndex(where: { $0.id == step.id })
+        {
+            withAnimation
+            {
+                moc.delete(steps[deleteIndex])
+            }
+            do
+            {
+                try moc.save()
+            }
+            catch
+            {
+                print(error.localizedDescription)
+            }
         }
     }
 }
