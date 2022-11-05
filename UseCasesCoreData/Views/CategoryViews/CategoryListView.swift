@@ -37,7 +37,6 @@ struct CategoryListView: View {
                 ForEach(projectCategories, id: \.id)
                 { category in
                     CategoryCellView(category: category)
-                        .environment(\.managedObjectContext, moc)
                 }
                 .onDelete(perform: deleteCategory)
             }

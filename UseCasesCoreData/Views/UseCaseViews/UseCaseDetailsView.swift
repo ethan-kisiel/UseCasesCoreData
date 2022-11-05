@@ -64,7 +64,6 @@ struct UseCaseDetailsView: View
         }
         Spacer()
         StepListView(useCase: useCase)
-            .environment(\.managedObjectContext, moc)
         Spacer()
             .navigationTitle("Steps")
             .navigationBarTitleDisplayMode(.inline)

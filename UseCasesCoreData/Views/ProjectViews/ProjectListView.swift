@@ -35,7 +35,6 @@ struct ProjectListView: View
                 {
                     project in
                     ProjectCellView(project: project)
-                        .environment(\.managedObjectContext, moc)
                 }.onDelete(perform: deleteProject)
             }.listStyle(.plain)
             .padding()

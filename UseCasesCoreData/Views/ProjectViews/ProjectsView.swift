@@ -66,7 +66,6 @@ struct ProjectsView: View
 
             Spacer()
             ProjectListView()
-                .environment(\.managedObjectContext, moc)
             Spacer()
                 .navigationTitle("Projects")
                 .navigationBarTitleDisplayMode(.inline)
