@@ -15,6 +15,7 @@ enum Route: Hashable
     case project(Project)
     case category(Category)
     case useCase(UseCase)
+    case step(Step)
 }
 
 @main
@@ -46,6 +47,9 @@ struct UseCasesCoreDataApp: App
 
                         case let .useCase(useCase):
                             UseCaseDetailsView(useCase: useCase)
+                        
+                        case let .step(step):
+                            StepDetailsView(step: step)
                         }
                     }
             }

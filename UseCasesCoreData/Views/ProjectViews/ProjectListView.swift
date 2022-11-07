@@ -36,6 +36,13 @@ struct ProjectListView: View
                     project in
                     ProjectCellView(project: project)
                 }.onDelete(perform: deleteProject)
+                    .swipeActions(edge: .leading)
+                {
+                    NavigationLink(value: Route.projects)
+                    {
+                        Text("Edit")
+                    }
+                }.tint(.indigo)
             }.listStyle(.plain)
             .padding()
         }

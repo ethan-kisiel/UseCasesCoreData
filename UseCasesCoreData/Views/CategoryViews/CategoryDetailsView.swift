@@ -10,7 +10,13 @@ import SwiftUI
 struct CategoryDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     
-    let category: Category
+    @State var category: Category
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    private var categories: FetchedResults<Category>
+    private var filteredCategories: [Category]
+    {
+        return categories.filter({ $0.parent == category.parent })
+    }
     
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
@@ -21,13 +27,29 @@ struct CategoryDetailsView: View {
 
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
+
     
     var body: some View
     {
-        // This is the
         HStack(alignment: .top)
         {
-            Text("**\(category.name ?? EMPTY_STRING)** Use Cases:")
+            Menu
+            {
+                Picker(selection: $category,
+                       label: EmptyView(),
+                       content:
+                        {
+                    ForEach(filteredCategories, id: \.self)
+                    { category in
+                        Text(category.name ?? "No Name")
+                    }
+                })
+            } label:
+            {
+                Text("Category: **\(category.name!)**")
+                    .background(.background)
+                    .foregroundColor(.white)
+            }
             Spacer()
             Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                 .onTapGesture

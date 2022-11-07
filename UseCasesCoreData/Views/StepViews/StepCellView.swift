@@ -17,12 +17,14 @@ struct StepCellView: View
     @State var trashIsEnabled: Bool = false
     var body: some View
     {
-        HStack(alignment: .center)
+        NavigationLink(value: Route.step(step))
         {
-            // Constants.TRASH_ICON: String
-            Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
-                .disabled(trashIsEnabled)
-                .onTapGesture
+            HStack(alignment: .center)
+            {
+                // Constants.TRASH_ICON: String
+                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
+                    .disabled(trashIsEnabled)
+                    .onTapGesture
                 {
                     if trashIsEnabled
                     {
@@ -33,9 +35,10 @@ struct StepCellView: View
                 {
                     trashIsEnabled.toggle()
                 }
-    
-            Text(step.name ?? "NO NAME")
-            Spacer()
+                
+                Text(step.name ?? "NO NAME")
+                Spacer()
+            }
         }
     }
     private func deleteStep(_ step: Step)

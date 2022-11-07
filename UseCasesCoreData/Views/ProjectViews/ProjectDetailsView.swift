@@ -14,6 +14,9 @@ struct ProjectDetailsView: View
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
     private var categories: FetchedResults<Category>
     
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.name, ascending: true)], animation: .default)
+    private var projects: FetchedResults<Project>
+    
     @State var project: Project
     // add inline picker for the category selection
     @State var categoryTitle: String = EMPTY_STRING
@@ -25,13 +28,29 @@ struct ProjectDetailsView: View
     {
         HStack(alignment: .top)
         {
-            Text("**\(project.name ?? EMPTY_STRING)** Categories:")
+            Menu
+            {
+                Picker(selection: $project,
+                       label: EmptyView(),
+                       content:
+                        {
+                    ForEach(projects, id: \.self)
+                    { project in
+                        Text(project.name!)
+                    }
+                })
+            } label:
+            {
+                Text("Project: **\(project.name!)**")
+                    .background(.background)
+                    .foregroundColor(.white)
+            }
             Spacer()
             Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                 .onTapGesture
-                {
-                    showAddFields.toggle()
-                }
+            {
+                showAddFields.toggle()
+            }
         }.padding()
 
         if showAddFields
