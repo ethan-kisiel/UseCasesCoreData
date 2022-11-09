@@ -13,32 +13,37 @@ struct ProjectListView: View
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.lastUpdated, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
-    // get only projects created by this user
+
     var body: some View
     {
-        // if there are projects saved to the localDB with a createdBy
-        // value equal to the current userId, those projects will be
-        // looped through and presented as a ProjectCellView in the loop.
-        // sliding to delete will cause the element at the current index to
-        // be deleted using the ProjectManager.
-        
-        if projects.isEmpty
+        VStack
         {
-            Text("No projects to display.")
-        }
-        else
-        {
-            List
+            if projects.isEmpty
             {
-                // sort by category
-                ForEach(projects, id: \.id)
+                Text("No projects to display.")
+            }
+            else
+            {
+                List
                 {
-                    project in
-                    ProjectCellView(project: project)
-                        .environment(\.managedObjectContext, moc)
-                }.onDelete(perform: deleteProject)
-            }.listStyle(.plain)
-            .padding()
+                    // sort by category
+                    ForEach(projects, id: \.id)
+                    {
+                        project in
+                        ProjectCellView(project: project)
+                    }.onDelete(perform: deleteProject)
+                        .swipeActions(edge: .leading)
+                    {
+                        NavigationLink(value: Route.projects)
+                        {
+                            Text("Edit")
+                        }
+                    }.tint(.indigo)
+                        .listRowBackground(NM_MAIN)
+                }.listStyle(.plain)
+                    .padding()
+                    .scrollContentBackground(.hidden)
+            }
         }
     }
     

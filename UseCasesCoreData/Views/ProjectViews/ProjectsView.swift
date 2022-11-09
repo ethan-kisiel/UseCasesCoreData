@@ -11,6 +11,9 @@ import SwiftUI
 
 struct ProjectsView: View
 {
+    // this view contains a list of all projects, as well as the
+    // form to create new projects
+    
     @Environment(\.managedObjectContext) private var moc
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.lastUpdated, ascending: true)], animation: .default)
@@ -31,30 +34,30 @@ struct ProjectsView: View
                 Spacer()
                 Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
                     .onTapGesture
-                    {
-                        showAddFields.toggle()
-                    }
+                {
+                    showAddFields.toggle()
+                }
             }.padding()
-
+            
             if showAddFields
             {
                 VStack(spacing: 10)
                 {
                     withAnimation
                     {
-                        TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
+                        TextBoxWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
                     }
                     withAnimation
                     {
-                        TextInputFieldWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
+                        TextBoxWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
                     }
                     Button(action:
-                        {
-                            addProject()
-                            title = EMPTY_STRING
-                            projectId = EMPTY_STRING
-                            isFocused = false
-                        })
+                            {
+                        addProject()
+                        title = EMPTY_STRING
+                        projectId = EMPTY_STRING
+                        isFocused = false
+                    })
                     {
                         Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
@@ -63,10 +66,9 @@ struct ProjectsView: View
                     .disabled(title.isEmpty || projectId.isEmpty)
                 }.padding()
             }
-
+            
             Spacer()
             ProjectListView()
-                .environment(\.managedObjectContext, moc)
             Spacer()
                 .navigationTitle("Projects")
                 .navigationBarTitleDisplayMode(.inline)

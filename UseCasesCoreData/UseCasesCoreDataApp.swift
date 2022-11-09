@@ -15,6 +15,7 @@ enum Route: Hashable
     case project(Project)
     case category(Category)
     case useCase(UseCase)
+    case step(Step)
 }
 
 @main
@@ -28,32 +29,35 @@ struct UseCasesCoreDataApp: App
         {
             NavigationStack
             {
-                // Navigation stack needs an initial view to play off of
-                // It might be better to use the content view for this(?)
-                ProjectsView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .navigationDestination(for: Route.self)
+                ZStack
+                {
+                    NM_MAIN.edgesIgnoringSafeArea(.all)
+                    // Navigation stack needs an initial view to play off of
+                    // It might be better to use the content view for this(?)
+                    ProjectsView()
+                        .navigationDestination(for: Route.self)
                     { route in
                         switch route
                         {
                         case .projects:
                             ProjectsView()
-                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-
+                            
                         case let .project(project):
                             ProjectDetailsView(project: project)
-                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-
+                            
                         case let .category(category):
                             CategoryDetailsView(category: category)
-                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-
+                            
                         case let .useCase(useCase):
                             UseCaseDetailsView(useCase: useCase)
-                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                            
+                        case let .step(step):
+                            StepDetailsView(step: step)
                         }
                     }
+                }
             }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
