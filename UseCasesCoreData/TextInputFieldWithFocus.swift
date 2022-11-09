@@ -37,7 +37,6 @@ struct TextInputFieldWithFocus: View
                     .scaleEffect(text.isEmpty ? 1 : 1, anchor: .leading)
                 
                 TextField(title, text: $text)
-                    .textFieldStyle(.roundedBorder)
                     .focused(self.isFocused)
             }
             .padding(.top, 15)

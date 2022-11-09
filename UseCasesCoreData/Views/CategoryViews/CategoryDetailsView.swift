@@ -31,79 +31,84 @@ struct CategoryDetailsView: View {
     
     var body: some View
     {
-        HStack(alignment: .top)
+        VStack
         {
-            Menu
+            HStack(alignment: .top)
             {
-                Picker(selection: $category,
-                       label: EmptyView(),
-                       content:
-                        {
-                    ForEach(filteredCategories, id: \.self)
-                    { category in
-                        Text(category.name ?? "No Name")
-                    }
-                })
-            } label:
-            {
-                Text("Category: **\(category.name!)**")
-                    .background(.background)
-                    .foregroundColor(.white)
-            }
-            Spacer()
-            Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                .onTapGesture
+                Menu
+                {
+                    Picker(selection: $category,
+                           label: EmptyView(),
+                           content:
+                            {
+                        ForEach(filteredCategories, id: \.self)
+                        { category in
+                            Text(category.name ?? "No Name")
+                        }
+                    })
+                } label:
+                {
+                    Text("Category: **\(category.name!)**")
+                        .background(NM_MAIN)
+                        .foregroundColor(NM_SEC)
+                }
+                Spacer()
+                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                    .onTapGesture
                 {
                     showAddFields.toggle()
                 }
-        }.padding()
-        
-        if showAddFields
-        {
-            VStack(spacing: 5)
-            {
-                Picker("Priority:", selection: $priority)
-                {
-                    ForEach(Priority.allCases, id: \.self)
-                    {
-                        priority in
-                        Text(priority.rawValue)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(5)
-                
-                withAnimation
-                {
-                    TextInputFieldWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
-                }
-                withAnimation
-                {
-                    TextInputFieldWithFocus("ID", text: $caseId, isFocused: $isFocused).padding(8)
-                }
-
-                Button(action:
-                {
-                    addUseCase()
-                    
-                    title = EMPTY_STRING
-                    caseId = EMPTY_STRING
-                    priority = .medium
-                    isFocused = false
-                })
-                {
-                    Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
-                        .fontWeight(.bold).frame(maxWidth: .infinity)
-                }
-                .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty || caseId.isEmpty )
             }.padding()
-        }
-        Spacer()
-        UseCaseListView(category: category)
-        Spacer()
-            .navigationTitle("Use Cases")
-            .navigationBarTitleDisplayMode(.inline)
+            
+            if showAddFields
+            {
+                VStack(spacing: 5)
+                {
+                    Picker("Priority:", selection: $priority)
+                    {
+                        ForEach(Priority.allCases, id: \.self)
+                        {
+                            priority in
+                            Text(priority.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(5)
+                    
+                    withAnimation
+                    {
+                        TextBoxWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
+                    }
+                    withAnimation
+                    {
+                        TextBoxWithFocus("ID", text: $caseId, isFocused: $isFocused).padding(8)
+                    }
+                    
+                    Button(action:
+                            {
+                        addUseCase()
+                        
+                        title = EMPTY_STRING
+                        caseId = EMPTY_STRING
+                        priority = .medium
+                        isFocused = false
+                    })
+                    {
+                        Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
+                            .fontWeight(.bold).frame(maxWidth: .infinity)
+                    }
+                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                    .disabled(title.isEmpty || caseId.isEmpty )
+                    .padding(8)
+                }.padding()
+            }
+        
+            Spacer()
+            UseCaseListView(category: category)
+            Spacer()
+                .navigationTitle("Use Cases")
+                .navigationBarTitleDisplayMode(.inline)
+        }.background(NM_MAIN)
     }
     
     private func addUseCase()

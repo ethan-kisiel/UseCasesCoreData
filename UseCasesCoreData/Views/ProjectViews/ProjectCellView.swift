@@ -28,6 +28,7 @@ struct ProjectCellView: View
                 // Tap-hold gesture enables trashIsEnabled boolean
                 // when trashIsEnabled is true, a tap gesture on the Image
                 // will cause project to be deleted from the localRealm DB
+
                 Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
                     .disabled(trashIsEnabled)
                     .onTapGesture
@@ -49,7 +50,7 @@ struct ProjectCellView: View
                 Spacer()
                 let projectId = project.id?.uuidString ?? EMPTY_STRING
                 Text(projectId.shorten(by: 3) + "...")
-            }
+            }.background(NM_MAIN)
         }
     }
     

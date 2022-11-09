@@ -26,69 +26,73 @@ struct ProjectDetailsView: View
 
     var body: some View
     {
-        HStack(alignment: .top)
+        VStack
         {
-            Menu
+            HStack(alignment: .top)
             {
-                Picker(selection: $project,
-                       label: EmptyView(),
-                       content:
-                        {
-                    ForEach(projects, id: \.self)
-                    { project in
-                        Text(project.name!)
+                Menu
+                {
+                    Picker(selection: $project,
+                           label: EmptyView(),
+                           content:
+                            {
+                        ForEach(projects, id: \.self)
+                        { project in
+                            Text(project.name!)
+                        }
+                    })
+                } label:
+                {
+                    Text("Project: **\(project.name!)**")
+                        .background(NM_MAIN)
+                        .foregroundColor(NM_SEC)
+                }
+                Spacer()
+                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                    .onTapGesture
+                {
+                    showAddFields.toggle()
+                }
+            }.padding()
+            
+            if showAddFields
+            {
+                VStack(spacing: 5)
+                {
+                    withAnimation
+                    {
+                        TextBoxWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
+                            .padding(8)
                     }
-                })
-            } label:
-            {
-                Text("Project: **\(project.name!)**")
-                    .background(.background)
-                    .foregroundColor(.white)
+                    
+                    Button(action:
+                            {
+                        // if there is a category with the specified title
+                        // the use case is added to that category
+                        // otherwise, a category is created
+                        // and the use case is added
+                        addCategory(name: categoryTitle)
+                        
+                        categoryTitle = EMPTY_STRING
+                        isFocused = false
+                    })
+                    {
+                        Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary: NM_SEC)
+                            .fontWeight(.bold).frame(maxWidth: .infinity)
+                    }
+                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                    .disabled(categoryTitle.isEmpty)
+                    .padding(8)
+                }.padding()
             }
             Spacer()
-            Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                .onTapGesture
-            {
-                showAddFields.toggle()
-            }
-        }.padding()
-
-        if showAddFields
-        {
-            VStack(spacing: 5)
-            {
-                withAnimation
-                {
-                    TextInputFieldWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
-                        .padding(8)
-                }
-                
-                Button(action:
-                {
-                    // if there is a category with the specified title
-                    // the use case is added to that category
-                    // otherwise, a category is created
-                    // and the use case is added
-                    addCategory(name: categoryTitle)
-                    
-                    categoryTitle = EMPTY_STRING
-                    isFocused = false
-                })
-                {
-                    Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary: NM_SEC)
-                        .fontWeight(.bold).frame(maxWidth: .infinity)
-                }
-                .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(categoryTitle.isEmpty)
-            }.padding()
-        }
-        Spacer()
-        CategoryListView(project: project)
-        Spacer()
-            .navigationTitle("Categories")
-            .navigationBarTitleDisplayMode(.inline)
+            CategoryListView(project: project)
+            Spacer()
+                .navigationTitle("Categories")
+                .navigationBarTitleDisplayMode(.inline)
+        }.background(NM_MAIN)
     }
-    
+
     
     func addCategory(name: String)
     {

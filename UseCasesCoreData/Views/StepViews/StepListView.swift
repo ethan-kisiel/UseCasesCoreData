@@ -38,9 +38,11 @@ struct StepListView: View
                     step in
                     StepCellView(step: step)
                 }.onDelete(perform: deleteStep)
+                    .listRowBackground(NM_MAIN)
             }
             .listStyle(.plain)
             .padding()
+            .scrollContentBackground(.hidden)
         }
     }
     

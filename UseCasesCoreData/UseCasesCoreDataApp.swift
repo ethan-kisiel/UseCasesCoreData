@@ -29,29 +29,33 @@ struct UseCasesCoreDataApp: App
         {
             NavigationStack
             {
-                // Navigation stack needs an initial view to play off of
-                // It might be better to use the content view for this(?)
-                ProjectsView()
-                    .navigationDestination(for: Route.self)
+                ZStack
+                {
+                    NM_MAIN.edgesIgnoringSafeArea(.all)
+                    // Navigation stack needs an initial view to play off of
+                    // It might be better to use the content view for this(?)
+                    ProjectsView()
+                        .navigationDestination(for: Route.self)
                     { route in
                         switch route
                         {
                         case .projects:
                             ProjectsView()
-
+                            
                         case let .project(project):
                             ProjectDetailsView(project: project)
-
+                            
                         case let .category(category):
                             CategoryDetailsView(category: category)
-
+                            
                         case let .useCase(useCase):
                             UseCaseDetailsView(useCase: useCase)
-                        
+                            
                         case let .step(step):
                             StepDetailsView(step: step)
                         }
                     }
+                }
             }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

@@ -34,73 +34,76 @@ struct UseCaseDetailsView: View
     
     var body: some View
     {
-        HStack(alignment: .top)
+        VStack
         {
-            Menu
+            HStack(alignment: .top)
             {
-                Picker(selection: $useCase,
-                       label: EmptyView(),
-                       content:
-                        {
-                    ForEach(filteredUseCases, id: \.self)
-                    { useCase in
-                        Text(useCase.name ?? "No Name")
-                    }
-                })
-            } label:
-            {
-                Text("Use Case: **\(useCase.name!)**")
-                    .background(.background)
-                    .foregroundColor(.white)
-            }
-            Spacer()
-            Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                .onTapGesture
+                Menu
+                {
+                    Picker(selection: $useCase,
+                           label: EmptyView(),
+                           content:
+                            {
+                        ForEach(filteredUseCases, id: \.self)
+                        { useCase in
+                            Text(useCase.name ?? "No Name")
+                        }
+                    })
+                } label:
+                {
+                    Text("Use Case: **\(useCase.name!)**")
+                        .background(NM_MAIN)
+                        .foregroundColor(NM_SEC)
+                }
+                Spacer()
+                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                    .onTapGesture
                 {
                     showAddFields.toggle()
                 }
-        }.padding()
-
-        if showAddFields
-        {
-            VStack(spacing: 5)
+            }.padding()
+            
+            if showAddFields
             {
-                withAnimation
+                VStack(spacing: 5)
                 {
-                    TextInputFieldWithFocus("Step", text: $name, isFocused: $isFocused).padding(8)
-                }
-                withAnimation
-                {
-                    TextInputFieldWithFocus("ID", text: $stepId, isFocused: $isFocused).padding(8)
-                }
-                
-                withAnimation
-                {
-                    TextBoxWithFocus("Description", text: $text, isFocused: $isFocused).padding(8)
-                }
-
-                Button(action:
+                    withAnimation
                     {
+                        TextBoxWithFocus("Step", text: $name, isFocused: $isFocused).padding(8)
+                    }
+                    withAnimation
+                    {
+                        TextBoxWithFocus("ID", text: $stepId, isFocused: $isFocused).padding(8)
+                    }
+                    
+                    withAnimation
+                    {
+                        TextBoxWithFocus("Description", text: $text, isFocused: $isFocused).padding(8)
+                    }
+                    Button(action:
+                            {
                         addStep()
-
+                        
                         name = EMPTY_STRING
                         stepId = EMPTY_STRING
                         text = EMPTY_STRING
                         isFocused = false
                     })
-                {
-                    Text("Add Step").foregroundColor(text.isEmpty ? .secondary : .primary)
-                        .fontWeight(.bold).frame(maxWidth: .infinity)
-                }
-                .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(invalidFields)
-            }.padding()
-        }
-        Spacer()
-        StepListView(useCase: useCase)
-        Spacer()
-            .navigationTitle("Steps")
-            .navigationBarTitleDisplayMode(.inline)
+                    {
+                        Text("Add Step").foregroundColor(text.isEmpty ? .secondary : .primary)
+                            .fontWeight(.bold).frame(maxWidth: .infinity)
+                    }
+                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                    .disabled(invalidFields)
+                    .padding(8)
+                }.padding()
+            }
+            Spacer()
+            StepListView(useCase: useCase)
+            Spacer()
+                .navigationTitle("Steps")
+                .navigationBarTitleDisplayMode(.inline)
+        }.background(NM_MAIN)
     }
     
     private func addStep()

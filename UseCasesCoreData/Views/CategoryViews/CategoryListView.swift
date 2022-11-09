@@ -26,22 +26,27 @@ struct CategoryListView: View {
     }
     
     var body: some View {
-        if projectCategories.isEmpty
+        VStack
         {
-            Text("No categories to show.")
-        }
-        else
-        {
-            List
+            if projectCategories.isEmpty
             {
-                ForEach(projectCategories, id: \.id)
-                { category in
-                    CategoryCellView(category: category)
-                }
-                .onDelete(perform: deleteCategory)
+                Text("No categories to show.")
             }
-            .listStyle(.plain)
-        }
+            else
+            {
+                List
+                {
+                    ForEach(projectCategories, id: \.id)
+                    { category in
+                        CategoryCellView(category: category)
+                    }
+                    .onDelete(perform: deleteCategory)
+                    .listRowBackground(NM_MAIN)
+                }.listStyle(.plain)
+                    .padding()
+                    .scrollContentBackground(.hidden)
+            }
+        }.background(NM_MAIN)
     }
     private func deleteCategory(indexSet: IndexSet)
     {

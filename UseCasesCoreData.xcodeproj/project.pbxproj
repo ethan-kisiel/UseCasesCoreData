@@ -40,7 +40,7 @@
 		88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */; };
 		88951CF72915DE79007081D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF62915DE79007081D3 /* Constants.swift */; };
 		88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CFA2916AD6A007081D3 /* StepDetailsView.swift */; };
-		88951CFD2916AF0F007081D3 /* TextBoxWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CFC2916AF0F007081D3 /* TextBoxWithFocus.swift */; };
+		88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +77,7 @@
 		88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88951CF62915DE79007081D3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88951CFA2916AD6A007081D3 /* StepDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDetailsView.swift; sourceTree = "<group>"; };
-		88951CFC2916AF0F007081D3 /* TextBoxWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxWithFocus.swift; sourceTree = "<group>"; };
+		88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxWithFocus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,7 @@
 				883F44972912A5C600284B2F /* Persistence.swift */,
 				883F44942912A5C600284B2F /* Preview Content */,
 				88951CF62915DE79007081D3 /* Constants.swift */,
-				88951CFC2916AF0F007081D3 /* TextBoxWithFocus.swift */,
+				88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */,
 			);
 			path = UseCasesCoreData;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				883F44B32912B76C00284B2F /* Step+CoreDataProperties.swift in Sources */,
-				88951CFD2916AF0F007081D3 /* TextBoxWithFocus.swift in Sources */,
+				88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */,
 				883F44B52912B76C00284B2F /* Category+CoreDataProperties.swift in Sources */,
 				883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,

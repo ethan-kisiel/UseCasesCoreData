@@ -71,12 +71,14 @@ struct UseCaseListView: View
                             UseCaseCellView(useCase: useCase)
                         }
                         .onDelete(perform: deleteUseCase)
+                        .listRowBackground(NM_MAIN)
                     }
                 }
-            }
+            }.listRowBackground(NM_MAIN)
         }
         .listStyle(.plain)
         .padding()
+        .scrollContentBackground(.hidden)
     }
     
     private func deleteUseCase(indexSet: IndexSet)
