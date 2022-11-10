@@ -24,5 +24,14 @@ extension BaseModel {
 }
 
 extension BaseModel : Identifiable {
-
+    
+    var wrappedName: String
+    {
+        self.name ?? MISSING_DATA
+    }
+    
+    var wrappedId: String
+    {
+        self.id?.uuidString ?? MISSING_DATA
+    }
 }

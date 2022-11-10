@@ -46,12 +46,12 @@ struct UseCaseDetailsView: View
                             {
                         ForEach(filteredUseCases, id: \.self)
                         { useCase in
-                            Text(useCase.name ?? "No Name")
+                            Text(useCase.wrappedName)
                         }
                     })
                 } label:
                 {
-                    Text("Use Case: **\(useCase.name!)**")
+                    Text("Use Case: **\(useCase.wrappedName)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }
@@ -90,6 +90,7 @@ struct UseCaseDetailsView: View
                         isFocused = false
                     })
                     {
+                        // MARK: add form validation variable
                         Text("Add Step").foregroundColor(text.isEmpty ? .secondary : .primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }

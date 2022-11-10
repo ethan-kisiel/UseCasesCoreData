@@ -43,12 +43,12 @@ struct CategoryDetailsView: View {
                             {
                         ForEach(filteredCategories, id: \.self)
                         { category in
-                            Text(category.name ?? "No Name")
+                            Text(category.wrappedName)
                         }
                     })
                 } label:
                 {
-                    Text("Category: **\(category.name!)**")
+                    Text("Category: **\(category.wrappedName)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }

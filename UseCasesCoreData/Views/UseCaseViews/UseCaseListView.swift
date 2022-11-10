@@ -69,6 +69,13 @@ struct UseCaseListView: View
                         { useCase in
                             //Text("\(useCase.name ?? "NO NAME")")
                             UseCaseCellView(useCase: useCase)
+                                .swipeActions(edge: .leading)
+                                {
+                                    NavigationLink(value: Route.editUseCase(useCase))
+                                    {
+                                        Text("Edit")
+                                    }
+                                }.tint(.indigo)
                         }
                         .onDelete(perform: deleteUseCase)
                         .listRowBackground(NM_MAIN)

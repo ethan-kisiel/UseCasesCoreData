@@ -41,7 +41,25 @@
 		88951CF72915DE79007081D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF62915DE79007081D3 /* Constants.swift */; };
 		88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CFA2916AD6A007081D3 /* StepDetailsView.swift */; };
 		88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */; };
+		88951D20291C1620007081D3 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1F291C1620007081D3 /* EditProjectView.swift */; };
+		88951D22291C3617007081D3 /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D21291C3617007081D3 /* EditCategoryView.swift */; };
+		88951D24291C3623007081D3 /* EditUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D23291C3623007081D3 /* EditUseCaseView.swift */; };
+		88951D26291C362F007081D3 /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D25291C362F007081D3 /* EditStepView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		88374095291C8B5000492A07 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = file.rcproject;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# rctool\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +96,10 @@
 		88951CF62915DE79007081D3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88951CFA2916AD6A007081D3 /* StepDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDetailsView.swift; sourceTree = "<group>"; };
 		88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxWithFocus.swift; sourceTree = "<group>"; };
+		88951D1F291C1620007081D3 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
+		88951D21291C3617007081D3 /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
+		88951D23291C3623007081D3 /* EditUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUseCaseView.swift; sourceTree = "<group>"; };
+		88951D25291C362F007081D3 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +192,7 @@
 				883F44C02912D38B00284B2F /* ProjectDetailsView.swift */,
 				883F44BB2912D38A00284B2F /* ProjectListView.swift */,
 				883F44BE2912D38B00284B2F /* ProjectsView.swift */,
+				88951D1F291C1620007081D3 /* EditProjectView.swift */,
 			);
 			path = ProjectViews;
 			sourceTree = "<group>";
@@ -180,6 +203,7 @@
 				883F44BC2912D38A00284B2F /* CategoryCellView.swift */,
 				883F44C12912D38B00284B2F /* CategoryDetailsView.swift */,
 				883F44C42912D38B00284B2F /* CategoryListView.swift */,
+				88951D21291C3617007081D3 /* EditCategoryView.swift */,
 			);
 			path = CategoryViews;
 			sourceTree = "<group>";
@@ -190,6 +214,7 @@
 				883F44BD2912D38A00284B2F /* UseCaseCellView.swift */,
 				883F44C22912D38B00284B2F /* UseCaseDetailsView.swift */,
 				883F44BF2912D38B00284B2F /* UseCaseListView.swift */,
+				88951D23291C3623007081D3 /* EditUseCaseView.swift */,
 			);
 			path = UseCaseViews;
 			sourceTree = "<group>";
@@ -200,6 +225,7 @@
 				883F44C32912D38B00284B2F /* StepCellView.swift */,
 				883F44BA2912D38A00284B2F /* StepListView.swift */,
 				88951CFA2916AD6A007081D3 /* StepDetailsView.swift */,
+				88951D25291C362F007081D3 /* EditStepView.swift */,
 			);
 			path = StepViews;
 			sourceTree = "<group>";
@@ -224,6 +250,7 @@
 				883F44892912A5C600284B2F /* Resources */,
 			);
 			buildRules = (
+				88374095291C8B5000492A07 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -292,10 +319,14 @@
 				88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */,
 				883F44B52912B76C00284B2F /* Category+CoreDataProperties.swift in Sources */,
 				883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */,
+				88951D22291C3617007081D3 /* EditCategoryView.swift in Sources */,
+				88951D26291C362F007081D3 /* EditStepView.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
+				88951D24291C3623007081D3 /* EditUseCaseView.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
 				883F44AF2912B76C00284B2F /* BaseModel+CoreDataProperties.swift in Sources */,
+				88951D20291C1620007081D3 /* EditProjectView.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,
 				883F44C82912D38B00284B2F /* CategoryCellView.swift in Sources */,

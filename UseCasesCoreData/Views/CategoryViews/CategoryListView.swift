@@ -39,6 +39,13 @@ struct CategoryListView: View {
                     ForEach(projectCategories, id: \.id)
                     { category in
                         CategoryCellView(category: category)
+                            .swipeActions(edge: .leading)
+                        {
+                            NavigationLink(value: Route.editCategory(category))
+                            {
+                                Text("Edit")
+                            }
+                        }.tint(.indigo)
                     }
                     .onDelete(perform: deleteCategory)
                     .listRowBackground(NM_MAIN)

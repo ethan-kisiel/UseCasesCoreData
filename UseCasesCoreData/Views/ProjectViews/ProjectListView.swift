@@ -31,14 +31,14 @@ struct ProjectListView: View
                     {
                         project in
                         ProjectCellView(project: project)
+                            .swipeActions(edge: .leading)
+                            {
+                                NavigationLink(value: Route.editProject(project))
+                                {
+                                    Text("Edit")
+                                }
+                            }.tint(.indigo)
                     }.onDelete(perform: deleteProject)
-                        .swipeActions(edge: .leading)
-                    {
-                        NavigationLink(value: Route.projects)
-                        {
-                            Text("Edit")
-                        }
-                    }.tint(.indigo)
                         .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                     .padding()

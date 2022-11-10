@@ -38,12 +38,12 @@ struct ProjectDetailsView: View
                             {
                         ForEach(projects, id: \.self)
                         { project in
-                            Text(project.name!)
+                            Text(project.wrappedName)
                         }
                     })
                 } label:
                 {
-                    Text("Project: **\(project.name!)**")
+                    Text("Project: **\(project.wrappedName)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }
