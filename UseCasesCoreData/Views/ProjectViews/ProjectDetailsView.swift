@@ -24,6 +24,11 @@ struct ProjectDetailsView: View
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
 
+    var invalidFields: Bool
+    {
+        categoryTitle.isEmpty
+    }
+    
     var body: some View
     {
         VStack
@@ -77,7 +82,7 @@ struct ProjectDetailsView: View
                         isFocused = false
                     })
                     {
-                        Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary: NM_SEC)
+                        Text("Add Category").foregroundColor(invalidFields ? .secondary: NM_SEC)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))

@@ -12,9 +12,9 @@ struct CategoryListView: View {
     
     @FetchRequest var projectCategories: FetchedResults<Category>
     
-    var project: Project
+    private let project: Project
     
-    @State var showUseCases: Bool = false
+    @State private var showUseCases: Bool = false
     
     init(project: Project)
     {

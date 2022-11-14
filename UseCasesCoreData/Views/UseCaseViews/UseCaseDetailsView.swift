@@ -91,7 +91,7 @@ struct UseCaseDetailsView: View
                     })
                     {
                         // MARK: add form validation variable
-                        Text("Add Step").foregroundColor(text.isEmpty ? .secondary : .primary)
+                        Text("Add Step").foregroundColor(invalidFields ? .secondary : .primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))

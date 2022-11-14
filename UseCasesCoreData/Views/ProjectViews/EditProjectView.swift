@@ -11,7 +11,7 @@ struct EditProjectView: View
 {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
-    
+
     let project: Project
     @State var title: String
     @State var projectId: String
@@ -23,6 +23,12 @@ struct EditProjectView: View
         _title = State(wrappedValue: project.wrappedName)
         _projectId = State(wrappedValue: project.wrappedId)
     }
+    
+    var invalidFields: Bool
+    {
+        title.isEmpty || projectId.isEmpty
+    }
+    
     var body: some View
     {
         ZStack
@@ -50,15 +56,15 @@ struct EditProjectView: View
                     dismiss()
                 })
                 {
-                    Text("Save Project").foregroundColor(title.isEmpty ? .secondary : .primary)
+                    Text("Save Project").foregroundColor(invalidFields ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty)
+                .disabled(invalidFields)
                 .padding(8)
                 
                 Spacer()
-                    .navigationTitle("Edit Use Case")
+                    .navigationTitle("Edit Project")
                     .navigationBarTitleDisplayMode(.inline)
             }.background(NM_MAIN)
                 .padding()
@@ -69,6 +75,7 @@ struct EditProjectView: View
     private func updateProject(_ project: Project)
     {
         project.name = title
+        project.lastUpdated = Date()
         do
         {
             try moc.save()

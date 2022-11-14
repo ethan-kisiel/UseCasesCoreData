@@ -24,7 +24,12 @@ struct ProjectsView: View
 
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
-
+    
+    var invalidFields: Bool
+    {
+        title.isEmpty || projectId.isEmpty
+    }
+    
     var body: some View
     {
         VStack
@@ -63,7 +68,7 @@ struct ProjectsView: View
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                    .disabled(title.isEmpty || projectId.isEmpty)
+                    .disabled(invalidFields)
                 }.padding()
             }
             

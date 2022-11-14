@@ -17,12 +17,18 @@ struct EditUseCaseView: View {
     @State var caseId: String
     
     @FocusState var isFocused: Bool
+    
     init(useCase: UseCase)
     {
         self.useCase = useCase
         _priority = State(wrappedValue: Priority(rawValue: useCase.wrappedPriority) ?? .medium)
         _title = State(wrappedValue: useCase.wrappedName)
         _caseId = State(wrappedValue: useCase.wrappedId)
+    }
+    
+    var invalidFields: Bool
+    {
+        title.isEmpty || caseId.isEmpty
     }
     
     var body: some View {
@@ -63,11 +69,11 @@ struct EditUseCaseView: View {
                     dismiss()
                 })
                 {
-                    Text("Save Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
+                    Text("Save Use Case").foregroundColor(invalidFields ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty || caseId.isEmpty )
+                .disabled(invalidFields)
                 .padding(8)
                 
                 Spacer()

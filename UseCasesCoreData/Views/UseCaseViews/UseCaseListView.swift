@@ -17,7 +17,7 @@ struct UseCaseListView: View
     @Environment(\.managedObjectContext) var moc
     @FetchRequest var categoryUseCases: FetchedResults<UseCase>
     // takes category for filter query purposes
-    var category: Category
+    private let category: Category
     
     init(category: Category)
     {

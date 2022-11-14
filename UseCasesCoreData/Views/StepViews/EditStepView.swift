@@ -26,6 +26,11 @@ struct EditStepView: View {
         _description = State(wrappedValue: step.body ?? EMPTY_STRING)
     }
     
+    var invalidFields: Bool
+    {
+        title.isEmpty || stepId.isEmpty
+    }
+    
     var body: some View {
         ZStack
         {
@@ -56,11 +61,11 @@ struct EditStepView: View {
                     dismiss()
                 })
                 {
-                    Text("Save Step").foregroundColor(title.isEmpty ? .secondary : .primary)
+                    Text("Save Step").foregroundColor(invalidFields ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty)
+                .disabled(invalidFields)
                 .padding(8)
                 
                 Spacer()
@@ -75,6 +80,7 @@ struct EditStepView: View {
     {
         step.name = title
         step.body = description
+        step.lastUpdated = Date()
         do
         {
             try moc.save()

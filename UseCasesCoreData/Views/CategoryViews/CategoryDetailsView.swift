@@ -21,13 +21,14 @@ struct CategoryDetailsView: View {
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
     @State var caseId: String = EMPTY_STRING
-    // add inline picker for the category selection
-    
-    @State var useCase: UseCase?
 
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
 
+    var invalidFields: Bool
+    {
+        title.isEmpty || caseId.isEmpty
+    }
     
     var body: some View
     {
@@ -94,11 +95,11 @@ struct CategoryDetailsView: View {
                         isFocused = false
                     })
                     {
-                        Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
+                        Text("Add Use Case").foregroundColor(invalidFields ? .secondary : .primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                    .disabled(title.isEmpty || caseId.isEmpty )
+                    .disabled(invalidFields)
                     .padding(8)
                 }.padding()
             }

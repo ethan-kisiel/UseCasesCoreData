@@ -23,6 +23,12 @@ struct EditCategoryView: View {
         _title = State(wrappedValue: category.wrappedName)
         _categoryId = State(wrappedValue: category.wrappedId)
     }
+
+    var invalidFields: Bool
+    {
+        title.isEmpty || categoryId.isEmpty
+    }
+
     var body: some View {
         ZStack
         {
@@ -49,11 +55,11 @@ struct EditCategoryView: View {
                     dismiss()
                 })
                 {
-                    Text("Save Project").foregroundColor(title.isEmpty ? .secondary : .primary)
+                    Text("Save Project").foregroundColor(invalidFields ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty)
+                .disabled(invalidFields)
                 .padding(8)
                 
                 Spacer()
@@ -67,6 +73,7 @@ struct EditCategoryView: View {
     private func updateCategory(_ category: Category)
     {
         category.name = title
+        category.lastUpdated = Date()
         do
         {
             try moc.save()
