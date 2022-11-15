@@ -17,7 +17,10 @@ struct UseCaseListView: View
     @Environment(\.managedObjectContext) var moc
     @FetchRequest var categoryUseCases: FetchedResults<UseCase>
     // takes category for filter query purposes
-    var category: Category
+    private let category: Category
+    
+    @State private var alertIsPresented: Bool = false
+    @State private var indexSet: IndexSet = IndexSet()
     
     init(category: Category)
     {
@@ -69,8 +72,30 @@ struct UseCaseListView: View
                         { useCase in
                             //Text("\(useCase.name ?? "NO NAME")")
                             UseCaseCellView(useCase: useCase)
+                                .swipeActions(edge: .leading)
+                                {
+                                    NavigationLink(value: Route.editUseCase(useCase))
+                                    {
+                                        Text("Edit")
+                                    }
+                                }.tint(.indigo)
                         }
-                        .onDelete(perform: deleteUseCase)
+                        .onDelete
+                        { indexSet in
+                            self.indexSet = indexSet
+                            alertIsPresented = true
+                        }
+                        .alert(isPresented: $alertIsPresented)
+                        {
+                            Alert(
+                                title: Text("Do you wish to delete this use case?"),
+                                message: Text("Doing so will delete this use case and all of its children."),
+                                primaryButton: .destructive(Text("DELETE"), action: {
+                                    deleteUseCase(indexSet: indexSet)
+                                }),
+                                secondaryButton: .cancel()
+                            )
+                        }
                         .listRowBackground(NM_MAIN)
                     }
                 }

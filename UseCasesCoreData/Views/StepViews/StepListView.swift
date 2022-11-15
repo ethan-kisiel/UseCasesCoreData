@@ -37,6 +37,13 @@ struct StepListView: View
                 {
                     step in
                     StepCellView(step: step)
+                        .swipeActions(edge: .leading)
+                    {
+                        NavigationLink(value: Route.editStep(step))
+                        {
+                            Text("Edit")
+                        }
+                    }.tint(.indigo)
                 }.onDelete(perform: deleteStep)
                     .listRowBackground(NM_MAIN)
             }

@@ -37,5 +37,9 @@ extension UseCase {
 
     @objc(removeSteps:)
     @NSManaged public func removeFromSteps(_ values: NSSet)
-
+    
+    var wrappedPriority: String
+    {
+        self.priority ?? Priority.medium.rawValue
+    }
 }

@@ -46,9 +46,9 @@ struct ProjectCellView: View
                         print("TeSTTESTTETST")
                     }
     
-                Text(project.name ?? EMPTY_STRING)
+                Text(project.wrappedName)
                 Spacer()
-                let projectId = project.id?.uuidString ?? EMPTY_STRING
+                let projectId = project.wrappedId
                 Text(projectId.shorten(by: 3) + "...")
             }.background(NM_MAIN)
         }

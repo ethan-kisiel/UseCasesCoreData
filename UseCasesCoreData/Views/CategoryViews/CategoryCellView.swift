@@ -35,10 +35,10 @@ struct CategoryCellView: View {
                 {
                     trashIsEnabled.toggle()
                 }
-                Text(category.name ?? EMPTY_STRING)
+                Text(category.wrappedName)
                 Spacer()
                 // TODO: change this to user made category id
-                let categoryId = category.id?.uuidString ?? EMPTY_STRING
+                let categoryId = category.wrappedId
                 Text(categoryId.shorten(by: 3) + "...")
             }
         }

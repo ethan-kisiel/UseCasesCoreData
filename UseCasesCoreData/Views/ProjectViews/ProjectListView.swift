@@ -13,7 +13,8 @@ struct ProjectListView: View
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.lastUpdated, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
-
+    @State private var alertIsPresented: Bool = false
+    @State private var indexSet: IndexSet = IndexSet()
     var body: some View
     {
         VStack
@@ -31,14 +32,28 @@ struct ProjectListView: View
                     {
                         project in
                         ProjectCellView(project: project)
-                    }.onDelete(perform: deleteProject)
-                        .swipeActions(edge: .leading)
+                            .swipeActions(edge: .leading)
+                            {
+                                NavigationLink(value: Route.editProject(project))
+                                {
+                                    Text("Edit")
+                                }
+                            }.tint(.indigo)
+                    }.onDelete(perform: { indexSet in
+                        self.indexSet = indexSet
+                        alertIsPresented = true
+                    })
+                    .alert(isPresented: $alertIsPresented)
                     {
-                        NavigationLink(value: Route.projects)
-                        {
-                            Text("Edit")
-                        }
-                    }.tint(.indigo)
+                        Alert(
+                            title: Text("Do you wish to delete this project?"),
+                            message: Text("Doing so will delete this project and all of its children."),
+                            primaryButton: .destructive(Text("DELETE"), action: {
+                                deleteProject(indexSet: indexSet)
+                            }),
+                            secondaryButton: .cancel()
+                        )
+                    }
                         .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                     .padding()

@@ -10,6 +10,7 @@ import Neumorphic
 import SwiftUI
 
 let EMPTY_STRING: String = ""
+let MISSING_DATA: String = "MISSING DATA"
 let USER_ID_STRING: String = "UserId"
 
 let TRASH_ICON: String = "trash.circle.fill"

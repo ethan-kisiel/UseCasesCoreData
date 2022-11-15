@@ -12,9 +12,12 @@ struct CategoryListView: View {
     
     @FetchRequest var projectCategories: FetchedResults<Category>
     
-    var project: Project
+    private let project: Project
     
-    @State var showUseCases: Bool = false
+    @State private var showUseCases: Bool = false
+    
+    @State private var alertIsPresented: Bool = false
+    @State private var indexSet: IndexSet = IndexSet()
     
     init(project: Project)
     {
@@ -39,8 +42,30 @@ struct CategoryListView: View {
                     ForEach(projectCategories, id: \.id)
                     { category in
                         CategoryCellView(category: category)
+                            .swipeActions(edge: .leading)
+                        {
+                            NavigationLink(value: Route.editCategory(category))
+                            {
+                                Text("Edit")
+                            }
+                        }.tint(.indigo)
                     }
-                    .onDelete(perform: deleteCategory)
+                    .onDelete
+                    { indexSet in
+                        self.indexSet = indexSet
+                        alertIsPresented = true
+                    }
+                    .alert(isPresented: $alertIsPresented)
+                    {
+                        Alert(
+                            title: Text("Do you wish to delete this category?"),
+                            message: Text("Doing so will delete this category and all of its children."),
+                            primaryButton: .destructive(Text("DELETE"), action: {
+                                deleteCategory(indexSet: indexSet)
+                            }),
+                            secondaryButton: .cancel()
+                        )
+                    }
                     .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                     .padding()
