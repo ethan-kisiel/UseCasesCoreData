@@ -19,6 +19,9 @@ struct UseCaseListView: View
     // takes category for filter query purposes
     private let category: Category
     
+    @State private var alertIsPresented: Bool = false
+    @State private var indexSet: IndexSet = IndexSet()
+    
     init(category: Category)
     {
         self.category = category
@@ -77,7 +80,22 @@ struct UseCaseListView: View
                                     }
                                 }.tint(.indigo)
                         }
-                        .onDelete(perform: deleteUseCase)
+                        .onDelete
+                        { indexSet in
+                            self.indexSet = indexSet
+                            alertIsPresented = true
+                        }
+                        .alert(isPresented: $alertIsPresented)
+                        {
+                            Alert(
+                                title: Text("Do you wish to delete this use case?"),
+                                message: Text("Doing so will delete this use case and all of its children."),
+                                primaryButton: .destructive(Text("DELETE"), action: {
+                                    deleteUseCase(indexSet: indexSet)
+                                }),
+                                secondaryButton: .cancel()
+                            )
+                        }
                         .listRowBackground(NM_MAIN)
                     }
                 }

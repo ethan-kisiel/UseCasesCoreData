@@ -16,6 +16,9 @@ struct CategoryListView: View {
     
     @State private var showUseCases: Bool = false
     
+    @State private var alertIsPresented: Bool = false
+    @State private var indexSet: IndexSet = IndexSet()
+    
     init(project: Project)
     {
         self.project = project
@@ -47,7 +50,22 @@ struct CategoryListView: View {
                             }
                         }.tint(.indigo)
                     }
-                    .onDelete(perform: deleteCategory)
+                    .onDelete
+                    { indexSet in
+                        self.indexSet = indexSet
+                        alertIsPresented = true
+                    }
+                    .alert(isPresented: $alertIsPresented)
+                    {
+                        Alert(
+                            title: Text("Do you wish to delete this category?"),
+                            message: Text("Doing so will delete this category and all of its children."),
+                            primaryButton: .destructive(Text("DELETE"), action: {
+                                deleteCategory(indexSet: indexSet)
+                            }),
+                            secondaryButton: .cancel()
+                        )
+                    }
                     .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                     .padding()
