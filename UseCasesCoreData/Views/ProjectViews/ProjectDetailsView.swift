@@ -95,6 +95,7 @@ struct ProjectDetailsView: View
             Spacer()
                 .navigationTitle("Categories")
                 .navigationBarTitleDisplayMode(.inline)
+            ReturnToTopButton()
         }.background(NM_MAIN)
     }
 

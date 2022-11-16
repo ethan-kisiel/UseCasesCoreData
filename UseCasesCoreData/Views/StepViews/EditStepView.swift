@@ -69,7 +69,7 @@ struct EditStepView: View {
                 .padding(8)
                 
                 Spacer()
-                    .navigationTitle("Edit Use Case")
+                    .navigationTitle("Edit Step")
                     .navigationBarTitleDisplayMode(.inline)
             }.background(NM_MAIN)
                 .padding()

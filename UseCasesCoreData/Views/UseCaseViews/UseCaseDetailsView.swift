@@ -104,6 +104,7 @@ struct UseCaseDetailsView: View
             Spacer()
                 .navigationTitle("Steps")
                 .navigationBarTitleDisplayMode(.inline)
+            ReturnToTopButton()
         }.background(NM_MAIN)
     }
     
