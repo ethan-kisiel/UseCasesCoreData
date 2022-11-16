@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryDetailsView: View {
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var router: Router
     
     @State var category: Category
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
@@ -24,7 +25,7 @@ struct CategoryDetailsView: View {
 
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
-
+    
     var invalidFields: Bool
     {
         title.isEmpty || caseId.isEmpty
@@ -109,6 +110,7 @@ struct CategoryDetailsView: View {
             Spacer()
                 .navigationTitle("Use Cases")
                 .navigationBarTitleDisplayMode(.inline)
+            ReturnToTopButton()
         }.background(NM_MAIN)
     }
     

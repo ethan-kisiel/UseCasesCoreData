@@ -51,6 +51,7 @@ struct StepDetailsView: View {
             }
             Spacer()
                 .navigationTitle("Step Details")
+            ReturnToTopButton()
         }.background(NM_MAIN)
     }
 }
