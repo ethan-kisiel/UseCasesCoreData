@@ -55,7 +55,7 @@ struct EditCategoryView: View {
                     dismiss()
                 })
                 {
-                    Text("Save Project").foregroundColor(invalidFields ? .secondary : .primary)
+                    Text("Save Category").foregroundColor(invalidFields ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
@@ -63,7 +63,7 @@ struct EditCategoryView: View {
                 .padding(8)
                 
                 Spacer()
-                    .navigationTitle("Edit Use Case")
+                    .navigationTitle("Edit Category")
                     .navigationBarTitleDisplayMode(.inline)
             }.background(NM_MAIN)
                 .padding()
