@@ -6,10 +6,10 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(BaseModel)
-public class BaseModel: NSManagedObject {
-
+public class BaseModel: NSManagedObject
+{
 }

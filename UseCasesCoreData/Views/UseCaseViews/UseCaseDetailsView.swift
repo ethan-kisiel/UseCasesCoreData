@@ -21,16 +21,6 @@ struct UseCaseDetailsView: View
     }
     
     @State var showAddFields: Bool = false
-    @FocusState var isFocused: Bool
-
-    @State var name: String = EMPTY_STRING
-    @State var text: String = EMPTY_STRING
-    @State var stepId: String = EMPTY_STRING
-    
-    private var invalidFields: Bool
-    {
-        return name.isEmpty && text.isEmpty
-    }
     
     var body: some View
     {
@@ -65,39 +55,7 @@ struct UseCaseDetailsView: View
             
             if showAddFields
             {
-                VStack(spacing: 5)
-                {
-                    withAnimation
-                    {
-                        TextBoxWithFocus("Step", text: $name, isFocused: $isFocused).padding(8)
-                    }
-                    withAnimation
-                    {
-                        TextBoxWithFocus("ID", text: $stepId, isFocused: $isFocused).padding(8)
-                    }
-                    
-                    withAnimation
-                    {
-                        TextBoxWithFocus("Description", text: $text, isFocused: $isFocused).padding(8)
-                    }
-                    Button(action:
-                            {
-                        addStep()
-                        
-                        name = EMPTY_STRING
-                        stepId = EMPTY_STRING
-                        text = EMPTY_STRING
-                        isFocused = false
-                    })
-                    {
-                        // MARK: add form validation variable
-                        Text("Add Step").foregroundColor(invalidFields ? .secondary : .primary)
-                            .fontWeight(.bold).frame(maxWidth: .infinity)
-                    }
-                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                    .disabled(invalidFields)
-                    .padding(8)
-                }.padding()
+                AddStepView(useCase: useCase)
             }
             Spacer()
             StepListView(useCase: useCase)
@@ -106,28 +64,6 @@ struct UseCaseDetailsView: View
                 .navigationBarTitleDisplayMode(.inline)
             ReturnToTopButton()
         }.background(NM_MAIN)
-    }
-    
-    private func addStep()
-    {
-        withAnimation
-        {
-            let step = Step(context: moc)
-            step.id = UUID()
-            step.name = name
-            step.body = text
-            step.created = Date()
-            step.lastUpdated = step.created
-            step.parent = useCase
-        }
-        do
-        {
-            try moc.save()
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
     }
 }
 

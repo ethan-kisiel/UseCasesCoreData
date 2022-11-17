@@ -6,10 +6,10 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(Category)
-public class Category: BaseModel {
-
+public class Category: BaseModel
+{
 }

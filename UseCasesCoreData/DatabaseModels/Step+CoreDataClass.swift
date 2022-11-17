@@ -6,10 +6,10 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(Step)
-public class Step: BaseModel {
-
+public class Step: BaseModel
+{
 }
