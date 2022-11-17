@@ -67,7 +67,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
-		88374096291EAF8C00492A07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		883740972925541700492A07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		88374099292557A800492A07 /* ReturnToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToTopButton.swift; sourceTree = "<group>"; };
 		8837409B2926B27000492A07 /* AddProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectView.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		88951D21291C3617007081D3 /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
 		88951D23291C3623007081D3 /* EditUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUseCaseView.swift; sourceTree = "<group>"; };
 		88951D25291C362F007081D3 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
+		889794532926DC3E0026A196 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				883F44922912A5C600284B2F /* Assets.xcassets */,
-				88374096291EAF8C00492A07 /* Info.plist */,
+				889794532926DC3E0026A196 /* Info.plist */,
 				883F44992912A5C600284B2F /* UseCasesCoreData.xcdatamodeld */,
 				883F44902912A5C600284B2F /* ContentView.swift */,
 				88951CF62915DE79007081D3 /* Constants.swift */,

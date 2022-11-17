@@ -103,28 +103,32 @@ struct UseCasesCoreDataApp: App
             router.path.append(Route.project(project))
         }
         else { return }
-        for index in 1 ..< url.pathComponents.count
+        let pathCount = url.pathComponents.count
+        if pathCount != 0
         {
-            let currentItem = url.pathComponents[index]
-            switch index
+            for index in 1 ..< pathCount
             {
-            case 1:
-                guard let category = ModelGetter<Category>(moc: moc)
-                    .getModelById(currentItem)
-                else { return }
-                router.path.append(Route.category(category))
-            case 2:
-                guard let useCase = ModelGetter<UseCase>(moc: moc)
-                    .getModelById(currentItem)
-                else { return }
-                router.path.append(Route.useCase(useCase))
-            case 3:
-                guard let step = ModelGetter<Step>(moc: moc)
-                    .getModelById(currentItem)
-                else { return }
-                router.path.append(Route.step(step))
-            default:
-                return
+                let currentItem = url.pathComponents[index]
+                switch index
+                {
+                case 1:
+                    guard let category = ModelGetter<Category>(moc: moc)
+                        .getModelById(currentItem)
+                    else { return }
+                    router.path.append(Route.category(category))
+                case 2:
+                    guard let useCase = ModelGetter<UseCase>(moc: moc)
+                        .getModelById(currentItem)
+                    else { return }
+                    router.path.append(Route.useCase(useCase))
+                case 3:
+                    guard let step = ModelGetter<Step>(moc: moc)
+                        .getModelById(currentItem)
+                    else { return }
+                    router.path.append(Route.step(step))
+                default:
+                    return
+                }
             }
         }
     }
