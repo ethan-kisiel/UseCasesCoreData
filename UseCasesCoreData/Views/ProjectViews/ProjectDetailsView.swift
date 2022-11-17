@@ -11,9 +11,12 @@ import SwiftUI
 struct ProjectDetailsView: View
 {
     @Environment(\.managedObjectContext) var moc
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
     private var categories: FetchedResults<Category>
     
+    // this fetch request is used for the display of the
+    // current project selector
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.name, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
     
@@ -62,33 +65,7 @@ struct ProjectDetailsView: View
             
             if showAddFields
             {
-                VStack(spacing: 5)
-                {
-                    withAnimation
-                    {
-                        TextBoxWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
-                            .padding(8)
-                    }
-                    
-                    Button(action:
-                            {
-                        // if there is a category with the specified title
-                        // the use case is added to that category
-                        // otherwise, a category is created
-                        // and the use case is added
-                        addCategory(name: categoryTitle)
-                        
-                        categoryTitle = EMPTY_STRING
-                        isFocused = false
-                    })
-                    {
-                        Text("Add Category").foregroundColor(invalidFields ? .secondary: NM_SEC)
-                            .fontWeight(.bold).frame(maxWidth: .infinity)
-                    }
-                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                    .disabled(categoryTitle.isEmpty)
-                    .padding(8)
-                }.padding()
+                AddCategoryView(project: project)
             }
             Spacer()
             CategoryListView(project: project)
@@ -97,27 +74,6 @@ struct ProjectDetailsView: View
                 .navigationBarTitleDisplayMode(.inline)
             ReturnToTopButton()
         }.background(NM_MAIN)
-    }
-
-    
-    func addCategory(name: String)
-    {
-        let category = Category(context: moc)
-        category.id = UUID()
-        category.created = Date()
-        category.lastUpdated = Date()
-        category.name = name
-        category.parent = project
-        
-        do
-        {
-            try moc.save()
-        }
-        catch
-        {
-            print("UNABLE TO SAVE")
-            print(error.localizedDescription)
-        }
     }
 }
 

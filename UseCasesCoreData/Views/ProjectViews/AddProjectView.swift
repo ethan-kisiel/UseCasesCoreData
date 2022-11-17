@@ -11,19 +11,19 @@ struct AddProjectView: View
 {
     @Environment(\.managedObjectContext) var moc
 
-    @State var title: String = EMPTY_STRING
-    @State var projectId: String = EMPTY_STRING
+    @State private var title: String = EMPTY_STRING
+    @State private var projectId: String = EMPTY_STRING
 
     @FocusState var isFocused: Bool
 
-    var invalidFields: Bool
+    private var invalidFields: Bool
     {
         title.isEmpty || projectId.isEmpty
     }
 
     var body: some View
     {
-        VStack(spacing: 10)
+        VStack(spacing: 5)
         {
             withAnimation
             {
@@ -46,6 +46,7 @@ struct AddProjectView: View
             }
             .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
             .disabled(invalidFields)
+            .padding(8)
         }.padding()
     }
 
