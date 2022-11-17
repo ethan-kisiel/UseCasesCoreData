@@ -6,10 +6,10 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(UseCase)
-public class UseCase: BaseModel {
-
+public class UseCase: BaseModel
+{
 }

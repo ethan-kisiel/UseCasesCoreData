@@ -19,16 +19,10 @@ struct ProjectsView: View
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.lastUpdated, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
     
-    @State var title: String = EMPTY_STRING
-    @State var projectId: String = EMPTY_STRING
+   
+   
 
     @State var showAddFields: Bool = false
-    @FocusState var isFocused: Bool
-    
-    var invalidFields: Bool
-    {
-        title.isEmpty || projectId.isEmpty
-    }
     
     var body: some View
     {
@@ -46,30 +40,7 @@ struct ProjectsView: View
             
             if showAddFields
             {
-                VStack(spacing: 10)
-                {
-                    withAnimation
-                    {
-                        TextBoxWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
-                    }
-                    withAnimation
-                    {
-                        TextBoxWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
-                    }
-                    Button(action:
-                            {
-                        addProject()
-                        title = EMPTY_STRING
-                        projectId = EMPTY_STRING
-                        isFocused = false
-                    })
-                    {
-                        Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
-                            .fontWeight(.bold).frame(maxWidth: .infinity)
-                    }
-                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                    .disabled(invalidFields)
-                }.padding()
+               AddProjectView()
             }
             
             Spacer()
@@ -77,27 +48,6 @@ struct ProjectsView: View
             Spacer()
                 .navigationTitle("Projects")
                 .navigationBarTitleDisplayMode(.inline)
-        }
-    }
-    
-    private func addProject()
-    {
-        withAnimation
-        {
-            let project = Project(context: moc)
-            project.id = UUID()
-            project.created = Date()
-            project.lastUpdated = project.created
-            project.name = title
-            
-            do
-            {
-                try moc.save()
-            }
-            catch
-            {
-                print(error.localizedDescription)
-            }
         }
     }
 }

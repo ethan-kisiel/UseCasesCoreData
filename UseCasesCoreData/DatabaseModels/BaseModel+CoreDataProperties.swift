@@ -6,13 +6,13 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension BaseModel {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<BaseModel> {
+extension BaseModel
+{
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<BaseModel>
+    {
         return NSFetchRequest<BaseModel>(entityName: "BaseModel")
     }
 
@@ -20,18 +20,23 @@ extension BaseModel {
     @NSManaged public var created: Date?
     @NSManaged public var lastUpdated: Date?
     @NSManaged public var name: String?
-
+    @NSManaged public var customId: String?
 }
 
-extension BaseModel : Identifiable {
-    
-    var wrappedName: String
-    {
-        self.name ?? MISSING_DATA
-    }
-    
+extension BaseModel: Identifiable
+{
     var wrappedId: String
     {
-        self.id?.uuidString ?? MISSING_DATA
+        id?.uuidString ?? MISSING_DATA
+    }
+
+    var wrappedName: String
+    {
+        name ?? MISSING_DATA
+    }
+
+    var wrappedCustomId: String
+    {
+        customId ?? MISSING_DATA
     }
 }

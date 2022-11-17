@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		883740982925541700492A07 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883740972925541700492A07 /* Router.swift */; };
 		8837409A292557A800492A07 /* ReturnToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88374099292557A800492A07 /* ReturnToTopButton.swift */; };
+		8837409C2926B27000492A07 /* AddProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8837409B2926B27000492A07 /* AddProjectView.swift */; };
 		883F448F2912A5C600284B2F /* UseCasesCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */; };
 		883F44912912A5C600284B2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44902912A5C600284B2F /* ContentView.swift */; };
 		883F44932912A5C600284B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44922912A5C600284B2F /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		88374096291EAF8C00492A07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		883740972925541700492A07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		88374099292557A800492A07 /* ReturnToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToTopButton.swift; sourceTree = "<group>"; };
+		8837409B2926B27000492A07 /* AddProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectView.swift; sourceTree = "<group>"; };
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesCoreDataApp.swift; sourceTree = "<group>"; };
 		883F44902912A5C600284B2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				883F44BB2912D38A00284B2F /* ProjectListView.swift */,
 				883F44BE2912D38B00284B2F /* ProjectsView.swift */,
 				88951D1F291C1620007081D3 /* EditProjectView.swift */,
+				8837409B2926B27000492A07 /* AddProjectView.swift */,
 			);
 			path = ProjectViews;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				883F44912912A5C600284B2F /* ContentView.swift in Sources */,
 				88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
+				8837409C2926B27000492A07 /* AddProjectView.swift in Sources */,
 				883F44AE2912B76C00284B2F /* BaseModel+CoreDataClass.swift in Sources */,
 				883F44CB2912D38B00284B2F /* UseCaseListView.swift in Sources */,
 				88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */,

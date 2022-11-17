@@ -6,13 +6,13 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension UseCase {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<UseCase> {
+extension UseCase
+{
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<UseCase>
+    {
         return NSFetchRequest<UseCase>(entityName: "UseCase")
     }
 
@@ -20,12 +20,12 @@ extension UseCase {
     @NSManaged public var isComplete: Bool
     @NSManaged public var parent: Category?
     @NSManaged public var steps: NSSet?
-
 }
 
 // MARK: Generated accessors for steps
-extension UseCase {
 
+extension UseCase
+{
     @objc(addStepsObject:)
     @NSManaged public func addToSteps(_ value: Step)
 
@@ -37,7 +37,7 @@ extension UseCase {
 
     @objc(removeSteps:)
     @NSManaged public func removeFromSteps(_ values: NSSet)
-    
+
     var wrappedPriority: String
     {
         self.priority ?? Priority.medium.rawValue
