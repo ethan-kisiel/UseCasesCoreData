@@ -12,6 +12,14 @@ class Router: ObservableObject
 {
     @Published var path = NavigationPath()
     
+    func lastPage()
+    {
+        if path.count > 1
+        {
+            path.removeLast()
+        }
+    }
+
     func reset()
     {
         path = NavigationPath()

@@ -8,8 +8,8 @@
 import SwiftUI
 enum Sections: String, CaseIterable
 {
-    case incomplete
-    case complete
+    case incomplete = "Incomplete"
+    case complete = "Complete"
 }
 
 struct UseCaseListView: View
@@ -21,7 +21,8 @@ struct UseCaseListView: View
     
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
-    
+    @State private var currentSection: Sections = .incomplete
+
     init(category: Category)
     {
         self.category = category
@@ -36,74 +37,77 @@ struct UseCaseListView: View
     {
         return categoryUseCases.filter({ $0.isComplete == false })
     }
-    
+
     var body: some View
     {
-        List
+        VStack
         {
-            ForEach(Sections.allCases, id: \.self)
+            Picker("Complete/Incomplete:", selection: $currentSection)
             {
-                section in
-                let filteredCases = section == .incomplete ? incompleteUseCases : completeUseCases
-                Spacer()
-                Section
-                {
-                    if filteredCases.isEmpty
-                    {
-                        Text("No \(section.rawValue) use cases to display.")
-                            .foregroundColor(.secondary)
-                            .opacity(0.5)
-                    }
-                    else
-                    {
-                        switch section
-                        {
-                        case .incomplete:
-                            Text("Incomplete use cases:")
-                                .fontWeight(.semibold)
-                                .opacity(0.5)
-                        case .complete:
-                            Text("Complete use cases:")
-                                .fontWeight(.semibold)
-                                .opacity(0.5)
-                        }
-                        
-                        ForEach(filteredCases, id: \.self)
-                        { useCase in
-                            //Text("\(useCase.name ?? "NO NAME")")
-                            UseCaseCellView(useCase: useCase)
-                                .swipeActions(edge: .leading)
-                                {
-                                    NavigationLink(value: Route.editUseCase(useCase))
-                                    {
-                                        Text("Edit")
-                                    }
-                                }.tint(.indigo)
-                        }
-                        .onDelete
-                        { indexSet in
-                            self.indexSet = indexSet
-                            alertIsPresented = true
-                        }
-                        .alert(isPresented: $alertIsPresented)
-                        {
-                            Alert(
-                                title: Text("Do you wish to delete this use case?"),
-                                message: Text("Doing so will delete this use case and all of its children."),
-                                primaryButton: .destructive(Text("DELETE"), action: {
-                                    deleteUseCase(indexSet: indexSet)
-                                }),
-                                secondaryButton: .cancel()
-                            )
-                        }
-                        .listRowBackground(NM_MAIN)
-                    }
+                ForEach(Sections.allCases, id: \.self)
+                { section in
+                    Text(section.rawValue)
                 }
-            }.listRowBackground(NM_MAIN)
-        }
-        .listStyle(.plain)
-        .padding()
-        .scrollContentBackground(.hidden)
+            }
+            .pickerStyle(.segmented)
+
+            let filteredCases = currentSection == .incomplete ? incompleteUseCases : completeUseCases
+            Spacer()
+            if filteredCases.isEmpty
+            {
+                Text("No \(currentSection.rawValue) use cases to display.")
+                    .foregroundColor(.secondary)
+                    .opacity(0.5)
+            }
+            else
+            {
+                switch currentSection
+                {
+                case .incomplete:
+                    Text("Incomplete use cases:")
+                        .fontWeight(.semibold)
+                        .opacity(0.5)
+                case .complete:
+                    Text("Complete use cases:")
+                        .fontWeight(.semibold)
+                        .opacity(0.5)
+                }
+                List
+                {
+                    ForEach(filteredCases, id: \.self)
+                    { useCase in
+                        UseCaseCellView(useCase: useCase)
+                            .swipeActions(edge: .leading)
+                        {
+                            NavigationLink(value: Route.editUseCase(useCase))
+                            {
+                                Text("Edit")
+                            }
+                        }.tint(.indigo)
+                    }
+                    .onDelete
+                    { indexSet in
+                        self.indexSet = indexSet
+                        alertIsPresented = true
+                    }
+                    .alert(isPresented: $alertIsPresented)
+                    {
+                        Alert(
+                            title: Text("Do you wish to delete this use case?"),
+                            message: Text("Doing so will delete this use case and all of its children."),
+                            primaryButton: .destructive(Text("DELETE"), action: {
+                                deleteUseCase(indexSet: indexSet)
+                            }),
+                            secondaryButton: .cancel()
+                        )
+                    }
+                    .listRowBackground(NM_MAIN)
+                }
+                .listStyle(.plain)
+                .padding()
+                .scrollContentBackground(.hidden)
+            }
+        }.padding(8)
     }
     
     private func deleteUseCase(indexSet: IndexSet)

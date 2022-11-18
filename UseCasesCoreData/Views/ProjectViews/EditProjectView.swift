@@ -20,6 +20,11 @@ struct EditProjectView: View
     init(project: Project)
     {
         self.project = project
+        
+        // initialization happens here, so that the state values
+        // which are used as bindings for the text fields
+        // can be set to the values of the passed project
+        
         _title = State(wrappedValue: project.wrappedName)
         _projectId = State(wrappedValue: project.wrappedId)
     }
