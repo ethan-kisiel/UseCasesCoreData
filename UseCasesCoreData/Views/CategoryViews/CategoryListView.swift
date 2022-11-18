@@ -23,7 +23,7 @@ struct CategoryListView: View {
     {
         self.project = project
         _projectCategories = FetchRequest<Category>(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)],
+            sortDescriptors: [NSSortDescriptor(keyPath: \Category.title, ascending: true)],
             predicate: NSPredicate(format: "parent == %@", project),
             animation: .default)
     }

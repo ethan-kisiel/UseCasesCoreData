@@ -15,13 +15,12 @@ struct AddUseCaseView: View
 
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
-    @State var caseId: String = EMPTY_STRING
 
     @FocusState var isFocused: Bool
 
     var invalidFields: Bool
     {
-        title.isEmpty || caseId.isEmpty
+        title.isEmpty
     }
 
     var body: some View
@@ -43,17 +42,12 @@ struct AddUseCaseView: View
             {
                 TextBoxWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
             }
-            withAnimation
-            {
-                TextBoxWithFocus("ID", text: $caseId, isFocused: $isFocused).padding(8)
-            }
 
             Button(action:
                 {
                     addUseCase()
 
                     title = EMPTY_STRING
-                    caseId = EMPTY_STRING
                     priority = .medium
                     isFocused = false
                 })
@@ -73,7 +67,7 @@ struct AddUseCaseView: View
         {
             let useCase = UseCase(context: moc)
             useCase.id = UUID()
-            useCase.name = title
+            useCase.title = title
             useCase.priority = priority.rawValue
             useCase.isComplete = false
             useCase.created = Date()

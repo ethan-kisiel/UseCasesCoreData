@@ -18,7 +18,7 @@ struct StepListView: View
     init(useCase: UseCase)
     {
         self.useCase = useCase
-        _useCaseSteps = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.name, ascending: true)],
+        _useCaseSteps = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.title, ascending: true)],
         predicate: NSPredicate(format: "parent == %@", useCase),
         animation: .default)
     }

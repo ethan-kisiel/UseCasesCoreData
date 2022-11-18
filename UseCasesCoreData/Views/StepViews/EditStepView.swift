@@ -20,7 +20,7 @@ struct EditStepView: View {
     init(step: Step)
     {
         self.step = step
-        _title = State(wrappedValue: step.wrappedName)
+        _title = State(wrappedValue: step.wrappedTitle)
         _stepId = State(wrappedValue: step.wrappedId)
         //TODO: add wrapped body value
         _description = State(wrappedValue: step.body ?? EMPTY_STRING)
@@ -37,7 +37,7 @@ struct EditStepView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(step.wrappedName)
+                Text(step.wrappedTitle)
                 withAnimation
                 {
                     TextBoxWithFocus("Step Name", text: $title, isFocused: $isFocused).padding(8)
@@ -78,7 +78,7 @@ struct EditStepView: View {
     
     private func updateStep(_ step: Step)
     {
-        step.name = title
+        step.title = title
         step.body = description
         step.lastUpdated = Date()
         do

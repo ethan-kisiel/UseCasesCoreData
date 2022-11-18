@@ -12,14 +12,13 @@ struct AddCategoryView: View {
     
     let project: Project
 
-    @State private var categoryTitle: String = EMPTY_STRING
-    @State private var categoryId: String = EMPTY_STRING
-    
+    @State private var title: String = EMPTY_STRING
+
     @FocusState var isFocused: Bool
     
     private var invalidFields: Bool
     {
-        categoryTitle.isEmpty
+        title.isEmpty
     }
 
     var body: some View {
@@ -27,7 +26,7 @@ struct AddCategoryView: View {
         {
             withAnimation
             {
-                TextBoxWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
+                TextBoxWithFocus("Category", text: $title, isFocused: $isFocused)
                     .padding(8)
             }
             
@@ -39,7 +38,7 @@ struct AddCategoryView: View {
                 // and the use case is added
                 addCategory()
                 
-                categoryTitle = EMPTY_STRING
+                title = EMPTY_STRING
                 isFocused = false
             })
             {
@@ -58,8 +57,7 @@ struct AddCategoryView: View {
         category.id = UUID()
         category.created = Date()
         category.lastUpdated = Date()
-        category.name = categoryTitle
-        category.customId = categoryId
+        category.title = title
         category.parent = project
         
         do

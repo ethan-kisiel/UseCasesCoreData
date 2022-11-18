@@ -11,7 +11,7 @@ import SwiftUI
 struct CategoryCellView: View {
     @Environment(\.managedObjectContext) var moc
 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.title, ascending: true)], animation: .default)
     private var categories: FetchedResults<Category>
     
     let category: Category
@@ -35,7 +35,7 @@ struct CategoryCellView: View {
                 {
                     trashIsEnabled.toggle()
                 }
-                Text(category.wrappedName)
+                Text(category.wrappedTitle)
                 Spacer()
                 // TODO: change this to user made category id
                 let categoryId = category.wrappedId

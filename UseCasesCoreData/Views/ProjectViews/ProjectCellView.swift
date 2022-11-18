@@ -12,7 +12,7 @@ struct ProjectCellView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.name, ascending: true)], animation: .default)
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
     
     @State var trashIsEnabled: Bool = false
@@ -46,7 +46,7 @@ struct ProjectCellView: View
                         print("TeSTTESTTETST")
                     }
     
-                Text(project.wrappedName)
+                Text(project.wrappedTitle)
                 Spacer()
                 let projectId = project.wrappedId
                 Text(projectId.shorten(by: 3) + "...")

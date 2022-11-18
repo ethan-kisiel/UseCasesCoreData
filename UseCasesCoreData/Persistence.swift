@@ -18,7 +18,7 @@ struct PersistenceController {
             newItem.id = UUID()
             newItem.created = Date()
             newItem.lastUpdated = Date()
-            newItem.name = "\(num)"
+            newItem.title = "\(num)"
         }
         do {
             try viewContext.save()

@@ -42,7 +42,7 @@ struct UseCaseCellView: View
                     updateIsComplete(useCase)
                 }
                 
-                Text("\(useCase.name ?? EMPTY_STRING)")
+                Text(useCase.wrappedTitle)
                 Spacer()
                 Text(useCase.priority ?? "None")
                     .padding(5)

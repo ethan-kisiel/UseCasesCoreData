@@ -58,6 +58,7 @@ struct UseCaseListView: View
                 Text("No \(currentSection.rawValue) use cases to display.")
                     .foregroundColor(.secondary)
                     .opacity(0.5)
+                Spacer()
             }
             else
             {
@@ -95,7 +96,7 @@ struct UseCaseListView: View
                         Alert(
                             title: Text("Do you wish to delete this use case?"),
                             message: Text("Doing so will delete this use case and all of its children."),
-                            primaryButton: .destructive(Text("DELETE"), action: {
+                            primaryButton: .destructive(Text("Delete"), action: {
                                 deleteUseCase(indexSet: indexSet)
                             }),
                             secondaryButton: .cancel()

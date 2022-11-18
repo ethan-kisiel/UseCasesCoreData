@@ -25,7 +25,7 @@ struct EditProjectView: View
         // which are used as bindings for the text fields
         // can be set to the values of the passed project
         
-        _title = State(wrappedValue: project.wrappedName)
+        _title = State(wrappedValue: project.wrappedTitle)
         _projectId = State(wrappedValue: project.wrappedId)
     }
     
@@ -41,7 +41,7 @@ struct EditProjectView: View
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(project.wrappedName)
+                Text(project.wrappedTitle)
                 withAnimation
                 {
                     TextBoxWithFocus("Project Name", text: $title, isFocused: $isFocused).padding(8)
@@ -79,7 +79,7 @@ struct EditProjectView: View
     
     private func updateProject(_ project: Project)
     {
-        project.name = title
+        project.title = title
         project.lastUpdated = Date()
         do
         {

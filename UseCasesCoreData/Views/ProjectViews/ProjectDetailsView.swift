@@ -12,12 +12,12 @@ struct ProjectDetailsView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.title, ascending: true)], animation: .default)
     private var categories: FetchedResults<Category>
     
     // this fetch request is used for the display of the
     // current project selector
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.name, ascending: true)], animation: .default)
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
     
     @State var project: Project
@@ -45,13 +45,13 @@ struct ProjectDetailsView: View
                            content:
                             {
                         ForEach(projects, id: \.self)
-                        { project in
-                            Text(project.wrappedName)
-                        }
+                            { project in
+                                Text(project.wrappedTitle)
+                            }
                     })
                 } label:
                 {
-                    Text("Project: **\(project.wrappedName)**")
+                    Text("Project: **\(project.wrappedTitle)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }

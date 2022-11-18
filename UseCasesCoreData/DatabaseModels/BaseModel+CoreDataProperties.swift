@@ -19,7 +19,7 @@ extension BaseModel
     @NSManaged public var id: UUID?
     @NSManaged public var created: Date?
     @NSManaged public var lastUpdated: Date?
-    @NSManaged public var name: String?
+    @NSManaged public var title: String?
     @NSManaged public var customId: String?
 }
 
@@ -30,9 +30,9 @@ extension BaseModel: Identifiable
         id?.uuidString ?? MISSING_DATA
     }
 
-    var wrappedName: String
+    var wrappedTitle: String
     {
-        name ?? MISSING_DATA
+        title ?? MISSING_DATA
     }
 
     var wrappedCustomId: String

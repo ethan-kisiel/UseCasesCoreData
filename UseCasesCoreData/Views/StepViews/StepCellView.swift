@@ -36,7 +36,7 @@ struct StepCellView: View
                     trashIsEnabled.toggle()
                 }
                 
-                Text(step.name ?? "NO NAME")
+                Text(step.wrappedTitle)
                 Spacer()
             }
         }

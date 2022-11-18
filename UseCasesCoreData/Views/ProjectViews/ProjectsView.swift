@@ -16,7 +16,7 @@ struct ProjectsView: View
     
     @Environment(\.managedObjectContext) private var moc
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.lastUpdated, ascending: true)], animation: .default)
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<Project>
     
    

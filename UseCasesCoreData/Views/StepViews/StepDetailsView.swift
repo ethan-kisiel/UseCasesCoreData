@@ -12,7 +12,7 @@ struct StepDetailsView: View {
     
     @State var step: Step
 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.name, ascending: true)], animation: .default)
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.title, ascending: true)], animation: .default)
     var steps: FetchedResults<Step>
     
     var filteredSteps: [Step]
@@ -33,12 +33,12 @@ struct StepDetailsView: View {
                             {
                         ForEach(filteredSteps, id: \.self)
                         { step in
-                            Text(step.name ?? "No Name")
+                            Text(step.wrappedTitle)
                         }
                     })
                 } label:
                 {
-                    Text("Step: **\(step.name!)**")
+                    Text("Step: **\(step.wrappedTitle)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }

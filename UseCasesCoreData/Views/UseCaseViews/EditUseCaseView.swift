@@ -22,7 +22,7 @@ struct EditUseCaseView: View {
     {
         self.useCase = useCase
         _priority = State(wrappedValue: Priority(rawValue: useCase.wrappedPriority) ?? .medium)
-        _title = State(wrappedValue: useCase.wrappedName)
+        _title = State(wrappedValue: useCase.wrappedTitle)
         _caseId = State(wrappedValue: useCase.wrappedId)
     }
     
@@ -37,7 +37,7 @@ struct EditUseCaseView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(useCase.wrappedName)
+                Text(useCase.wrappedTitle)
                 Picker("Priority:", selection: $priority)
                 {
                     ForEach(Priority.allCases, id: \.self)
@@ -88,7 +88,7 @@ struct EditUseCaseView: View {
     
     private func updateUseCase(_ useCase: UseCase)
     {
-        useCase.name = title
+        useCase.title = title
         useCase.priority = priority.rawValue
         useCase.lastUpdated = Date()
         do

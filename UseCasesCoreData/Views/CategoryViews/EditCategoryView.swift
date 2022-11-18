@@ -20,7 +20,7 @@ struct EditCategoryView: View {
     init(category: Category)
     {
         self.category = category
-        _title = State(wrappedValue: category.wrappedName)
+        _title = State(wrappedValue: category.wrappedTitle)
         _categoryId = State(wrappedValue: category.wrappedId)
     }
 
@@ -35,7 +35,7 @@ struct EditCategoryView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(category.wrappedName)
+                Text(category.wrappedTitle)
                 withAnimation
                 {
                     TextBoxWithFocus("Category Name", text: $title, isFocused: $isFocused).padding(8)
@@ -72,7 +72,7 @@ struct EditCategoryView: View {
     
     private func updateCategory(_ category: Category)
     {
-        category.name = title
+        category.title = title
         category.lastUpdated = Date()
         do
         {
