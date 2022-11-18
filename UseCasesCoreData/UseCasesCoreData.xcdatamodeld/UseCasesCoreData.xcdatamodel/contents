@@ -21,6 +21,7 @@
     <entity name="UseCase" representedClassName="UseCase" parentEntity="BaseModel" syncable="YES">
         <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="priority" optional="YES" attributeType="String"/>
+        <attribute name="prioritySort" optional="YES" attributeType="String"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="useCases" inverseEntity="Category"/>
         <relationship name="steps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Step" inverseName="parent" inverseEntity="Step"/>
     </entity>

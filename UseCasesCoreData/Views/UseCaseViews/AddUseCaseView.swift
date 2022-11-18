@@ -73,6 +73,16 @@ struct AddUseCaseView: View
             useCase.created = Date()
             useCase.lastUpdated = useCase.created
             useCase.parent = category
+            
+            switch priority
+            {
+            case .low:
+                useCase.prioritySort = "0"
+            case .medium:
+                useCase.prioritySort = "1"
+            case .high:
+                useCase.prioritySort = "2"
+            }
 
             do
             {

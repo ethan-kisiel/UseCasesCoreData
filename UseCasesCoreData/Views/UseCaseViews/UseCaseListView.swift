@@ -26,7 +26,7 @@ struct UseCaseListView: View
     init(category: Category)
     {
         self.category = category
-        _categoryUseCases = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath:\UseCase.priority, ascending: true)], predicate: NSPredicate(format: "parent == %@", category), animation: .default)
+        _categoryUseCases = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCase.prioritySort, ascending: true)], predicate: NSPredicate(format: "parent == %@", category), animation: .default)
     }
     var completeUseCases: [UseCase]
     {
