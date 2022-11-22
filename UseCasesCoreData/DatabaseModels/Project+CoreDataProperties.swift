@@ -15,8 +15,16 @@ extension ProjectEntity
     {
         return NSFetchRequest<ProjectEntity>(entityName: "Project")
     }
-
+    
     @NSManaged public var categories: NSSet?
+    
+    var wrappedCategories: [CategoryEntity]
+    {
+        let set = categories as? Set<CategoryEntity> ?? []
+        
+        return set.sorted
+        { $0.wrappedTitle > $1.wrappedTitle }
+    }
 }
 
 // MARK: Generated accessors for categories

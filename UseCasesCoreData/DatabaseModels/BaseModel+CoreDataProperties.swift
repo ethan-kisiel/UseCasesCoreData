@@ -21,10 +21,7 @@ extension BaseModelEntity
     @NSManaged public var lastUpdated: Date?
     @NSManaged public var title: String?
     @NSManaged public var customId: String?
-}
-
-extension BaseModelEntity: Identifiable
-{
+    
     var wrappedId: String
     {
         id?.uuidString ?? MISSING_DATA
@@ -39,4 +36,8 @@ extension BaseModelEntity: Identifiable
     {
         customId ?? MISSING_DATA
     }
+}
+
+extension BaseModelEntity: Identifiable
+{
 }

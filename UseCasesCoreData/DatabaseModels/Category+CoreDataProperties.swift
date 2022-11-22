@@ -18,6 +18,14 @@ extension CategoryEntity
 
     @NSManaged public var parent: ProjectEntity?
     @NSManaged public var useCases: NSSet?
+    
+    var wrappedUseCases: [UseCaseEntity]
+    {
+        let set = useCases as? Set<UseCaseEntity> ?? []
+        
+        return set.sorted
+        { $0.wrappedTitle > $1.wrappedTitle }
+    }
 }
 
 // MARK: Generated accessors for useCases

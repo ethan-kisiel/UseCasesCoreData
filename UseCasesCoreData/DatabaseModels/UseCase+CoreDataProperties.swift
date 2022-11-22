@@ -21,6 +21,19 @@ extension UseCaseEntity
     @NSManaged public var isComplete: Bool
     @NSManaged public var parent: CategoryEntity?
     @NSManaged public var steps: NSSet?
+    
+    var wrappedPriority: String
+    {
+        self.priority ?? Priority.medium.rawValue
+    }
+    
+    var wrappedSteps: [StepEntity]
+    {
+        let set = steps as? Set<StepEntity> ?? []
+        
+        return set.sorted
+        { $0.wrappedTitle > $1.wrappedTitle }
+    }
 }
 
 // MARK: Generated accessors for steps
@@ -38,9 +51,4 @@ extension UseCaseEntity
 
     @objc(removeSteps:)
     @NSManaged public func removeFromSteps(_ values: NSSet)
-
-    var wrappedPriority: String
-    {
-        self.priority ?? Priority.medium.rawValue
-    }
 }
