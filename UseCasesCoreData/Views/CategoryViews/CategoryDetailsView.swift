@@ -12,15 +12,12 @@ struct CategoryDetailsView: View {
     @EnvironmentObject var router: Router
     
     @State var category: CategoryEntity
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)], animation: .default)
-    private var categories: FetchedResults<CategoryEntity>
-    
+    @State var showAddFields: Bool = false
+
     private var filteredCategories: [CategoryEntity]
     {
-        return categories.filter({ $0.parent == category.parent })
+        return category.parent?.wrappedCategories ?? []
     }
-
-    @State var showAddFields: Bool = false
 
     var body: some View
     {

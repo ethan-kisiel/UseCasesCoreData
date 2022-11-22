@@ -5,33 +5,26 @@
 //  Created by Ethan Kisiel on 8/7/22.
 //
 
+import CoreData
 import SwiftUI
 
-struct CategoryListView: View {
+struct CategoryListView: View
+{
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest var projectCategories: FetchedResults<CategoryEntity>
-    
-    private let project: ProjectEntity
-    
-    @State private var showUseCases: Bool = false
+    @FetchRequest(sortDescriptors: [])
+    var fetchedCategories: FetchedResults<CategoryEntity>
     
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
     
-    init(project: ProjectEntity)
-    {
-        self.project = project
-        _projectCategories = FetchRequest<CategoryEntity>(
-            sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)],
-            predicate: NSPredicate(format: "parent == %@", project),
-            animation: .default)
-    }
+    let project: ProjectEntity
     
-    var body: some View {
+    var body: some View
+    {
         VStack
         {
-            if projectCategories.isEmpty
+            if project.wrappedCategories.isEmpty
             {
                 Text("No categories to show.")
             }
@@ -39,16 +32,16 @@ struct CategoryListView: View {
             {
                 List
                 {
-                    ForEach(projectCategories, id: \.id)
+                    ForEach(project.wrappedCategories, id: \.id)
                     { category in
                         CategoryCellView(category: category)
                             .swipeActions(edge: .leading)
-                        {
-                            NavigationLink(value: Route.editCategory(category))
                             {
-                                Text("Edit")
-                            }
-                        }.tint(.indigo)
+                                NavigationLink(value: Route.editCategory(category))
+                                {
+                                    Text("Edit")
+                                }
+                            }.tint(.indigo)
                     }
                     .onDelete
                     { indexSet in
@@ -68,16 +61,17 @@ struct CategoryListView: View {
                     }
                     .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
-                    .padding()
-                    .scrollContentBackground(.hidden)
+                .padding()
+                .scrollContentBackground(.hidden)
             }
         }.background(NM_MAIN)
     }
+
     private func deleteCategory(indexSet: IndexSet)
     {
         withAnimation
         {
-            indexSet.map{ projectCategories[$0] }.forEach(moc.delete)
+            indexSet.map { project.wrappedCategories[$0] }.forEach(moc.delete)
         }
         do
         {
@@ -90,9 +84,10 @@ struct CategoryListView: View {
     }
 }
 
-struct CategoryListView_Previews: PreviewProvider {
-    static var previews: some View {
-        let moc = PersistenceController.shared.container.viewContext
-        CategoryListView(project: ProjectEntity(context: moc))
+struct CategoryListView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
+        CategoryListView(project: ProjectEntity())
     }
 }

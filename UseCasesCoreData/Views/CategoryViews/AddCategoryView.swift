@@ -59,7 +59,7 @@ struct AddCategoryView: View {
         category.lastUpdated = Date()
         category.title = title
         category.parent = project
-        
+
         do
         {
             try moc.save()
@@ -73,7 +73,9 @@ struct AddCategoryView: View {
 }
 
 struct AddCategoryView_Previews: PreviewProvider {
+
     static var previews: some View {
-        AddCategoryView(project: ProjectEntity())
+        //AddCategoryView(project: ProjectEntity(), refreshTopView: $refrsh)
+        Text("Preview")
     }
 }

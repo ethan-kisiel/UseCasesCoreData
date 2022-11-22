@@ -21,16 +21,9 @@ struct ProjectDetailsView: View
     private var projects: FetchedResults<ProjectEntity>
     
     @State var project: ProjectEntity
-    // add inline picker for the category selection
-    @State var categoryTitle: String = EMPTY_STRING
  
     @State var showAddFields: Bool = false
-    @FocusState var isFocused: Bool
-
-    var invalidFields: Bool
-    {
-        categoryTitle.isEmpty
-    }
+    @State var refresh: Bool = false
     
     var body: some View
     {
@@ -67,13 +60,19 @@ struct ProjectDetailsView: View
             {
                 AddCategoryView(project: project)
             }
+            
             Spacer()
+            
             CategoryListView(project: project)
+            
             Spacer()
-                .navigationTitle("Categories")
-                .navigationBarTitleDisplayMode(.inline)
+        
             ReturnToTopButton()
-        }.background(NM_MAIN)
+            
+        }
+        .background(NM_MAIN)
+        .navigationTitle("Categories")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
