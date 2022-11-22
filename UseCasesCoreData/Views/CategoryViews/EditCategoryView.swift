@@ -11,13 +11,13 @@ struct EditCategoryView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let category: Category
+    let category: CategoryEntity
     @State var title: String
     @State var categoryId: String
     
     @FocusState var isFocused: Bool
     
-    init(category: Category)
+    init(category: CategoryEntity)
     {
         self.category = category
         _title = State(wrappedValue: category.wrappedTitle)
@@ -70,7 +70,7 @@ struct EditCategoryView: View {
         }
     }
     
-    private func updateCategory(_ category: Category)
+    private func updateCategory(_ category: CategoryEntity)
     {
         category.title = title
         category.lastUpdated = Date()
@@ -87,6 +87,6 @@ struct EditCategoryView: View {
 
 struct EditCategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCategoryView(category: Category())
+        EditCategoryView(category: CategoryEntity())
     }
 }

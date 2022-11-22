@@ -12,12 +12,12 @@ struct EditProjectView: View
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
 
-    let project: Project
+    let project: ProjectEntity
     @State var title: String
     @State var projectId: String
     @FocusState var isFocused: Bool
     
-    init(project: Project)
+    init(project: ProjectEntity)
     {
         self.project = project
         
@@ -77,7 +77,7 @@ struct EditProjectView: View
         }
     }
     
-    private func updateProject(_ project: Project)
+    private func updateProject(_ project: ProjectEntity)
     {
         project.title = title
         project.lastUpdated = Date()
@@ -96,6 +96,6 @@ struct EditProjectView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        EditProjectView(project: Project())
+        EditProjectView(project: ProjectEntity())
     }
 }

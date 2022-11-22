@@ -10,12 +10,12 @@ import SwiftUI
 struct StepDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     
-    @State var step: Step
+    @State var step: StepEntity
 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.title, ascending: true)], animation: .default)
-    var steps: FetchedResults<Step>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \StepEntity.title, ascending: true)], animation: .default)
+    var steps: FetchedResults<StepEntity>
     
-    var filteredSteps: [Step]
+    var filteredSteps: [StepEntity]
     {
         return steps.filter({ $0.parent == step.parent })
     }

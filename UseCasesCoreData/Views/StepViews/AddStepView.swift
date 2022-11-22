@@ -10,7 +10,7 @@ import SwiftUI
 struct AddStepView: View {
     @Environment(\.managedObjectContext) var moc
     
-    let useCase: UseCase
+    let useCase: UseCaseEntity
 
     @State private var title: String = EMPTY_STRING
     @State private var text: String = EMPTY_STRING
@@ -56,7 +56,7 @@ struct AddStepView: View {
     {
         withAnimation
         {
-            let step = Step(context: moc)
+            let step = StepEntity(context: moc)
             step.id = UUID()
             step.title = title
             step.body = text
@@ -77,6 +77,6 @@ struct AddStepView: View {
 
 struct AddStepView_Previews: PreviewProvider {
     static var previews: some View {
-        AddStepView(useCase: UseCase())
+        AddStepView(useCase: UseCaseEntity())
     }
 }

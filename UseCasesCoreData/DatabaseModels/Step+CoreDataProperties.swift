@@ -9,13 +9,13 @@
 import CoreData
 import Foundation
 
-extension Step
+extension StepEntity
 {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Step>
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<StepEntity>
     {
-        return NSFetchRequest<Step>(entityName: "Step")
+        return NSFetchRequest<StepEntity>(entityName: "Step")
     }
 
     @NSManaged public var body: String?
-    @NSManaged public var parent: UseCase?
+    @NSManaged public var parent: UseCaseEntity?
 }

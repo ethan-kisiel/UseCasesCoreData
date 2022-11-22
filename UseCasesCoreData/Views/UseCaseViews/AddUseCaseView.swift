@@ -11,7 +11,7 @@ struct AddUseCaseView: View
 {
     @Environment(\.managedObjectContext) var moc
 
-    let category: Category
+    let category: CategoryEntity
 
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
@@ -65,7 +65,7 @@ struct AddUseCaseView: View
     {
         withAnimation
         {
-            let useCase = UseCase(context: moc)
+            let useCase = UseCaseEntity(context: moc)
             useCase.id = UUID()
             useCase.title = title
             useCase.priority = priority.rawValue
@@ -87,7 +87,6 @@ struct AddUseCaseView: View
             do
             {
                 try moc.save()
-                print("Successfully saved use case")
             }
             catch
             {
@@ -101,6 +100,6 @@ struct AddUseCaseView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        AddUseCaseView(category: Category())
+        AddUseCaseView(category: CategoryEntity())
     }
 }

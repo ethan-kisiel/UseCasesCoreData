@@ -12,10 +12,10 @@ struct UseCaseDetailsView: View
 {
     @Environment(\.managedObjectContext) var moc
 
-    @State var useCase: UseCase
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCase.title, ascending: true)], animation: .default)
-    private var useCases: FetchedResults<UseCase>
-    private var filteredUseCases: [UseCase]
+    @State var useCase: UseCaseEntity
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCaseEntity.title, ascending: true)], animation: .default)
+    private var useCases: FetchedResults<UseCaseEntity>
+    private var filteredUseCases: [UseCaseEntity]
     {
         return useCases.filter({ $0.parent == useCase.parent })
     }

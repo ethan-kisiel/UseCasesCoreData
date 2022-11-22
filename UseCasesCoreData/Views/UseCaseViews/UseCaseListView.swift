@@ -15,25 +15,25 @@ enum Sections: String, CaseIterable
 struct UseCaseListView: View
 {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest var categoryUseCases: FetchedResults<UseCase>
+    @FetchRequest var categoryUseCases: FetchedResults<UseCaseEntity>
     // takes category for filter query purposes
-    private let category: Category
+    private let category: CategoryEntity
     
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
     @State private var currentSection: Sections = .incomplete
 
-    init(category: Category)
+    init(category: CategoryEntity)
     {
         self.category = category
-        _categoryUseCases = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCase.prioritySort, ascending: true)], predicate: NSPredicate(format: "parent == %@", category), animation: .default)
+        _categoryUseCases = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCaseEntity.prioritySort, ascending: true)], predicate: NSPredicate(format: "parent == %@", category), animation: .default)
     }
-    var completeUseCases: [UseCase]
+    var completeUseCases: [UseCaseEntity]
     {
         return categoryUseCases.filter({ $0.isComplete == true })
     }
     
-    var incompleteUseCases: [UseCase]
+    var incompleteUseCases: [UseCaseEntity]
     {
         return categoryUseCases.filter({ $0.isComplete == false })
     }
@@ -132,7 +132,7 @@ struct UseCasesListView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let category: Category = Category()
+        let category: CategoryEntity = CategoryEntity()
         UseCaseListView(category: category)
     }
 }

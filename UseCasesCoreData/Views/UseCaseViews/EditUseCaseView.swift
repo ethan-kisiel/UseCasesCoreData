@@ -11,14 +11,14 @@ struct EditUseCaseView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let useCase: UseCase
+    let useCase: UseCaseEntity
     @State var priority: Priority
     @State var title: String
     @State var caseId: String
     
     @FocusState var isFocused: Bool
     
-    init(useCase: UseCase)
+    init(useCase: UseCaseEntity)
     {
         self.useCase = useCase
         _priority = State(wrappedValue: Priority(rawValue: useCase.wrappedPriority) ?? .medium)
@@ -86,7 +86,7 @@ struct EditUseCaseView: View {
     
     }
     
-    private func updateUseCase(_ useCase: UseCase)
+    private func updateUseCase(_ useCase: UseCaseEntity)
     {
         useCase.title = title
         useCase.priority = priority.rawValue
@@ -104,6 +104,6 @@ struct EditUseCaseView: View {
 
 struct EditUseCaseView_Previews: PreviewProvider {
     static var previews: some View {
-        EditUseCaseView(useCase: UseCase())
+        EditUseCaseView(useCase: UseCaseEntity())
     }
 }

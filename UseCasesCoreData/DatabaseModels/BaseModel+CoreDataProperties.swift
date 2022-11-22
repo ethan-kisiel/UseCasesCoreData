@@ -9,11 +9,11 @@
 import CoreData
 import Foundation
 
-extension BaseModel
+extension BaseModelEntity
 {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<BaseModel>
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<BaseModelEntity>
     {
-        return NSFetchRequest<BaseModel>(entityName: "BaseModel")
+        return NSFetchRequest<BaseModelEntity>(entityName: "BaseModel")
     }
 
     @NSManaged public var id: UUID?
@@ -23,7 +23,7 @@ extension BaseModel
     @NSManaged public var customId: String?
 }
 
-extension BaseModel: Identifiable
+extension BaseModelEntity: Identifiable
 {
     var wrappedId: String
     {

@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-@objc(Project)
-public class Project: BaseModel
+@objc(ProjectEntity)
+public class ProjectEntity: BaseModelEntity
 {
 }

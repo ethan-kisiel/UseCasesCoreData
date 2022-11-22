@@ -11,13 +11,13 @@ struct EditStepView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let step: Step
+    let step: StepEntity
     @State var title: String
     @State var stepId: String
     @State var description: String
     @FocusState var isFocused: Bool
     
-    init(step: Step)
+    init(step: StepEntity)
     {
         self.step = step
         _title = State(wrappedValue: step.wrappedTitle)
@@ -76,7 +76,7 @@ struct EditStepView: View {
         }
     }
     
-    private func updateStep(_ step: Step)
+    private func updateStep(_ step: StepEntity)
     {
         step.title = title
         step.body = description
@@ -94,6 +94,6 @@ struct EditStepView: View {
 
 struct EditStepView_Previews: PreviewProvider {
     static var previews: some View {
-        EditStepView(step: Step())
+        EditStepView(step: StepEntity())
     }
 }

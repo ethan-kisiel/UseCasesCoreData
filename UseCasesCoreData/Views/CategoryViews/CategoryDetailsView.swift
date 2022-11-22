@@ -11,11 +11,11 @@ struct CategoryDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var router: Router
     
-    @State var category: Category
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.title, ascending: true)], animation: .default)
-    private var categories: FetchedResults<Category>
+    @State var category: CategoryEntity
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)], animation: .default)
+    private var categories: FetchedResults<CategoryEntity>
     
-    private var filteredCategories: [Category]
+    private var filteredCategories: [CategoryEntity]
     {
         return categories.filter({ $0.parent == category.parent })
     }

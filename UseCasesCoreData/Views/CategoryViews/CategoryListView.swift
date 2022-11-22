@@ -10,20 +10,20 @@ import SwiftUI
 struct CategoryListView: View {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest var projectCategories: FetchedResults<Category>
+    @FetchRequest var projectCategories: FetchedResults<CategoryEntity>
     
-    private let project: Project
+    private let project: ProjectEntity
     
     @State private var showUseCases: Bool = false
     
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
     
-    init(project: Project)
+    init(project: ProjectEntity)
     {
         self.project = project
-        _projectCategories = FetchRequest<Category>(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Category.title, ascending: true)],
+        _projectCategories = FetchRequest<CategoryEntity>(
+            sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)],
             predicate: NSPredicate(format: "parent == %@", project),
             animation: .default)
     }
@@ -93,6 +93,6 @@ struct CategoryListView: View {
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
         let moc = PersistenceController.shared.container.viewContext
-        CategoryListView(project: Project(context: moc))
+        CategoryListView(project: ProjectEntity(context: moc))
     }
 }

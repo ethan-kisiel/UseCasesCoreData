@@ -12,15 +12,15 @@ struct ProjectDetailsView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.title, ascending: true)], animation: .default)
-    private var categories: FetchedResults<Category>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)], animation: .default)
+    private var categories: FetchedResults<CategoryEntity>
     
     // this fetch request is used for the display of the
     // current project selector
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)], animation: .default)
-    private var projects: FetchedResults<Project>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
+    private var projects: FetchedResults<ProjectEntity>
     
-    @State var project: Project
+    @State var project: ProjectEntity
     // add inline picker for the category selection
     @State var categoryTitle: String = EMPTY_STRING
  
@@ -81,6 +81,6 @@ struct ProjectDetailsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ProjectDetailsView(project: Project())
+        ProjectDetailsView(project: ProjectEntity())
     }
 }

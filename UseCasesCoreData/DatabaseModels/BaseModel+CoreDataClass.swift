@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-@objc(BaseModel)
-public class BaseModel: NSManagedObject
+@objc(BaseModelEntity)
+public class BaseModelEntity: NSManagedObject
 {
 }

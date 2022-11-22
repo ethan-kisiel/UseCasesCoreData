@@ -11,14 +11,14 @@ struct StepListView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest var useCaseSteps: FetchedResults<Step>
+    @FetchRequest var useCaseSteps: FetchedResults<StepEntity>
 
-    let useCase: UseCase
+    let useCase: UseCaseEntity
 
-    init(useCase: UseCase)
+    init(useCase: UseCaseEntity)
     {
         self.useCase = useCase
-        _useCaseSteps = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.title, ascending: true)],
+        _useCaseSteps = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \StepEntity.title, ascending: true)],
         predicate: NSPredicate(format: "parent == %@", useCase),
         animation: .default)
     }
@@ -75,7 +75,7 @@ struct StepListView_Previews: PreviewProvider
     static var previews: some View
     {
         let context = PersistenceController.shared.container.viewContext
-        let useCase = UseCase(context: context)
+        let useCase = UseCaseEntity(context: context)
         StepListView(useCase: useCase)
     }
 }

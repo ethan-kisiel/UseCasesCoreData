@@ -10,7 +10,7 @@ import SwiftUI
 struct AddCategoryView: View {
     @Environment(\.managedObjectContext) var moc
     
-    let project: Project
+    let project: ProjectEntity
 
     @State private var title: String = EMPTY_STRING
 
@@ -53,7 +53,7 @@ struct AddCategoryView: View {
 
     func addCategory()
     {
-        let category = Category(context: moc)
+        let category = CategoryEntity(context: moc)
         category.id = UUID()
         category.created = Date()
         category.lastUpdated = Date()
@@ -74,6 +74,6 @@ struct AddCategoryView: View {
 
 struct AddCategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCategoryView(project: Project())
+        AddCategoryView(project: ProjectEntity())
     }
 }

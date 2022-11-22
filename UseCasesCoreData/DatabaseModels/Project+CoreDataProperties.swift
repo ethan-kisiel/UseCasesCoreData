@@ -9,11 +9,11 @@
 import CoreData
 import Foundation
 
-extension Project
+extension ProjectEntity
 {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Project>
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ProjectEntity>
     {
-        return NSFetchRequest<Project>(entityName: "Project")
+        return NSFetchRequest<ProjectEntity>(entityName: "Project")
     }
 
     @NSManaged public var categories: NSSet?
@@ -21,13 +21,13 @@ extension Project
 
 // MARK: Generated accessors for categories
 
-extension Project
+extension ProjectEntity
 {
     @objc(addCategoriesObject:)
-    @NSManaged public func addToCategories(_ value: Category)
+    @NSManaged public func addToCategories(_ value: CategoryEntity)
 
     @objc(removeCategoriesObject:)
-    @NSManaged public func removeFromCategories(_ value: Category)
+    @NSManaged public func removeFromCategories(_ value: CategoryEntity)
 
     @objc(addCategories:)
     @NSManaged public func addToCategories(_ values: NSSet)

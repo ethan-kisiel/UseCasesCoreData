@@ -12,11 +12,11 @@ struct ProjectCellView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)], animation: .default)
-    private var projects: FetchedResults<Project>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
+    private var projects: FetchedResults<ProjectEntity>
     
     @State var trashIsEnabled: Bool = false
-    let project: Project
+    let project: ProjectEntity
     
     var body: some View
     {
@@ -54,7 +54,7 @@ struct ProjectCellView: View
         }
     }
     
-    private func deleteProject(_ project: Project)
+    private func deleteProject(_ project: ProjectEntity)
     {
         if let deleteIndex = projects.firstIndex(where: { $0.id == project.id })
         {
@@ -79,6 +79,6 @@ struct ProjectCellView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ProjectCellView(project: Project())
+        ProjectCellView(project: ProjectEntity())
     }
 }

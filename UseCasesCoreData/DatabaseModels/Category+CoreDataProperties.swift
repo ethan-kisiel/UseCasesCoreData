@@ -9,26 +9,26 @@
 import CoreData
 import Foundation
 
-extension Category
+extension CategoryEntity
 {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Category>
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CategoryEntity>
     {
-        return NSFetchRequest<Category>(entityName: "Category")
+        return NSFetchRequest<CategoryEntity>(entityName: "Category")
     }
 
-    @NSManaged public var parent: Project?
+    @NSManaged public var parent: ProjectEntity?
     @NSManaged public var useCases: NSSet?
 }
 
 // MARK: Generated accessors for useCases
 
-extension Category
+extension CategoryEntity
 {
     @objc(addUseCasesObject:)
-    @NSManaged public func addToUseCases(_ value: UseCase)
+    @NSManaged public func addToUseCases(_ value: UseCaseEntity)
 
     @objc(removeUseCasesObject:)
-    @NSManaged public func removeFromUseCases(_ value: UseCase)
+    @NSManaged public func removeFromUseCases(_ value: UseCaseEntity)
 
     @objc(addUseCases:)
     @NSManaged public func addToUseCases(_ values: NSSet)
