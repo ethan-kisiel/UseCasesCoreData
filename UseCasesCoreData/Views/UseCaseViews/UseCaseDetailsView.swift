@@ -17,7 +17,7 @@ struct UseCaseDetailsView: View
     private var useCases: FetchedResults<UseCaseEntity>
     private var filteredUseCases: [UseCaseEntity]
     {
-        return useCases.filter({ $0.parent == useCase.parent })
+        return useCases.filter({ $0.category == useCase.category })
     }
     
     @State var showAddFields: Bool = false

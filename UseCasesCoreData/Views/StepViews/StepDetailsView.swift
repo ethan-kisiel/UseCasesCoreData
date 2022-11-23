@@ -17,7 +17,7 @@ struct StepDetailsView: View {
     
     var filteredSteps: [StepEntity]
     {
-        return steps.filter({ $0.parent == step.parent })
+        return steps.filter({ $0.useCase == step.useCase })
     }
 
     var body: some View {

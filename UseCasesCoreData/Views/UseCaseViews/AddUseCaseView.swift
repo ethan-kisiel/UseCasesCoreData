@@ -72,7 +72,7 @@ struct AddUseCaseView: View
             useCase.isComplete = false
             useCase.created = Date()
             useCase.lastUpdated = useCase.created
-            useCase.parent = category
+            useCase.category = category
             
             switch priority
             {

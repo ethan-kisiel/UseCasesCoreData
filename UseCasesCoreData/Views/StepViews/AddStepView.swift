@@ -62,7 +62,7 @@ struct AddStepView: View {
             step.body = text
             step.created = Date()
             step.lastUpdated = step.created
-            step.parent = useCase
+            step.useCase = useCase
         }
         do
         {

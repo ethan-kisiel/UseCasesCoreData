@@ -20,8 +20,6 @@
 		883F44962912A5C600284B2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44952912A5C600284B2F /* Preview Assets.xcassets */; };
 		883F44982912A5C600284B2F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44972912A5C600284B2F /* Persistence.swift */; };
 		883F449B2912A5C600284B2F /* UseCasesCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 883F44992912A5C600284B2F /* UseCasesCoreData.xcdatamodeld */; };
-		883F44AE2912B76C00284B2F /* BaseModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44A42912B76C00284B2F /* BaseModel+CoreDataClass.swift */; };
-		883F44AF2912B76C00284B2F /* BaseModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44A52912B76C00284B2F /* BaseModel+CoreDataProperties.swift */; };
 		883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44A82912B76C00284B2F /* Step+CoreDataClass.swift */; };
 		883F44B32912B76C00284B2F /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44A92912B76C00284B2F /* Step+CoreDataProperties.swift */; };
 		883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44AA2912B76C00284B2F /* Category+CoreDataClass.swift */; };
@@ -51,6 +49,8 @@
 		88951D22291C3617007081D3 /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D21291C3617007081D3 /* EditCategoryView.swift */; };
 		88951D24291C3623007081D3 /* EditUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D23291C3623007081D3 /* EditUseCaseView.swift */; };
 		88951D26291C362F007081D3 /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D25291C362F007081D3 /* EditStepView.swift */; };
+		88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */; };
+		88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -82,8 +82,6 @@
 		883F44952912A5C600284B2F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		883F44972912A5C600284B2F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		883F449A2912A5C600284B2F /* UseCasesCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UseCasesCoreData.xcdatamodel; sourceTree = "<group>"; };
-		883F44A42912B76C00284B2F /* BaseModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModel+CoreDataClass.swift"; sourceTree = "<group>"; };
-		883F44A52912B76C00284B2F /* BaseModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		883F44A82912B76C00284B2F /* Step+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataClass.swift"; sourceTree = "<group>"; };
 		883F44A92912B76C00284B2F /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		883F44AA2912B76C00284B2F /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		88951D23291C3623007081D3 /* EditUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUseCaseView.swift; sourceTree = "<group>"; };
 		88951D25291C362F007081D3 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
 		889794532926DC3E0026A196 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,10 +174,10 @@
 		883F44A12912A60000284B2F /* DatabaseModels */ = {
 			isa = PBXGroup;
 			children = (
+				88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */,
+				88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */,
 				88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */,
 				88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */,
-				883F44A42912B76C00284B2F /* BaseModel+CoreDataClass.swift */,
-				883F44A52912B76C00284B2F /* BaseModel+CoreDataProperties.swift */,
 				883F44A82912B76C00284B2F /* Step+CoreDataClass.swift */,
 				883F44A92912B76C00284B2F /* Step+CoreDataProperties.swift */,
 				883F44AA2912B76C00284B2F /* Category+CoreDataClass.swift */,
@@ -346,13 +346,13 @@
 				88951D24291C3623007081D3 /* EditUseCaseView.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
-				883F44AF2912B76C00284B2F /* BaseModel+CoreDataProperties.swift in Sources */,
 				8837409A292557A800492A07 /* ReturnToTopButton.swift in Sources */,
 				88951D20291C1620007081D3 /* EditProjectView.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,
 				883F44C82912D38B00284B2F /* CategoryCellView.swift in Sources */,
 				883F449B2912A5C600284B2F /* UseCasesCoreData.xcdatamodeld in Sources */,
+				88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */,
 				883F44CD2912D38B00284B2F /* CategoryDetailsView.swift in Sources */,
 				883F44D02912D38B00284B2F /* CategoryListView.swift in Sources */,
 				883740A02926BB7600492A07 /* AddUseCaseView.swift in Sources */,
@@ -362,13 +362,13 @@
 				883F44C62912D38B00284B2F /* StepListView.swift in Sources */,
 				8837409E2926B64100492A07 /* AddCategoryView.swift in Sources */,
 				883F44C92912D38B00284B2F /* UseCaseCellView.swift in Sources */,
+				88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */,
 				88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */,
 				883740A22926BF2A00492A07 /* AddStepView.swift in Sources */,
 				883F44912912A5C600284B2F /* ContentView.swift in Sources */,
 				88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
 				8837409C2926B27000492A07 /* AddProjectView.swift in Sources */,
-				883F44AE2912B76C00284B2F /* BaseModel+CoreDataClass.swift in Sources */,
 				883F44CB2912D38B00284B2F /* UseCaseListView.swift in Sources */,
 				88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */,
 				883F44CE2912D38B00284B2F /* UseCaseDetailsView.swift in Sources */,
