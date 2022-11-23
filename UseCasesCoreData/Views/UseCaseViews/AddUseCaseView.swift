@@ -11,17 +11,16 @@ struct AddUseCaseView: View
 {
     @Environment(\.managedObjectContext) var moc
 
-    let category: Category
+    let category: CategoryEntity
 
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
-    @State var caseId: String = EMPTY_STRING
 
     @FocusState var isFocused: Bool
 
     var invalidFields: Bool
     {
-        title.isEmpty || caseId.isEmpty
+        title.isEmpty
     }
 
     var body: some View
@@ -43,17 +42,12 @@ struct AddUseCaseView: View
             {
                 TextBoxWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
             }
-            withAnimation
-            {
-                TextBoxWithFocus("ID", text: $caseId, isFocused: $isFocused).padding(8)
-            }
 
             Button(action:
                 {
                     addUseCase()
 
                     title = EMPTY_STRING
-                    caseId = EMPTY_STRING
                     priority = .medium
                     isFocused = false
                 })
@@ -71,19 +65,28 @@ struct AddUseCaseView: View
     {
         withAnimation
         {
-            let useCase = UseCase(context: moc)
+            let useCase = UseCaseEntity(context: moc)
             useCase.id = UUID()
-            useCase.name = title
+            useCase.title = title
             useCase.priority = priority.rawValue
             useCase.isComplete = false
             useCase.created = Date()
             useCase.lastUpdated = useCase.created
             useCase.parent = category
+            
+            switch priority
+            {
+            case .low:
+                useCase.prioritySort = "0"
+            case .medium:
+                useCase.prioritySort = "1"
+            case .high:
+                useCase.prioritySort = "2"
+            }
 
             do
             {
                 try moc.save()
-                print("Successfully saved use case")
             }
             catch
             {
@@ -97,6 +100,6 @@ struct AddUseCaseView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        AddUseCaseView(category: Category())
+        AddUseCaseView(category: CategoryEntity())
     }
 }

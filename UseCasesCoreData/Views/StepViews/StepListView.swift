@@ -11,21 +11,14 @@ struct StepListView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest var useCaseSteps: FetchedResults<Step>
+    @FetchRequest(sortDescriptors: [])
+    var steps: FetchedResults<StepEntity>
 
-    let useCase: UseCase
-
-    init(useCase: UseCase)
-    {
-        self.useCase = useCase
-        _useCaseSteps = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.name, ascending: true)],
-        predicate: NSPredicate(format: "parent == %@", useCase),
-        animation: .default)
-    }
+    let useCase: UseCaseEntity
 
     var body: some View
     {
-        if useCaseSteps.isEmpty
+        if useCase.wrappedSteps.isEmpty
         {
             Text("No steps to display.")
         }
@@ -33,7 +26,7 @@ struct StepListView: View
         {
             List
             {
-                ForEach(useCaseSteps, id: \.id)
+                ForEach(useCase.wrappedSteps, id: \.id)
                 {
                     step in
                     StepCellView(step: step)
@@ -57,7 +50,8 @@ struct StepListView: View
     {
         withAnimation
         {
-            indexSet.map { useCaseSteps[$0] }.forEach(moc.delete)
+            indexSet.map
+            { useCase.wrappedSteps[$0] }.forEach(moc.delete)
         }
         do
         {
@@ -75,7 +69,7 @@ struct StepListView_Previews: PreviewProvider
     static var previews: some View
     {
         let context = PersistenceController.shared.container.viewContext
-        let useCase = UseCase(context: context)
+        let useCase = UseCaseEntity(context: context)
         StepListView(useCase: useCase)
     }
 }

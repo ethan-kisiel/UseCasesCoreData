@@ -9,37 +9,46 @@
 import CoreData
 import Foundation
 
-extension UseCase
+extension UseCaseEntity
 {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<UseCase>
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<UseCaseEntity>
     {
-        return NSFetchRequest<UseCase>(entityName: "UseCase")
+        return NSFetchRequest<UseCaseEntity>(entityName: "UseCase")
     }
 
     @NSManaged public var priority: String?
+    @NSManaged public var prioritySort: String?
     @NSManaged public var isComplete: Bool
-    @NSManaged public var parent: Category?
+    @NSManaged public var parent: CategoryEntity?
     @NSManaged public var steps: NSSet?
+    
+    var wrappedPriority: String
+    {
+        self.priority ?? Priority.medium.rawValue
+    }
+    
+    var wrappedSteps: [StepEntity]
+    {
+        let set = steps as? Set<StepEntity> ?? []
+        
+        return set.sorted
+        { $0.wrappedTitle > $1.wrappedTitle }
+    }
 }
 
 // MARK: Generated accessors for steps
 
-extension UseCase
+extension UseCaseEntity
 {
     @objc(addStepsObject:)
-    @NSManaged public func addToSteps(_ value: Step)
+    @NSManaged public func addToSteps(_ value: StepEntity)
 
     @objc(removeStepsObject:)
-    @NSManaged public func removeFromSteps(_ value: Step)
+    @NSManaged public func removeFromSteps(_ value: StepEntity)
 
     @objc(addSteps:)
     @NSManaged public func addToSteps(_ values: NSSet)
 
     @objc(removeSteps:)
     @NSManaged public func removeFromSteps(_ values: NSSet)
-
-    var wrappedPriority: String
-    {
-        self.priority ?? Priority.medium.rawValue
-    }
 }

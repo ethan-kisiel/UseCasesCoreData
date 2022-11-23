@@ -11,16 +11,16 @@ struct EditStepView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let step: Step
+    let step: StepEntity
     @State var title: String
     @State var stepId: String
     @State var description: String
     @FocusState var isFocused: Bool
     
-    init(step: Step)
+    init(step: StepEntity)
     {
         self.step = step
-        _title = State(wrappedValue: step.wrappedName)
+        _title = State(wrappedValue: step.wrappedTitle)
         _stepId = State(wrappedValue: step.wrappedId)
         //TODO: add wrapped body value
         _description = State(wrappedValue: step.body ?? EMPTY_STRING)
@@ -37,7 +37,7 @@ struct EditStepView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(step.wrappedName)
+                Text(step.wrappedTitle)
                 withAnimation
                 {
                     TextBoxWithFocus("Step Name", text: $title, isFocused: $isFocused).padding(8)
@@ -76,9 +76,9 @@ struct EditStepView: View {
         }
     }
     
-    private func updateStep(_ step: Step)
+    private func updateStep(_ step: StepEntity)
     {
-        step.name = title
+        step.title = title
         step.body = description
         step.lastUpdated = Date()
         do
@@ -94,6 +94,6 @@ struct EditStepView: View {
 
 struct EditStepView_Previews: PreviewProvider {
     static var previews: some View {
-        EditStepView(step: Step())
+        EditStepView(step: StepEntity())
     }
 }

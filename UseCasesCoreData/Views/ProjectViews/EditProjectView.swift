@@ -12,12 +12,12 @@ struct EditProjectView: View
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
 
-    let project: Project
+    let project: ProjectEntity
     @State var title: String
     @State var projectId: String
     @FocusState var isFocused: Bool
     
-    init(project: Project)
+    init(project: ProjectEntity)
     {
         self.project = project
         
@@ -25,7 +25,7 @@ struct EditProjectView: View
         // which are used as bindings for the text fields
         // can be set to the values of the passed project
         
-        _title = State(wrappedValue: project.wrappedName)
+        _title = State(wrappedValue: project.wrappedTitle)
         _projectId = State(wrappedValue: project.wrappedId)
     }
     
@@ -41,7 +41,7 @@ struct EditProjectView: View
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(project.wrappedName)
+                Text(project.wrappedTitle)
                 withAnimation
                 {
                     TextBoxWithFocus("Project Name", text: $title, isFocused: $isFocused).padding(8)
@@ -77,9 +77,9 @@ struct EditProjectView: View
         }
     }
     
-    private func updateProject(_ project: Project)
+    private func updateProject(_ project: ProjectEntity)
     {
-        project.name = title
+        project.title = title
         project.lastUpdated = Date()
         do
         {
@@ -96,6 +96,6 @@ struct EditProjectView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        EditProjectView(project: Project())
+        EditProjectView(project: ProjectEntity())
     }
 }

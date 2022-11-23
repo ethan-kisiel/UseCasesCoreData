@@ -11,10 +11,10 @@ import SwiftUI
 struct CategoryCellView: View {
     @Environment(\.managedObjectContext) var moc
 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
-    private var categories: FetchedResults<Category>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)], animation: .default)
+    private var categories: FetchedResults<CategoryEntity>
     
-    let category: Category
+    let category: CategoryEntity
     @State var trashIsEnabled: Bool = false
     var body: some View
     {
@@ -35,7 +35,7 @@ struct CategoryCellView: View {
                 {
                     trashIsEnabled.toggle()
                 }
-                Text(category.wrappedName)
+                Text(category.wrappedTitle)
                 Spacer()
                 // TODO: change this to user made category id
                 let categoryId = category.wrappedId
@@ -44,7 +44,7 @@ struct CategoryCellView: View {
         }
     }
     
-    private func deleteCategory(_ category: Category)
+    private func deleteCategory(_ category: CategoryEntity)
     {
         if let deleteIndex = categories.firstIndex(where: { $0.id == category.id })
         {

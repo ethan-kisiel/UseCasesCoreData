@@ -10,17 +10,16 @@ import SwiftUI
 struct AddStepView: View {
     @Environment(\.managedObjectContext) var moc
     
-    let useCase: UseCase
+    let useCase: UseCaseEntity
 
-    @State private var name: String = EMPTY_STRING
+    @State private var title: String = EMPTY_STRING
     @State private var text: String = EMPTY_STRING
-    @State private var stepId: String = EMPTY_STRING
     
     @FocusState var isFocused: Bool
     
     private var invalidFields: Bool
     {
-        return name.isEmpty && text.isEmpty
+        return title.isEmpty && text.isEmpty
     }
     
     var body: some View {
@@ -28,13 +27,8 @@ struct AddStepView: View {
         {
             withAnimation
             {
-                TextBoxWithFocus("Step", text: $name, isFocused: $isFocused).padding(8)
+                TextBoxWithFocus("Step", text: $title, isFocused: $isFocused).padding(8)
             }
-            withAnimation
-            {
-                TextBoxWithFocus("ID", text: $stepId, isFocused: $isFocused).padding(8)
-            }
-            
             withAnimation
             {
                 TextBoxWithFocus("Description", text: $text, isFocused: $isFocused).padding(8)
@@ -43,8 +37,7 @@ struct AddStepView: View {
                     {
                 addStep()
                 
-                name = EMPTY_STRING
-                stepId = EMPTY_STRING
+                title = EMPTY_STRING
                 text = EMPTY_STRING
                 isFocused = false
             })
@@ -63,9 +56,9 @@ struct AddStepView: View {
     {
         withAnimation
         {
-            let step = Step(context: moc)
+            let step = StepEntity(context: moc)
             step.id = UUID()
-            step.name = name
+            step.title = title
             step.body = text
             step.created = Date()
             step.lastUpdated = step.created
@@ -84,6 +77,6 @@ struct AddStepView: View {
 
 struct AddStepView_Previews: PreviewProvider {
     static var previews: some View {
-        AddStepView(useCase: UseCase())
+        AddStepView(useCase: UseCaseEntity())
     }
 }

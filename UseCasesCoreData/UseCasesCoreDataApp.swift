@@ -12,14 +12,14 @@ import SwiftUI
 enum Route: Hashable
 {
     case projects
-    case project(Project)
-    case category(Category)
-    case useCase(UseCase)
-    case step(Step)
-    case editProject(Project)
-    case editCategory(Category)
-    case editUseCase(UseCase)
-    case editStep(Step)
+    case project(ProjectEntity)
+    case category(CategoryEntity)
+    case useCase(UseCaseEntity)
+    case step(StepEntity)
+    case editProject(ProjectEntity)
+    case editCategory(CategoryEntity)
+    case editUseCase(UseCaseEntity)
+    case editStep(StepEntity)
 }
 
 @main
@@ -97,7 +97,7 @@ struct UseCasesCoreDataApp: App
         // where option is one of the members of the Route Enum and object is the retrieved object
 
         let moc = persistenceController.container.viewContext
-        if let project = ModelGetter<Project>(moc: moc)
+        if let project = ModelGetter<ProjectEntity>(moc: moc)
             .getModelById(url.host!)
         {
             router.path.append(Route.project(project))
@@ -112,17 +112,17 @@ struct UseCasesCoreDataApp: App
                 switch index
                 {
                 case 1:
-                    guard let category = ModelGetter<Category>(moc: moc)
+                    guard let category = ModelGetter<CategoryEntity>(moc: moc)
                         .getModelById(currentItem)
                     else { return }
                     router.path.append(Route.category(category))
                 case 2:
-                    guard let useCase = ModelGetter<UseCase>(moc: moc)
+                    guard let useCase = ModelGetter<UseCaseEntity>(moc: moc)
                         .getModelById(currentItem)
                     else { return }
                     router.path.append(Route.useCase(useCase))
                 case 3:
-                    guard let step = ModelGetter<Step>(moc: moc)
+                    guard let step = ModelGetter<StepEntity>(moc: moc)
                         .getModelById(currentItem)
                     else { return }
                     router.path.append(Route.step(step))
@@ -134,7 +134,7 @@ struct UseCasesCoreDataApp: App
     }
 }
 
-struct ModelGetter<Model: BaseModel>
+struct ModelGetter<Model: BaseModelEntity>
 {
     // This generic struct is instantiated with an object type which,
     // conforms to BaseModel, and then uses that generic type to fetch

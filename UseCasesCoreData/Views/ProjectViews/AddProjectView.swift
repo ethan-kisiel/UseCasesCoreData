@@ -12,13 +12,12 @@ struct AddProjectView: View
     @Environment(\.managedObjectContext) var moc
 
     @State private var title: String = EMPTY_STRING
-    @State private var projectId: String = EMPTY_STRING
 
     @FocusState var isFocused: Bool
 
     private var invalidFields: Bool
     {
-        title.isEmpty || projectId.isEmpty
+        title.isEmpty
     }
 
     var body: some View
@@ -27,21 +26,17 @@ struct AddProjectView: View
         {
             withAnimation
             {
-                TextBoxWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
-            }
-            withAnimation
-            {
-                TextBoxWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
+                TextBoxWithFocus("Project", text: $title, isFocused: $isFocused).padding(8)
             }
             Button(action:
                 {
                     addProject()
                     title = EMPTY_STRING
-                    projectId = EMPTY_STRING
+                
                     isFocused = false
                 })
             {
-                Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
+                Text("Create Project").foregroundColor(invalidFields ? .secondary : .primary)
                     .fontWeight(.bold).frame(maxWidth: .infinity)
             }
             .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
@@ -54,12 +49,11 @@ struct AddProjectView: View
     {
         withAnimation
         {
-            let project = Project(context: moc)
+            let project = ProjectEntity(context: moc)
             project.id = UUID()
             project.created = Date()
             project.lastUpdated = project.created
-            project.name = title
-            project.customId = projectId
+            project.title = title
 
             do
             {

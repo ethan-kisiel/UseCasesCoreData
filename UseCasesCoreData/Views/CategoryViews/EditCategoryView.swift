@@ -11,16 +11,16 @@ struct EditCategoryView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let category: Category
+    let category: CategoryEntity
     @State var title: String
     @State var categoryId: String
     
     @FocusState var isFocused: Bool
     
-    init(category: Category)
+    init(category: CategoryEntity)
     {
         self.category = category
-        _title = State(wrappedValue: category.wrappedName)
+        _title = State(wrappedValue: category.wrappedTitle)
         _categoryId = State(wrappedValue: category.wrappedId)
     }
 
@@ -35,7 +35,7 @@ struct EditCategoryView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(category.wrappedName)
+                Text(category.wrappedTitle)
                 withAnimation
                 {
                     TextBoxWithFocus("Category Name", text: $title, isFocused: $isFocused).padding(8)
@@ -70,9 +70,9 @@ struct EditCategoryView: View {
         }
     }
     
-    private func updateCategory(_ category: Category)
+    private func updateCategory(_ category: CategoryEntity)
     {
-        category.name = title
+        category.title = title
         category.lastUpdated = Date()
         do
         {
@@ -87,6 +87,6 @@ struct EditCategoryView: View {
 
 struct EditCategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCategoryView(category: Category())
+        EditCategoryView(category: CategoryEntity())
     }
 }

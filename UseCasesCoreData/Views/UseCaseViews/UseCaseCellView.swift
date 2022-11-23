@@ -13,9 +13,9 @@ struct UseCaseCellView: View
     @Environment(\.managedObjectContext) var moc
     
     @FetchRequest(sortDescriptors: [], animation: .default)
-    var useCases: FetchedResults<UseCase>
+    var useCases: FetchedResults<UseCaseEntity>
     
-    let useCase: UseCase
+    let useCase: UseCaseEntity
     
     private func priorityBackground(_ priority: Priority) -> Color
     {
@@ -42,7 +42,7 @@ struct UseCaseCellView: View
                     updateIsComplete(useCase)
                 }
                 
-                Text("\(useCase.name ?? EMPTY_STRING)")
+                Text(useCase.wrappedTitle)
                 Spacer()
                 Text(useCase.priority ?? "None")
                     .padding(5)
@@ -55,7 +55,7 @@ struct UseCaseCellView: View
         }
     }
     
-    private func updateIsComplete(_ useCase: UseCase)
+    private func updateIsComplete(_ useCase: UseCaseEntity)
     {
         if let useCaseIndex = useCases.firstIndex(where: { $0.id == useCase.id })
         {
@@ -74,7 +74,7 @@ struct UseCaseCellView: View
         }
     }
 
-    private func deleteUseCase(_ useCase: UseCase)
+    private func deleteUseCase(_ useCase: UseCaseEntity)
     {
         
     }
@@ -85,7 +85,7 @@ struct UseCaseCellView_Previews: PreviewProvider
     static var previews: some View
     {
         let context = PersistenceController.shared.container.viewContext
-        let useCase = UseCase(context: context)
+        let useCase = UseCaseEntity(context: context)
         UseCaseCellView(useCase: useCase)
     }
 }

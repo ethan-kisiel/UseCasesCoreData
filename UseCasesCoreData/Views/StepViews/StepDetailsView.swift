@@ -10,12 +10,12 @@ import SwiftUI
 struct StepDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     
-    @State var step: Step
+    @State var step: StepEntity
 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Step.name, ascending: true)], animation: .default)
-    var steps: FetchedResults<Step>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \StepEntity.title, ascending: true)], animation: .default)
+    var steps: FetchedResults<StepEntity>
     
-    var filteredSteps: [Step]
+    var filteredSteps: [StepEntity]
     {
         return steps.filter({ $0.parent == step.parent })
     }
@@ -33,12 +33,12 @@ struct StepDetailsView: View {
                             {
                         ForEach(filteredSteps, id: \.self)
                         { step in
-                            Text(step.name ?? "No Name")
+                            Text(step.wrappedTitle)
                         }
                     })
                 } label:
                 {
-                    Text("Step: **\(step.name!)**")
+                    Text("Step: **\(step.wrappedTitle)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }

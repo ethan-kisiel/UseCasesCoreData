@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-@objc(Step)
-public class Step: BaseModel
+@objc(StepEntity)
+public class StepEntity: BaseModelEntity
 {
 }

@@ -11,10 +11,11 @@ struct ProjectListView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.lastUpdated, ascending: true)], animation: .default)
-    private var projects: FetchedResults<Project>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
+    private var projects: FetchedResults<ProjectEntity>
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
+    
     var body: some View
     {
         VStack

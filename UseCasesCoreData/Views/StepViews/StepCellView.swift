@@ -11,9 +11,9 @@ struct StepCellView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: []) var steps: FetchedResults<Step>
+    @FetchRequest(sortDescriptors: []) var steps: FetchedResults<StepEntity>
     
-    let step: Step
+    let step: StepEntity
     @State var trashIsEnabled: Bool = false
     var body: some View
     {
@@ -36,12 +36,12 @@ struct StepCellView: View
                     trashIsEnabled.toggle()
                 }
                 
-                Text(step.name ?? "NO NAME")
+                Text(step.wrappedTitle)
                 Spacer()
             }
         }
     }
-    private func deleteStep(_ step: Step)
+    private func deleteStep(_ step: StepEntity)
     {
         if let deleteIndex = steps.firstIndex(where: { $0.id == step.id })
         {

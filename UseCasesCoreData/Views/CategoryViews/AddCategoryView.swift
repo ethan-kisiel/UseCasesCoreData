@@ -10,16 +10,15 @@ import SwiftUI
 struct AddCategoryView: View {
     @Environment(\.managedObjectContext) var moc
     
-    let project: Project
+    let project: ProjectEntity
 
-    @State private var categoryTitle: String = EMPTY_STRING
-    @State private var categoryId: String = EMPTY_STRING
-    
+    @State private var title: String = EMPTY_STRING
+
     @FocusState var isFocused: Bool
     
     private var invalidFields: Bool
     {
-        categoryTitle.isEmpty
+        title.isEmpty
     }
 
     var body: some View {
@@ -27,7 +26,7 @@ struct AddCategoryView: View {
         {
             withAnimation
             {
-                TextBoxWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
+                TextBoxWithFocus("Category", text: $title, isFocused: $isFocused)
                     .padding(8)
             }
             
@@ -39,7 +38,7 @@ struct AddCategoryView: View {
                 // and the use case is added
                 addCategory()
                 
-                categoryTitle = EMPTY_STRING
+                title = EMPTY_STRING
                 isFocused = false
             })
             {
@@ -54,14 +53,13 @@ struct AddCategoryView: View {
 
     func addCategory()
     {
-        let category = Category(context: moc)
+        let category = CategoryEntity(context: moc)
         category.id = UUID()
         category.created = Date()
         category.lastUpdated = Date()
-        category.name = categoryTitle
-        category.customId = categoryId
+        category.title = title
         category.parent = project
-        
+
         do
         {
             try moc.save()
@@ -75,7 +73,9 @@ struct AddCategoryView: View {
 }
 
 struct AddCategoryView_Previews: PreviewProvider {
+
     static var previews: some View {
-        AddCategoryView(project: Project())
+        //AddCategoryView(project: ProjectEntity(), refreshTopView: $refrsh)
+        Text("Preview")
     }
 }

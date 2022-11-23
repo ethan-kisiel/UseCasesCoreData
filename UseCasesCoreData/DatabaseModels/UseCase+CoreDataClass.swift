@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-@objc(UseCase)
-public class UseCase: BaseModel
+@objc(UseCaseEntity)
+public class UseCaseEntity: BaseModelEntity
 {
 }

@@ -11,18 +11,18 @@ struct EditUseCaseView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let useCase: UseCase
+    let useCase: UseCaseEntity
     @State var priority: Priority
     @State var title: String
     @State var caseId: String
     
     @FocusState var isFocused: Bool
     
-    init(useCase: UseCase)
+    init(useCase: UseCaseEntity)
     {
         self.useCase = useCase
         _priority = State(wrappedValue: Priority(rawValue: useCase.wrappedPriority) ?? .medium)
-        _title = State(wrappedValue: useCase.wrappedName)
+        _title = State(wrappedValue: useCase.wrappedTitle)
         _caseId = State(wrappedValue: useCase.wrappedId)
     }
     
@@ -37,7 +37,7 @@ struct EditUseCaseView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                Text(useCase.wrappedName)
+                Text(useCase.wrappedTitle)
                 Picker("Priority:", selection: $priority)
                 {
                     ForEach(Priority.allCases, id: \.self)
@@ -86,9 +86,9 @@ struct EditUseCaseView: View {
     
     }
     
-    private func updateUseCase(_ useCase: UseCase)
+    private func updateUseCase(_ useCase: UseCaseEntity)
     {
-        useCase.name = title
+        useCase.title = title
         useCase.priority = priority.rawValue
         useCase.lastUpdated = Date()
         do
@@ -104,6 +104,6 @@ struct EditUseCaseView: View {
 
 struct EditUseCaseView_Previews: PreviewProvider {
     static var previews: some View {
-        EditUseCaseView(useCase: UseCase())
+        EditUseCaseView(useCase: UseCaseEntity())
     }
 }

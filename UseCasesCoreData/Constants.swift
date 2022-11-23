@@ -28,9 +28,3 @@ let NM_DARK_SHADOW = Color.Neumorphic.darkShadow
 
 // character amount to shorten display title to if display title > DT_SHORT
 let DISP_SHORT: Int = 10
-enum Priority: String, CaseIterable
-{
-    case low = "Low"
-    case medium = "Medium"
-    case high = "High"
-}

@@ -11,16 +11,13 @@ struct CategoryDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var router: Router
     
-    @State var category: Category
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
-    private var categories: FetchedResults<Category>
-    
-    private var filteredCategories: [Category]
-    {
-        return categories.filter({ $0.parent == category.parent })
-    }
-
+    @State var category: CategoryEntity
     @State var showAddFields: Bool = false
+
+    private var filteredCategories: [CategoryEntity]
+    {
+        return category.parent?.wrappedCategories ?? []
+    }
 
     var body: some View
     {
@@ -36,12 +33,12 @@ struct CategoryDetailsView: View {
                             {
                         ForEach(filteredCategories, id: \.self)
                         { category in
-                            Text(category.wrappedName)
+                            Text(category.wrappedTitle)
                         }
                     })
                 } label:
                 {
-                    Text("Category: **\(category.wrappedName)**")
+                    Text("Category: **\(category.wrappedTitle)**")
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }
