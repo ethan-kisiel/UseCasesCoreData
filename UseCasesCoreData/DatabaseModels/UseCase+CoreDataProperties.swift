@@ -19,7 +19,7 @@ extension UseCaseEntity
     @NSManaged public var priority: String?
     @NSManaged public var prioritySort: String?
     @NSManaged public var isComplete: Bool
-    @NSManaged public var parent: CategoryEntity?
+    @NSManaged public var category: CategoryEntity?
     @NSManaged public var steps: NSSet?
     
     var wrappedPriority: String

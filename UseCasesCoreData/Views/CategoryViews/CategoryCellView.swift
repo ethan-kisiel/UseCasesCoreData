@@ -20,26 +20,26 @@ struct CategoryCellView: View {
     {
         NavigationLink(value: Route.category(category))
         {
-            HStack(alignment: .center)
+            VStack(spacing: 8)
             {
-                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
-                    .disabled(trashIsEnabled)
-                .onTapGesture
+                HStack(alignment: .center)
                 {
-                    if trashIsEnabled
+                    Text(category.wrappedTitle)
+                    
+                    Spacer()
+                }
+                HStack
+                {
+                    VStack(alignment: .leading)
                     {
-                        deleteCategory(category)
+                        Text("**Created on:** \(category.wrappedDate)")
+                            .font(.caption)
+                        Text("**Last updated:** \(category.wrappedDate)")
+                            .font(.caption)
                     }
+                    
+                    Spacer()
                 }
-                .onLongPressGesture(minimumDuration: 0.8)
-                {
-                    trashIsEnabled.toggle()
-                }
-                Text(category.wrappedTitle)
-                Spacer()
-                // TODO: change this to user made category id
-                let categoryId = category.wrappedId
-                Text(categoryId.shorten(by: 3) + "...")
             }
         }
     }

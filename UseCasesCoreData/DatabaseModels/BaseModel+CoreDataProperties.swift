@@ -36,6 +36,11 @@ extension BaseModelEntity
     {
         customId ?? MISSING_DATA
     }
+    
+    var wrappedDate: String
+    {
+        created?.formatted(date: .numeric, time: .omitted) ?? MISSING_DATA
+    }
 }
 
 extension BaseModelEntity: Identifiable
