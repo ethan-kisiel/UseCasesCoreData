@@ -28,7 +28,6 @@ struct UseCasesCoreDataApp: App
     let persistenceController = PersistenceController.shared
 
     @StateObject var router: Router = Router()
-
     var body: some Scene
     {
         WindowGroup
@@ -80,11 +79,11 @@ struct UseCasesCoreDataApp: App
             .onOpenURL
             { url in
                 router.reset()
-                //handleUrl(url)
+                handleUrl(url)
             }
         }
     }
-/*
+
     private func handleUrl(_ url: URL)
     {
         // This function takes a url comprised of UUID Strings
@@ -150,7 +149,7 @@ struct ModelGetter<Model: BaseModelEntity>
 
         do
         {
-            let model = try moc.fetch(fetchRequest).first(where: { $0.id?.uuidString == modelId })
+            let model = try moc.fetch(fetchRequest).first(where: { String($0.id) == modelId })
             return model as? Model
         }
         catch
@@ -158,5 +157,5 @@ struct ModelGetter<Model: BaseModelEntity>
             print(error.localizedDescription)
         }
         return nil
-    }*/
+    }
 }
