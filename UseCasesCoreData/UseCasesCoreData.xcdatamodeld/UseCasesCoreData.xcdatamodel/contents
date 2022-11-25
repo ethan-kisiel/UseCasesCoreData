@@ -12,9 +12,11 @@
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectEntity" inverseName="categories" inverseEntity="ProjectEntity"/>
         <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UseCaseEntity" inverseName="category" inverseEntity="UseCaseEntity"/>
     </entity>
+    <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class"/>
     <entity name="ProjectEntity" representedClassName="ProjectEntity" parentEntity="BaseModelEntity" syncable="YES">
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryEntity" inverseName="project" inverseEntity="CategoryEntity"/>
     </entity>
+    <entity name="ReactionEntity" representedClassName="ReactionEntity" syncable="YES" codeGenerationType="class"/>
     <entity name="StepEntity" representedClassName="StepEntity" parentEntity="BaseModelEntity" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String"/>
         <relationship name="useCase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCaseEntity" inverseName="steps" inverseEntity="UseCaseEntity"/>
