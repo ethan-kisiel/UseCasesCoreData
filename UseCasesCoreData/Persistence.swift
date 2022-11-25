@@ -15,8 +15,8 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for num in 0..<10 {
             let newItem = ProjectEntity(context: viewContext)
-            newItem.id = UUID()
-            newItem.created = Date()
+            newItem.id = 0
+            newItem.dateCreated = Date()
             newItem.lastUpdated = Date()
             newItem.title = "\(num)"
         }

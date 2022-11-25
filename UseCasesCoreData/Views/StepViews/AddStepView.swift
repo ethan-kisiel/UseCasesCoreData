@@ -57,11 +57,11 @@ struct AddStepView: View {
         withAnimation
         {
             let step = StepEntity(context: moc)
-            step.id = UUID()
+            //step.id = UUID()
             step.title = title
             step.body = text
-            step.created = Date()
-            step.lastUpdated = step.created
+            step.dateCreated = Date()
+            step.lastUpdated = step.dateCreated
             step.useCase = useCase
         }
         do

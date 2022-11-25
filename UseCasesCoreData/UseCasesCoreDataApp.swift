@@ -80,11 +80,11 @@ struct UseCasesCoreDataApp: App
             .onOpenURL
             { url in
                 router.reset()
-                handleUrl(url)
+                //handleUrl(url)
             }
         }
     }
-
+/*
     private func handleUrl(_ url: URL)
     {
         // This function takes a url comprised of UUID Strings
@@ -158,5 +158,5 @@ struct ModelGetter<Model: BaseModelEntity>
             print(error.localizedDescription)
         }
         return nil
-    }
+    }*/
 }

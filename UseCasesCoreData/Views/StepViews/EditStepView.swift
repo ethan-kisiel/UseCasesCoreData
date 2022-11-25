@@ -21,7 +21,8 @@ struct EditStepView: View {
     {
         self.step = step
         _title = State(wrappedValue: step.wrappedTitle)
-        _stepId = State(wrappedValue: step.wrappedId)
+        //_stepId = State(wrappedValue: step.wrappedId)
+        _stepId = State(wrappedValue: "")
         //TODO: add wrapped body value
         _description = State(wrappedValue: step.body ?? EMPTY_STRING)
     }

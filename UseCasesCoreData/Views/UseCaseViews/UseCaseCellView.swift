@@ -36,21 +36,23 @@ struct UseCaseCellView: View
         {
             HStack
             {
+                /*
                 Image(systemName: useCase.isComplete ? CHECKED_ICON : UNCHECKED_ICON)
                     .onTapGesture
                 {
                     updateIsComplete(useCase)
                 }
-                
+                */
                 Text(useCase.wrappedTitle)
                 Spacer()
-                Text(useCase.priority ?? "None")
+                /*Text(useCase.priority ?? "None")
                     .padding(5)
                     .frame(width: 75)
                     .background(
                         priorityBackground(Priority(rawValue: useCase.priority!) ?? .low))
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                 */
             }
         }
     }
@@ -61,7 +63,7 @@ struct UseCaseCellView: View
         {
             withAnimation
             {
-                useCases[useCaseIndex].isComplete.toggle()
+                //useCases[useCaseIndex].isComplete.toggle()
             }
             do
             {

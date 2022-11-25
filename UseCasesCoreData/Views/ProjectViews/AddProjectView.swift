@@ -50,9 +50,9 @@ struct AddProjectView: View
         withAnimation
         {
             let project = ProjectEntity(context: moc)
-            project.id = UUID()
-            project.created = Date()
-            project.lastUpdated = project.created
+            //project.id = UUID()
+            project.dateCreated = Date()
+            project.lastUpdated = project.dateCreated
             project.title = title
 
             do
