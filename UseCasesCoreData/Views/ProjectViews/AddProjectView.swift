@@ -30,7 +30,7 @@ struct AddProjectView: View
             }
             Button(action:
                 {
-                    let result = EntityIdUtil.shared.giveObjectId(CategoryEntity.self)
+                    let result = EntityIdUtil.shared.getNewObjectId(CategoryEntity.self)
                     print(result)
                 
                     addProject()
@@ -53,7 +53,8 @@ struct AddProjectView: View
         withAnimation
         {
             let project = ProjectEntity(context: moc)
-            project.id = EntityIdUtil.shared.giveObjectId(ProjectEntity.self)
+            project.id = EntityIdUtil.shared
+                .getNewObjectId(ProjectEntity.self)
             project.dateCreated = Date()
             project.lastUpdated = project.dateCreated
             project.title = title

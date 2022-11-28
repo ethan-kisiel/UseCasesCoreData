@@ -55,7 +55,8 @@ struct AddCategoryView: View {
     {
         let category = CategoryEntity(context: moc)
     
-        //category.id = UUID()
+        category.id = EntityIdUtil.shared
+            .getNewObjectId(CategoryEntity.self)
         category.dateCreated = Date()
         category.lastUpdated = Date()
         category.title = title

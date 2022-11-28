@@ -37,8 +37,6 @@ struct UseCaseListView: View
             }
             else
             {
-                Text("Use Cases: ")
-                
                 List
                 {
                     ForEach(category.wrappedUseCases, id: \.self)

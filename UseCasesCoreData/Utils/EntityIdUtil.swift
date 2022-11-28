@@ -10,9 +10,19 @@ import CoreData
 
 struct EntityIdUtil
 {
+    // this is a singleton struct, which is responsible
+    // for the handling of object id distribution.
+    // if the database is fresh; there are no objects of the
+    // the specified type, a fresh 64 bit integer is
+    // returned to be used as an object id
+    // if there are already entries for the specified type
+    // the current largest id is incremented and returned.
+    // usage: EntityIdUitl.shared.getNewObjectId(<EntityName>.self)
+    // note: the entity type must inherit from the BaseModelEntity
+    
     static let shared = EntityIdUtil()
     
-    func giveObjectId<T: BaseModelEntity>(_ T: T.Type) -> Int64
+    func getNewObjectId<T: BaseModelEntity>(_ T: T.Type) -> Int64
     {
         let context = PersistenceController.shared.container.viewContext
         
