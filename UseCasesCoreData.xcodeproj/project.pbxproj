@@ -16,7 +16,6 @@
 		883740A02926BB7600492A07 /* AddUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8837409F2926BB7600492A07 /* AddUseCaseView.swift */; };
 		883740A22926BF2A00492A07 /* AddStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883740A12926BF2A00492A07 /* AddStepView.swift */; };
 		883F448F2912A5C600284B2F /* UseCasesCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */; };
-		883F44912912A5C600284B2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44902912A5C600284B2F /* ContentView.swift */; };
 		883F44932912A5C600284B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44922912A5C600284B2F /* Assets.xcassets */; };
 		883F44962912A5C600284B2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44952912A5C600284B2F /* Preview Assets.xcassets */; };
 		883F44982912A5C600284B2F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44972912A5C600284B2F /* Persistence.swift */; };
@@ -79,7 +78,6 @@
 		883740A12926BF2A00492A07 /* AddStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepView.swift; sourceTree = "<group>"; };
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesCoreDataApp.swift; sourceTree = "<group>"; };
-		883F44902912A5C600284B2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		883F44922912A5C600284B2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		883F44952912A5C600284B2F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		883F44972912A5C600284B2F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -102,6 +100,7 @@
 		883F44C22912D38B00284B2F /* UseCaseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseDetailsView.swift; sourceTree = "<group>"; };
 		883F44C32912D38B00284B2F /* StepCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCellView.swift; sourceTree = "<group>"; };
 		883F44C42912D38B00284B2F /* CategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		887B1B33293694BD00203CB2 /* UseCasesCoreDataDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UseCasesCoreDataDebug.entitlements; sourceTree = "<group>"; };
 		88815D302914077E00B0CF40 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -156,10 +155,10 @@
 		883F448D2912A5C600284B2F /* UseCasesCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				887B1B33293694BD00203CB2 /* UseCasesCoreDataDebug.entitlements */,
 				883F44922912A5C600284B2F /* Assets.xcassets */,
 				889794532926DC3E0026A196 /* Info.plist */,
 				883F44992912A5C600284B2F /* UseCasesCoreData.xcdatamodeld */,
-				883F44902912A5C600284B2F /* ContentView.swift */,
 				88951CF62915DE79007081D3 /* Constants.swift */,
 				883F44972912A5C600284B2F /* Persistence.swift */,
 				883740972925541700492A07 /* Router.swift */,
@@ -376,7 +375,6 @@
 				88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */,
 				88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */,
 				883740A22926BF2A00492A07 /* AddStepView.swift in Sources */,
-				883F44912912A5C600284B2F /* ContentView.swift in Sources */,
 				88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
 				8837409C2926B27000492A07 /* AddProjectView.swift in Sources */,
@@ -513,6 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = UseCasesCoreData/UseCasesCoreDataDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UseCasesCoreData/Preview Content\"";
@@ -544,6 +543,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = UseCasesCoreData/UseCasesCoreDataRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UseCasesCoreData/Preview Content\"";
