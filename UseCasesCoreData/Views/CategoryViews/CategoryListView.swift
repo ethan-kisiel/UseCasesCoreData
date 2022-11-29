@@ -13,12 +13,12 @@ struct CategoryListView: View
     @Environment(\.managedObjectContext) var moc
     
     @FetchRequest(sortDescriptors: [])
-    var fetchedCategories: FetchedResults<CategoryEntity>
+    private var categories: FetchedResults<CategoryEntity>
     
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
     
-    let project: ProjectEntity
+    @State var project: ProjectEntity
     
     var body: some View
     {

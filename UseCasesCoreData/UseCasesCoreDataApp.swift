@@ -26,9 +26,7 @@ enum Route: Hashable
 struct UseCasesCoreDataApp: App
 {
     let persistenceController = PersistenceController.shared
-
-    @StateObject var router: Router = Router()
-
+     @StateObject var router: Router = Router()
     var body: some Scene
     {
         WindowGroup
@@ -150,7 +148,7 @@ struct ModelGetter<Model: BaseModelEntity>
 
         do
         {
-            let model = try moc.fetch(fetchRequest).first(where: { $0.id?.uuidString == modelId })
+            let model = try moc.fetch(fetchRequest).first(where: { String($0.id) == modelId })
             return model as? Model
         }
         catch

@@ -22,34 +22,29 @@ struct ProjectCellView: View
     {
         NavigationLink(value: Route.project(project))
         {
-            HStack(alignment: .center)
+            VStack(spacing: 8)
             {
-                // Constants.TRASH_ICON: String
-                // Tap-hold gesture enables trashIsEnabled boolean
-                // when trashIsEnabled is true, a tap gesture on the Image
-                // will cause project to be deleted from the localRealm DB
-
-                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
-                    .disabled(trashIsEnabled)
-                    .onTapGesture
+                HStack(alignment: .center)
+                {
+                    // Constants.TRASH_ICON: String
+                    // Tap-hold gesture enables trashIsEnabled boolean
+                    // when trashIsEnabled is true, a tap gesture on the Image
+                    // will cause project to be deleted from the localRealm DB
+                    
+                    Text(project.wrappedTitle)
+                    Spacer()
+                }
+                HStack
+                {
+                    VStack(alignment: .leading)
                     {
-                        print("pressed")
-                        if trashIsEnabled
-                        {
-                            print("delete pressed")
-                            deleteProject(project)
-                        }
+                        Text("**Created on:** \(project.wrappedDate)")
+                            .font(.caption)
+                        Text("**Last updated:** \(project.wrappedDate)")
+                            .font(.caption)
                     }
-                    .onLongPressGesture(minimumDuration: 0.8)
-                    {
-                        trashIsEnabled.toggle()
-                        print("TeSTTESTTETST")
-                    }
-    
-                Text(project.wrappedTitle)
-                Spacer()
-                let projectId = project.wrappedId
-                Text(projectId.shorten(by: 3) + "...")
+                    Spacer()
+                }
             }.background(NM_MAIN)
         }
     }

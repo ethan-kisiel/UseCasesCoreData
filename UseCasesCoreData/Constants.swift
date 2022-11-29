@@ -28,3 +28,13 @@ let NM_DARK_SHADOW = Color.Neumorphic.darkShadow
 
 // character amount to shorten display title to if display title > DT_SHORT
 let DISP_SHORT: Int = 10
+
+
+
+// These are the default values for the entity ids
+// based off int64 maximum size
+
+let CAT_ID_DEFAULT = 1000000000000000
+let UC_ID_DEFAULT = 2000000000000000
+let STEP_ID_DEFAULT = 3000000000000000
+let COM_ID_DEFAULT = 4000000000000000

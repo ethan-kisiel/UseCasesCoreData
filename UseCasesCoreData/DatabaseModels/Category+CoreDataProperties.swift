@@ -16,7 +16,7 @@ extension CategoryEntity
         return NSFetchRequest<CategoryEntity>(entityName: "Category")
     }
 
-    @NSManaged public var parent: ProjectEntity?
+    @NSManaged public var project: ProjectEntity?
     @NSManaged public var useCases: NSSet?
     
     var wrappedUseCases: [UseCaseEntity]

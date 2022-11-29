@@ -26,7 +26,8 @@ struct EditProjectView: View
         // can be set to the values of the passed project
         
         _title = State(wrappedValue: project.wrappedTitle)
-        _projectId = State(wrappedValue: project.wrappedId)
+        //_projectId = State(wrappedValue: project.wrappedId)
+        _projectId = State(wrappedValue: "")
     }
     
     var invalidFields: Bool

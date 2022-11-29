@@ -84,6 +84,9 @@ struct ProjectListView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ProjectListView()
+        NavigationStack
+        {
+            ProjectListView()
+        }
     }
 }

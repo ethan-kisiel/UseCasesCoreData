@@ -15,67 +15,31 @@ enum Sections: String, CaseIterable
 struct UseCaseListView: View
 {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest var categoryUseCases: FetchedResults<UseCaseEntity>
+    @FetchRequest(sortDescriptors: [])
+    var useCases: FetchedResults<UseCaseEntity>
+    
     // takes category for filter query purposes
-    private let category: CategoryEntity
+    let category: CategoryEntity
     
     @State private var alertIsPresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
-    @State private var currentSection: Sections = .incomplete
-
-    init(category: CategoryEntity)
-    {
-        self.category = category
-        _categoryUseCases = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCaseEntity.prioritySort, ascending: true)], predicate: NSPredicate(format: "parent == %@", category), animation: .default)
-    }
-    var completeUseCases: [UseCaseEntity]
-    {
-        return categoryUseCases.filter({ $0.isComplete == true })
-    }
-    
-    var incompleteUseCases: [UseCaseEntity]
-    {
-        return categoryUseCases.filter({ $0.isComplete == false })
-    }
 
     var body: some View
     {
         VStack
         {
-            Picker("Complete/Incomplete:", selection: $currentSection)
+            if category.wrappedUseCases.isEmpty
             {
-                ForEach(Sections.allCases, id: \.self)
-                { section in
-                    Text(section.rawValue)
-                }
-            }
-            .pickerStyle(.segmented)
-
-            let filteredCases = currentSection == .incomplete ? incompleteUseCases : completeUseCases
-            Spacer()
-            if filteredCases.isEmpty
-            {
-                Text("No \(currentSection.rawValue) use cases to display.")
+                Text("No use cases to display.")
                     .foregroundColor(.secondary)
                     .opacity(0.5)
                 Spacer()
             }
             else
             {
-                switch currentSection
-                {
-                case .incomplete:
-                    Text("Incomplete use cases:")
-                        .fontWeight(.semibold)
-                        .opacity(0.5)
-                case .complete:
-                    Text("Complete use cases:")
-                        .fontWeight(.semibold)
-                        .opacity(0.5)
-                }
                 List
                 {
-                    ForEach(filteredCases, id: \.self)
+                    ForEach(category.wrappedUseCases, id: \.self)
                     { useCase in
                         UseCaseCellView(useCase: useCase)
                             .swipeActions(edge: .leading)
@@ -115,7 +79,7 @@ struct UseCaseListView: View
     {
         withAnimation
         {
-            indexSet.map { categoryUseCases[$0] }.forEach(moc.delete)
+            indexSet.map { category.wrappedUseCases[$0] }.forEach(moc.delete)
         }
         do
         {

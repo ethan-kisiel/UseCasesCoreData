@@ -44,7 +44,9 @@ struct ProjectsView: View
             }
             
             Spacer()
+            
             ProjectListView()
+            
             Spacer()
                 .navigationTitle("Projects")
                 .navigationBarTitleDisplayMode(.inline)

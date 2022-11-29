@@ -16,7 +16,7 @@ struct CategoryDetailsView: View {
 
     private var filteredCategories: [CategoryEntity]
     {
-        return category.parent?.wrappedCategories ?? []
+        return category.project?.wrappedCategories ?? []
     }
 
     var body: some View

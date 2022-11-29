@@ -21,7 +21,8 @@ struct EditCategoryView: View {
     {
         self.category = category
         _title = State(wrappedValue: category.wrappedTitle)
-        _categoryId = State(wrappedValue: category.wrappedId)
+        //_categoryId = State(wrappedValue: category.wrappedId)
+        _categoryId = State(wrappedValue: "")
     }
 
     var invalidFields: Bool

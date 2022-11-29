@@ -66,23 +66,14 @@ struct AddUseCaseView: View
         withAnimation
         {
             let useCase = UseCaseEntity(context: moc)
-            useCase.id = UUID()
-            useCase.title = title
-            useCase.priority = priority.rawValue
-            useCase.isComplete = false
-            useCase.created = Date()
-            useCase.lastUpdated = useCase.created
-            useCase.parent = category
             
-            switch priority
-            {
-            case .low:
-                useCase.prioritySort = "0"
-            case .medium:
-                useCase.prioritySort = "1"
-            case .high:
-                useCase.prioritySort = "2"
-            }
+            useCase.id = EntityIdUtil.shared
+                .getNewObjectId(UseCaseEntity.self)
+            
+            useCase.title = title
+            useCase.dateCreated = Date()
+            useCase.lastUpdated = useCase.dateCreated
+            useCase.category = category
 
             do
             {

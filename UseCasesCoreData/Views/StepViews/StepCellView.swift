@@ -19,28 +19,30 @@ struct StepCellView: View
     {
         NavigationLink(value: Route.step(step))
         {
-            HStack(alignment: .center)
+            VStack(spacing: 8)
             {
-                // Constants.TRASH_ICON: String
-                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
-                    .disabled(trashIsEnabled)
-                    .onTapGesture
+                HStack(alignment: .center)
                 {
-                    if trashIsEnabled
+                    Text(step.wrappedTitle)
+                    
+                    Spacer()
+                }
+                HStack
+                {
+                    VStack(alignment: .leading)
                     {
-                        deleteStep(step)
+                        Text("**Created on:** \(step.wrappedDate)")
+                            .font(.caption)
+                        Text("**Last updated:** \(step.wrappedDate)")
+                            .font(.caption)
                     }
+                    
+                    Spacer()
                 }
-                .onLongPressGesture(minimumDuration: 0.8)
-                {
-                    trashIsEnabled.toggle()
-                }
-                
-                Text(step.wrappedTitle)
-                Spacer()
             }
         }
     }
+    
     private func deleteStep(_ step: StepEntity)
     {
         if let deleteIndex = steps.firstIndex(where: { $0.id == step.id })

@@ -17,5 +17,5 @@ extension StepEntity
     }
 
     @NSManaged public var body: String?
-    @NSManaged public var parent: UseCaseEntity?
+    @NSManaged public var useCase: UseCaseEntity?
 }

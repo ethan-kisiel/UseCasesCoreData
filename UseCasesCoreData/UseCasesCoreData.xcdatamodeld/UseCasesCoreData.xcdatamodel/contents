@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A5295i" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A5295i" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="BaseModelEntity" representedClassName="BaseModelEntity" syncable="YES">
-        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="customId" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="createdBy" optional="YES" attributeType="String"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <entity name="CategoryEntity" representedClassName="CategoryEntity" parentEntity="BaseModelEntity" syncable="YES">
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectEntity" inverseName="categories" inverseEntity="ProjectEntity"/>
-        <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UseCaseEntity" inverseName="parent" inverseEntity="UseCaseEntity"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectEntity" inverseName="categories" inverseEntity="ProjectEntity"/>
+        <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UseCaseEntity" inverseName="category" inverseEntity="UseCaseEntity"/>
     </entity>
+    <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class"/>
     <entity name="ProjectEntity" representedClassName="ProjectEntity" parentEntity="BaseModelEntity" syncable="YES">
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryEntity" inverseName="parent" inverseEntity="CategoryEntity"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryEntity" inverseName="project" inverseEntity="CategoryEntity"/>
     </entity>
+    <entity name="ReactionEntity" representedClassName="ReactionEntity" syncable="YES" codeGenerationType="class"/>
     <entity name="StepEntity" representedClassName="StepEntity" parentEntity="BaseModelEntity" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCaseEntity" inverseName="steps" inverseEntity="UseCaseEntity"/>
+        <relationship name="useCase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UseCaseEntity" inverseName="steps" inverseEntity="UseCaseEntity"/>
     </entity>
     <entity name="UseCaseEntity" representedClassName="UseCaseEntity" parentEntity="BaseModelEntity" syncable="YES">
-        <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="priority" optional="YES" attributeType="String"/>
-        <attribute name="prioritySort" optional="YES" attributeType="String"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="useCases" inverseEntity="CategoryEntity"/>
-        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StepEntity" inverseName="parent" inverseEntity="StepEntity"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="useCases" inverseEntity="CategoryEntity"/>
+        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StepEntity" inverseName="useCase" inverseEntity="StepEntity"/>
     </entity>
 </model>
