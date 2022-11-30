@@ -12,10 +12,14 @@ import SwiftUI
 enum Route: Hashable
 {
     case projects
+    
+    case addProject
+
     case project(ProjectEntity)
     case category(CategoryEntity)
     case useCase(UseCaseEntity)
     case step(StepEntity)
+
     case editProject(ProjectEntity)
     case editCategory(CategoryEntity)
     case editUseCase(UseCaseEntity)
@@ -46,6 +50,11 @@ struct UseCasesCoreDataApp: App
                             case .projects:
                                 ProjectsView()
 
+                                
+                            case .addProject:
+                                ProjectFieldsView()
+                                
+
                             case let .project(project):
                                 ProjectDetailsView(project: project)
 
@@ -58,8 +67,9 @@ struct UseCasesCoreDataApp: App
                             case let .step(step):
                                 StepDetailsView(step: step)
 
+
                             case let .editProject(project):
-                                EditProjectView(project: project)
+                                ProjectFieldsView(project)
 
                             case let .editCategory(category):
                                 EditCategoryView(category: category)

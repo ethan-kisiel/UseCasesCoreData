@@ -40,7 +40,7 @@ struct ProjectsView: View
             
             if showAddFields
             {
-               AddProjectView()
+               ProjectFieldsView()
             }
             
             Spacer()
