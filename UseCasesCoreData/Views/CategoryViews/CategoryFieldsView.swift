@@ -1,14 +1,13 @@
 //
-//  EditProjectView.swift
+//  CategoryFieldsView.swift
 //  UseCasesCoreData
 //
-//  Created by Ethan Kisiel on 11/9/22.
+//  Created by Ethan Kisiel on 11/30/22.
 //
 
 import SwiftUI
 
-struct ProjectFieldsView: View
-{
+struct CategoryFieldsView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
@@ -18,31 +17,41 @@ struct ProjectFieldsView: View
     
     @FocusState var isFocused: Bool
     
+    private let category: CategoryEntity?
+    
     private let project: ProjectEntity?
     
-    private let isNewProject: Bool
+    private let isNewCategory: Bool
     
-    init(_ project: ProjectEntity? = nil)
+    init(_ category: CategoryEntity? = nil, _ project: ProjectEntity? = nil)
     {
-        if let project = project
+        // if a category is passed, project is initialized as nil
+        // if a project is passed, category is initialized as nil
+        
+
+        if let category = category
         {
-            self.project = project
+            self.category = category
+
+            self.project = nil
             
-            isNewProject = false
+            isNewCategory = false
             
             // initialization happens here, so that the state values
             // which are used as bindings for the text fields
             // can be set to the values of the passed project
             
-            _title = State(wrappedValue: project.wrappedTitle)
+            _title = State(wrappedValue: category.wrappedTitle)
             
-            _description = State(wrappedValue: project.desc ?? EMPTY_STRING)
+            _description = State(wrappedValue: category.desc ?? EMPTY_STRING)
         }
         else
         {
-            self.project = nil
+            self.category = nil
             
-            isNewProject = true
+            self.project = project
+            
+            isNewCategory = true
         }
     }
     
@@ -58,7 +67,7 @@ struct ProjectFieldsView: View
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                isNewProject ? Text("New Project") : Text(project!.wrappedTitle)
+                isNewCategory ? Text("New Category") : Text(category!.wrappedTitle)
                 
                 withAnimation
                 {
@@ -77,17 +86,18 @@ struct ProjectFieldsView: View
                     Button(action:
                             {
                         
-                        isNewProject ? addProject() : updateProject(project!)
+                        isNewCategory ? addCategory() : updateCategory(category!)
                         
                         title = EMPTY_STRING
+                        description = EMPTY_STRING
+
                         isFocused = false
                         dismiss()
                     })
                     {
-                        Text("Save Project").foregroundColor(invalidFields ? .secondary : .primary)
+                        Text("Save Category").foregroundColor(invalidFields ? .secondary : .primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
-                    
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .disabled(invalidFields)
                     .padding(8)
@@ -99,36 +109,40 @@ struct ProjectFieldsView: View
                 .padding()
             
         }
-        .navigationTitle("\(isNewProject ? "Add" : "Edit") Project")
+        .navigationTitle("\(isNewCategory ? "Add" : "Edit") Category")
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    private func addProject()
+    private func addCategory()
     {
-        withAnimation
+        let category = CategoryEntity(context: moc)
+    
+        category.id = EntityIdUtil.shared
+            .getNewObjectId(CategoryEntity.self)
+        category.dateCreated = Date()
+        category.lastUpdated = Date()
+        category.title = title
+        category.desc = description
+
+        project!.addToCategories(category)
+
+        do
         {
-            let project = ProjectEntity(context: moc)
-            project.id = EntityIdUtil.shared
-                .getNewObjectId(ProjectEntity.self)
-            project.dateCreated = Date()
-            project.lastUpdated = project.dateCreated
-            project.title = title
-            
-            do
-            {
-                try moc.save()
-            }
-            catch
-            {
-                print(error.localizedDescription)
-            }
+            try moc.save()
+        }
+        catch
+        {
+            print("UNABLE TO SAVE")
+            print(error.localizedDescription)
         }
     }
 
-    private func updateProject(_ project: ProjectEntity)
+    private func updateCategory(_ category: CategoryEntity)
     {
-        project.title = title
-        project.lastUpdated = Date()
+        category.title = title
+        category.desc = description
+        category.lastUpdated = Date()
+
         do
         {
             try moc.save()
@@ -140,10 +154,8 @@ struct ProjectFieldsView: View
     }
 }
 
-struct EditProjectView_Previews: PreviewProvider
-{
-    static var previews: some View
-    {
-        ProjectFieldsView()
+struct CategoryFieldsView_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryFieldsView()
     }
 }

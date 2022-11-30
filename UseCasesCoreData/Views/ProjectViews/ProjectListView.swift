@@ -33,28 +33,35 @@ struct ProjectListView: View
                     {
                         project in
                         ProjectCellView(project: project)
-                            .swipeActions(edge: .leading)
+                            .swipeActions(edge: .trailing)
+                            {
+                                Button("Delete")
+                                {
+                                    alertIsPresented = true
+                                }
+                            }.tint(.red)
+                            .alert(isPresented: $alertIsPresented)
+                            {
+                                Alert(
+                                    title: Text("Do you wish to delete this project?"),
+                                    message: Text("Doing so will delete this project and all of its children."),
+                                    primaryButton: .destructive(Text(ALERT_DEL), action: {
+                                        deleteProject(project)
+                                    }),
+                                    secondaryButton: .cancel()
+                                )
+                            }
+                            .swipeActions(edge: .trailing)
                             {
                                 NavigationLink(value: Route.editProject(project))
                                 {
                                     Text("Edit")
                                 }
+                                
                             }.tint(.indigo)
-                    }.onDelete(perform: { indexSet in
-                        self.indexSet = indexSet
-                        alertIsPresented = true
-                    })
-                    .alert(isPresented: $alertIsPresented)
-                    {
-                        Alert(
-                            title: Text("Do you wish to delete this project?"),
-                            message: Text("Doing so will delete this project and all of its children."),
-                            primaryButton: .destructive(Text("DELETE"), action: {
-                                deleteProject(indexSet: indexSet)
-                            }),
-                            secondaryButton: .cancel()
-                        )
+                        
                     }
+                  
                         .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                     .padding()
@@ -63,11 +70,11 @@ struct ProjectListView: View
         }
     }
     
-    private func deleteProject(indexSet: IndexSet)
+    private func deleteProject(_ project: ProjectEntity)
     {
         withAnimation
         {
-            indexSet.map{ projects[$0] }.forEach(moc.delete)
+            moc.delete(project)
         }
         do
         {

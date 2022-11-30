@@ -29,7 +29,8 @@ let NM_DARK_SHADOW = Color.Neumorphic.darkShadow
 // character amount to shorten display title to if display title > DT_SHORT
 let DISP_SHORT: Int = 10
 
-
+// alert texts:
+let ALERT_DEL = "Delete"
 
 // These are the default values for the entity ids
 // based off int64 maximum size
