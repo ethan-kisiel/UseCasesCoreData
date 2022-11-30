@@ -58,8 +58,6 @@ struct ProjectFieldsView: View
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                isNewProject ? Text("New Project") : Text(project!.wrappedTitle)
-                
                 withAnimation
                 {
                     TextBoxWithFocus("Title", text: $title, isFocused: $isFocused)
@@ -80,6 +78,7 @@ struct ProjectFieldsView: View
                         isNewProject ? addProject() : updateProject(project!)
                         
                         title = EMPTY_STRING
+                        description = EMPTY_STRING
                         isFocused = false
                         dismiss()
                     })
@@ -128,7 +127,9 @@ struct ProjectFieldsView: View
     private func updateProject(_ project: ProjectEntity)
     {
         project.title = title
+        project.desc = description
         project.lastUpdated = Date()
+
         do
         {
             try moc.save()

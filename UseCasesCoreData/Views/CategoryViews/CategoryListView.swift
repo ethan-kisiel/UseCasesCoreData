@@ -15,7 +15,8 @@ struct CategoryListView: View
     @FetchRequest(sortDescriptors: [])
     private var categories: FetchedResults<CategoryEntity>
     
-    @State private var alertIsPresented: Bool = false
+    @State private var isDeletePresented: Bool = false
+
     @State private var indexSet: IndexSet = IndexSet()
     
     @State var project: ProjectEntity
@@ -35,7 +36,26 @@ struct CategoryListView: View
                     ForEach(project.wrappedCategories, id: \.id)
                     { category in
                         CategoryCellView(category: category)
-                            .swipeActions(edge: .leading)
+                            .swipeActions(edge: .trailing)
+                            {
+                                Button(ALERT_DEL)
+                                {
+                                    isDeletePresented = true
+                                    print("DELETED")
+                                }
+                            }.tint(.red)
+                            .alert(isPresented: $isDeletePresented)
+                            {
+                                Alert(
+                                    title: Text("Do you wish to delete this category?"),
+                                    message: Text("Doing so will delete this category and all of its children."),
+                                    primaryButton: .destructive(Text(ALERT_DEL), action: {
+                                        deleteCategory(category)
+                                    }),
+                                    secondaryButton: .cancel()
+                                )
+                            }
+                            .swipeActions(edge: .trailing)
                             {
                                 NavigationLink(value: Route.editCategory(category))
                                 {
@@ -46,19 +66,8 @@ struct CategoryListView: View
                     .onDelete
                     { indexSet in
                         self.indexSet = indexSet
-                        alertIsPresented = true
                     }
-                    .alert(isPresented: $alertIsPresented)
-                    {
-                        Alert(
-                            title: Text("Do you wish to delete this category?"),
-                            message: Text("Doing so will delete this category and all of its children."),
-                            primaryButton: .destructive(Text("DELETE"), action: {
-                                deleteCategory(indexSet: indexSet)
-                            }),
-                            secondaryButton: .cancel()
-                        )
-                    }
+
                     .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                 .padding()
@@ -67,7 +76,21 @@ struct CategoryListView: View
         }.background(NM_MAIN)
     }
 
-    private func deleteCategory(indexSet: IndexSet)
+    private func deleteCategory(_ category: CategoryEntity)
+    {
+        moc.delete(category)
+        
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func deleteCategories(indexSet: IndexSet)
     {
         withAnimation
         {

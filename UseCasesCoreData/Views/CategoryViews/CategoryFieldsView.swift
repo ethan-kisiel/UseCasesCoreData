@@ -23,7 +23,7 @@ struct CategoryFieldsView: View {
     
     private let isNewCategory: Bool
     
-    init(_ category: CategoryEntity? = nil, _ project: ProjectEntity? = nil)
+    init(_ category: CategoryEntity? = nil, project: ProjectEntity? = nil)
     {
         // if a category is passed, project is initialized as nil
         // if a project is passed, category is initialized as nil
@@ -67,8 +67,6 @@ struct CategoryFieldsView: View {
             NM_MAIN.edgesIgnoringSafeArea(.all)
             VStack
             {
-                isNewCategory ? Text("New Category") : Text(category!.wrappedTitle)
-                
                 withAnimation
                 {
                     TextBoxWithFocus("Title", text: $title, isFocused: $isFocused)
