@@ -19,37 +19,33 @@ struct ProjectsView: View
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<ProjectEntity>
     
-   
-   
-
-    @State var showAddFields: Bool = false
     
     var body: some View
     {
         VStack
         {
-            HStack(alignment: .top)
-            {
-                Spacer()
-                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                    .onTapGesture
-                {
-                    showAddFields.toggle()
-                }
-            }.padding()
-            
-            if showAddFields
-            {
-               ProjectFieldsView()
-            }
-            
             Spacer()
             
             ProjectListView()
             
             Spacer()
-                .navigationTitle("Projects")
-                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationTitle("Projects")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar
+        {
+            ToolbarItemGroup(placement: .navigationBarTrailing)
+            {
+                HStack
+                {
+                    projects.count > 0 ? EditButton() : nil
+                    
+                    NavigationLink(value: Route.addProject)
+                    {
+                        Image(systemName: ADD_ICON)
+                    }
+                }
+            }
         }
     }
 }
