@@ -13,7 +13,7 @@ struct ProjectListView: View
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<ProjectEntity>
-    @State private var alertIsPresented: Bool = false
+    @State private var isDeletePresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
     
     var body: some View
@@ -37,10 +37,10 @@ struct ProjectListView: View
                             {
                                 Button("Delete")
                                 {
-                                    alertIsPresented = true
+                                    isDeletePresented = true
                                 }
                             }.tint(.red)
-                            .alert(isPresented: $alertIsPresented)
+                            .alert(isPresented: $isDeletePresented)
                             {
                                 Alert(
                                     title: Text("Do you wish to delete this project?"),

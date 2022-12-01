@@ -11,7 +11,6 @@
 		8831B0D229310ED0009B7EEF /* EntityIdUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831B0D129310ED0009B7EEF /* EntityIdUtil.swift */; };
 		883740982925541700492A07 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883740972925541700492A07 /* Router.swift */; };
 		8837409A292557A800492A07 /* ReturnToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88374099292557A800492A07 /* ReturnToTopButton.swift */; };
-		883740A02926BB7600492A07 /* AddUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8837409F2926BB7600492A07 /* AddUseCaseView.swift */; };
 		883740A22926BF2A00492A07 /* AddStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883740A12926BF2A00492A07 /* AddStepView.swift */; };
 		883F448F2912A5C600284B2F /* UseCasesCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */; };
 		883F44932912A5C600284B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44922912A5C600284B2F /* Assets.xcassets */; };
@@ -47,7 +46,6 @@
 		88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CFA2916AD6A007081D3 /* StepDetailsView.swift */; };
 		88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */; };
 		88951D20291C1620007081D3 /* ProjectFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1F291C1620007081D3 /* ProjectFieldsView.swift */; };
-		88951D24291C3623007081D3 /* EditUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D23291C3623007081D3 /* EditUseCaseView.swift */; };
 		88951D26291C362F007081D3 /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D25291C362F007081D3 /* EditStepView.swift */; };
 		88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */; };
 		88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */; };
@@ -72,7 +70,6 @@
 		8831B0D129310ED0009B7EEF /* EntityIdUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIdUtil.swift; sourceTree = "<group>"; };
 		883740972925541700492A07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		88374099292557A800492A07 /* ReturnToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToTopButton.swift; sourceTree = "<group>"; };
-		8837409F2926BB7600492A07 /* AddUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUseCaseView.swift; sourceTree = "<group>"; };
 		883740A12926BF2A00492A07 /* AddStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepView.swift; sourceTree = "<group>"; };
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesCoreDataApp.swift; sourceTree = "<group>"; };
@@ -109,7 +106,6 @@
 		88951CFA2916AD6A007081D3 /* StepDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDetailsView.swift; sourceTree = "<group>"; };
 		88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxWithFocus.swift; sourceTree = "<group>"; };
 		88951D1F291C1620007081D3 /* ProjectFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFieldsView.swift; sourceTree = "<group>"; };
-		88951D23291C3623007081D3 /* EditUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUseCaseView.swift; sourceTree = "<group>"; };
 		88951D25291C362F007081D3 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
 		889794532926DC3E0026A196 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -241,8 +237,6 @@
 				883F44BD2912D38A00284B2F /* UseCaseCellView.swift */,
 				883F44C22912D38B00284B2F /* UseCaseDetailsView.swift */,
 				883F44BF2912D38B00284B2F /* UseCaseListView.swift */,
-				88951D23291C3623007081D3 /* EditUseCaseView.swift */,
-				8837409F2926BB7600492A07 /* AddUseCaseView.swift */,
 				887B1B382938EBF600203CB2 /* UseCaseFieldsView.swift */,
 			);
 			path = UseCaseViews;
@@ -352,7 +346,6 @@
 				883740982925541700492A07 /* Router.swift in Sources */,
 				88951D26291C362F007081D3 /* EditStepView.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
-				88951D24291C3623007081D3 /* EditUseCaseView.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
 				8837409A292557A800492A07 /* ReturnToTopButton.swift in Sources */,
@@ -364,7 +357,6 @@
 				88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */,
 				883F44CD2912D38B00284B2F /* CategoryDetailsView.swift in Sources */,
 				883F44D02912D38B00284B2F /* CategoryListView.swift in Sources */,
-				883740A02926BB7600492A07 /* AddUseCaseView.swift in Sources */,
 				887B1B392938EBF600203CB2 /* UseCaseFieldsView.swift in Sources */,
 				883F44C72912D38B00284B2F /* ProjectListView.swift in Sources */,
 				88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */,

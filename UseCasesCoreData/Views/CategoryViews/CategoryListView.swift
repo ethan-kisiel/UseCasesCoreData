@@ -87,22 +87,6 @@ struct CategoryListView: View
             print(error.localizedDescription)
         }
     }
-    
-    private func deleteCategories(indexSet: IndexSet)
-    {
-        withAnimation
-        {
-            indexSet.map { project.wrappedCategories[$0] }.forEach(moc.delete)
-        }
-        do
-        {
-            try moc.save()
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
-    }
 }
 
 struct CategoryListView_Previews: PreviewProvider
