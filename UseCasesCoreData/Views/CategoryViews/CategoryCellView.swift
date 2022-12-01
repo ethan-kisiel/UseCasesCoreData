@@ -20,23 +20,24 @@ struct CategoryCellView: View {
     {
         NavigationLink(value: Route.category(category))
         {
-            VStack(spacing: 8)
+            VStack
             {
                 HStack(alignment: .center)
                 {
                     Text(category.wrappedTitle)
+                        .bold()
                     
                     Spacer()
                 }
                 HStack
                 {
-                    VStack(alignment: .leading)
+                    VStack(alignment: .leading, spacing: 8)
                     {
-                        Text("**Created on:** \(category.wrappedDate)")
+                        Text(category.wrappedDescription)
                             .font(.caption)
                         Text("**Last updated:** \(category.wrappedDate)")
                             .font(.caption)
-                    }
+                    }.padding(.leading, 8)
                     
                     Spacer()
                 }

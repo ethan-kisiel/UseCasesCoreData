@@ -18,23 +18,24 @@ struct UseCaseCellView: View
     {
         NavigationLink(value: Route.useCase(useCase))
         {
-            VStack(spacing: 8)
+            VStack
             {
                 HStack(alignment: .center)
                 {
                     Text(useCase.wrappedTitle)
+                        .bold()
                     
                     Spacer()
                 }
                 HStack
                 {
-                    VStack(alignment: .leading)
+                    VStack(alignment: .leading, spacing: 8)
                     {
-                        Text("**Created on:** \(useCase.wrappedDate)")
+                        Text(useCase.wrappedDescription)
                             .font(.caption)
                         Text("**Last updated:** \(useCase.wrappedDate)")
                             .font(.caption)
-                    }
+                    }.padding(.leading, 8)
                     
                     Spacer()
                 }

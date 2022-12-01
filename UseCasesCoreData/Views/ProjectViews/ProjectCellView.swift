@@ -22,7 +22,7 @@ struct ProjectCellView: View
     {
         NavigationLink(value: Route.project(project))
         {
-            VStack(spacing: 8)
+            VStack
             {
                 HStack(alignment: .center)
                 {
@@ -32,17 +32,21 @@ struct ProjectCellView: View
                     // will cause project to be deleted from the localRealm DB
                     
                     Text(project.wrappedTitle)
+                        .bold()
+                    
                     Spacer()
                 }
                 HStack
                 {
-                    VStack(alignment: .leading)
+                    VStack(alignment: .leading, spacing: 8)
                     {
-                        Text("**Created on:** \(project.wrappedDate)")
+                        Text(project.wrappedDescription)
                             .font(.caption)
+    
                         Text("**Last updated:** \(project.wrappedDate)")
                             .font(.caption)
-                    }
+                    }.padding(.leading, 8)
+                    
                     Spacer()
                 }
             }.background(NM_MAIN)
