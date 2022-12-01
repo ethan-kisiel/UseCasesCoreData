@@ -29,6 +29,11 @@ extension BaseModelEntity {
         title ?? MISSING_DATA
     }
     
+    var wrappedDescription: String
+    {
+        desc ?? MISSING_DATA
+    }
+    
     var wrappedDate: String
     {
         dateCreated?.formatted(date: .numeric, time: .omitted) ?? MISSING_DATA
