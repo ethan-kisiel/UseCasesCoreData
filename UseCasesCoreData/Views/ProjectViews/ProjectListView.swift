@@ -61,7 +61,11 @@ struct ProjectListView: View
                             }.tint(.indigo)
                         
                     }
-                  
+                    .onDelete
+                    { indexSet in
+                        // This is here so that the EditButton()
+                        // functionality still works.
+                    }
                         .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
                     .padding()

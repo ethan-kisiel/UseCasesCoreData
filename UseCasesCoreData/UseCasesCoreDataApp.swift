@@ -15,6 +15,7 @@ enum Route: Hashable
     
     case addProject
     case addCategory(ProjectEntity)
+    case addUseCase(CategoryEntity)
 
     case project(ProjectEntity)
     case category(CategoryEntity)
@@ -57,7 +58,11 @@ struct UseCasesCoreDataApp: App
                                 
                             case let .addCategory(project):
                                 CategoryFieldsView(project: project)
+                            
+                            case let .addUseCase(category):
+                                UseCaseFieldsView(category: category)
                                 
+
                             case let .project(project):
                                 ProjectDetailsView(project: project)
 
@@ -78,7 +83,7 @@ struct UseCasesCoreDataApp: App
                                 CategoryFieldsView(category)
 
                             case let .editUseCase(useCase):
-                                EditUseCaseView(useCase: useCase)
+                                UseCaseFieldsView(useCase)
 
                             case let .editStep(step):
                                 EditStepView(step: step)

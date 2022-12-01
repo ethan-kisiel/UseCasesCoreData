@@ -99,6 +99,18 @@ struct CategoryFieldsView: View {
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .disabled(invalidFields)
                     .padding(8)
+                    
+                    Button(action:
+                            {
+                        dismiss()
+                    })
+                    {
+                        Text("Cancel").foregroundColor(.primary)
+                            .fontWeight(.bold).frame(maxWidth: .infinity)
+                    }
+                    
+                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                    .padding(8)
                 }
                 
                 Spacer()
@@ -117,8 +129,11 @@ struct CategoryFieldsView: View {
     
         category.id = EntityIdUtil.shared
             .getNewObjectId(CategoryEntity.self)
+
         category.dateCreated = Date()
-        category.lastUpdated = Date()
+        category.lastUpdated = category.dateCreated
+
+        
         category.title = title
         category.desc = description
 

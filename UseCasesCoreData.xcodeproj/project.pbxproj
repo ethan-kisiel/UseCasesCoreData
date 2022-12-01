@@ -39,6 +39,7 @@
 		883F44D92912D5BA00284B2F /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = 883F44D82912D5BA00284B2F /* Neumorphic */; };
 		887B1B352937E0FF00203CB2 /* TextEditorWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B1B342937E0FF00203CB2 /* TextEditorWithFocus.swift */; };
 		887B1B37293803F900203CB2 /* CategoryFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B1B36293803F900203CB2 /* CategoryFieldsView.swift */; };
+		887B1B392938EBF600203CB2 /* UseCaseFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B1B382938EBF600203CB2 /* UseCaseFieldsView.swift */; };
 		88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88815D302914077E00B0CF40 /* String+Extensions.swift */; };
 		88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */; };
 		88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */; };
@@ -100,6 +101,7 @@
 		887B1B33293694BD00203CB2 /* UseCasesCoreDataDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UseCasesCoreDataDebug.entitlements; sourceTree = "<group>"; };
 		887B1B342937E0FF00203CB2 /* TextEditorWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorWithFocus.swift; sourceTree = "<group>"; };
 		887B1B36293803F900203CB2 /* CategoryFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFieldsView.swift; sourceTree = "<group>"; };
+		887B1B382938EBF600203CB2 /* UseCaseFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFieldsView.swift; sourceTree = "<group>"; };
 		88815D302914077E00B0CF40 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88951CF3291587D3007081D3 /* UseCase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCase+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				883F44BF2912D38B00284B2F /* UseCaseListView.swift */,
 				88951D23291C3623007081D3 /* EditUseCaseView.swift */,
 				8837409F2926BB7600492A07 /* AddUseCaseView.swift */,
+				887B1B382938EBF600203CB2 /* UseCaseFieldsView.swift */,
 			);
 			path = UseCaseViews;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				883F44CD2912D38B00284B2F /* CategoryDetailsView.swift in Sources */,
 				883F44D02912D38B00284B2F /* CategoryListView.swift in Sources */,
 				883740A02926BB7600492A07 /* AddUseCaseView.swift in Sources */,
+				887B1B392938EBF600203CB2 /* UseCaseFieldsView.swift in Sources */,
 				883F44C72912D38B00284B2F /* ProjectListView.swift in Sources */,
 				88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */,
 				883F44982912A5C600284B2F /* Persistence.swift in Sources */,

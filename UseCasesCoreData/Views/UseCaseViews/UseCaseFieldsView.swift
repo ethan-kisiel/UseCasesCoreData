@@ -1,56 +1,70 @@
 //
-//  EditProjectView.swift
+//  UseCaseFieldsView.swift
 //  UseCasesCoreData
 //
-//  Created by Ethan Kisiel on 11/9/22.
+//  Created by Ethan Kisiel on 12/1/22.
 //
 
 import SwiftUI
 
-struct ProjectFieldsView: View
+struct UseCaseFieldsView: View
 {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
-    
+
     @State var title: String = EMPTY_STRING
-    
+
     @State var description: String = EMPTY_STRING
-    
+
     @FocusState var isFocused: Bool
-    
-    private let project: ProjectEntity?
-    
-    private let isNewProject: Bool
-    
-    init(_ project: ProjectEntity? = nil)
+
+    private let useCase: UseCaseEntity?
+
+    private let category: CategoryEntity?
+
+    private let isNewUseCase: Bool
+
+    init(_ useCase: UseCaseEntity? = nil, category: CategoryEntity? = nil)
     {
-        if let project = project
+        // if a use case is passed, category is initialized as nil
+        // if a category is passed, useCase is initialized as nil
+
+        if let useCase = useCase
         {
-            self.project = project
-            
-            isNewProject = false
-            
+            // if we are editing an existing use case, populate fields:
+
+            self.useCase = useCase
+
+            self.category = nil
+
+            isNewUseCase = false
+
             // initialization happens here, so that the state values
             // which are used as bindings for the text fields
             // can be set to the values of the passed project
-            
-            _title = State(wrappedValue: project.wrappedTitle)
-            
-            _description = State(wrappedValue: project.desc ?? EMPTY_STRING)
+
+            _title = State(wrappedValue: useCase.wrappedTitle)
+
+            _description = State(wrappedValue: useCase.desc ?? EMPTY_STRING)
         }
         else
         {
-            self.project = nil
-            
-            isNewProject = true
+            // if we are creating a new use case, pretty much
+            // do nothing.
+
+            self.useCase = nil
+
+            self.category = category
+
+            isNewUseCase = true
         }
     }
-    
+
     var invalidFields: Bool
     {
         title.isEmpty || description.isEmpty
     }
-    
+
     var body: some View
     {
         ZStack
@@ -63,70 +77,71 @@ struct ProjectFieldsView: View
                     TextBoxWithFocus("Title", text: $title, isFocused: $isFocused)
                         .padding(8)
                 }
-                
+
                 withAnimation
                 {
                     TextEditorWithFocus("Description", text: $description, isFocused: $isFocused)
                         .padding(8)
                 }
-                
+
                 HStack
                 {
                     Button(action:
-                            {
-                        
-                        isNewProject ? addProject() : updateProject(project!)
-                        
+                    {
+                        isNewUseCase ? addUseCase() : updateUseCase(useCase!)
+
                         title = EMPTY_STRING
                         description = EMPTY_STRING
+
                         isFocused = false
                         dismiss()
                     })
                     {
-                        Text("Save Project").foregroundColor(invalidFields ? .secondary : .primary)
+                        Text("Save Use Case").foregroundColor(invalidFields ? .secondary : .primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
-                    
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .disabled(invalidFields)
                     .padding(8)
-                    
+
                     Button(action:
-                            {
-                        dismiss()
-                    })
+                        {
+                            dismiss()
+                        })
                     {
                         Text("Cancel").foregroundColor(.primary)
                             .fontWeight(.bold).frame(maxWidth: .infinity)
                     }
-                    
+
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .padding(8)
                 }
-                
+
                 Spacer()
-                  
+
             }.background(NM_MAIN)
-                .padding()
-            
+            .padding()
         }
-        .navigationTitle("\(isNewProject ? "Add" : "Edit") Project")
+        .navigationTitle("\(isNewUseCase ? "Add" : "Edit") Use Case")
         .navigationBarTitleDisplayMode(.inline)
     }
-    
-    private func addProject()
+
+    private func addUseCase()
     {
         withAnimation
         {
-            let project = ProjectEntity(context: moc)
-            project.id = EntityIdUtil.shared
-                .getNewObjectId(ProjectEntity.self)
+            let useCase = UseCaseEntity(context: moc)
 
-            project.dateCreated = Date()
-            project.lastUpdated = project.dateCreated
+            useCase.id = EntityIdUtil.shared
+                .getNewObjectId(UseCaseEntity.self)
 
-            project.title = title
-            project.desc = description
+            useCase.dateCreated = Date()
+            useCase.lastUpdated = useCase.dateCreated
+
+            useCase.title = title
+            useCase.desc = description
+
+            useCase.category = category
 
             do
             {
@@ -138,13 +153,14 @@ struct ProjectFieldsView: View
             }
         }
     }
-
-    private func updateProject(_ project: ProjectEntity)
+    
+    private func updateUseCase(_ useCase: UseCaseEntity)
     {
-        project.title = title
-        project.desc = description
-        project.lastUpdated = Date()
+        useCase.title = title
+        useCase.desc = description
 
+        useCase.lastUpdated = Date()
+        
         do
         {
             try moc.save()
@@ -156,10 +172,10 @@ struct ProjectFieldsView: View
     }
 }
 
-struct EditProjectView_Previews: PreviewProvider
+struct UseCaseFieldsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ProjectFieldsView()
+        UseCaseFieldsView()
     }
 }

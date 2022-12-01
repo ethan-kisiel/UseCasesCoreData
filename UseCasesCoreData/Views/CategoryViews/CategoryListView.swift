@@ -16,8 +16,6 @@ struct CategoryListView: View
     private var categories: FetchedResults<CategoryEntity>
     
     @State private var isDeletePresented: Bool = false
-
-    @State private var indexSet: IndexSet = IndexSet()
     
     @State var project: ProjectEntity
     
@@ -49,7 +47,8 @@ struct CategoryListView: View
                                 Alert(
                                     title: Text("Do you wish to delete this category?"),
                                     message: Text("Doing so will delete this category and all of its children."),
-                                    primaryButton: .destructive(Text(ALERT_DEL), action: {
+                                    primaryButton: .destructive(Text(ALERT_DEL), action:
+                                    {
                                         deleteCategory(category)
                                     }),
                                     secondaryButton: .cancel()
@@ -65,7 +64,6 @@ struct CategoryListView: View
                     }
                     .onDelete
                     { indexSet in
-                        self.indexSet = indexSet
                     }
 
                     .listRowBackground(NM_MAIN)
