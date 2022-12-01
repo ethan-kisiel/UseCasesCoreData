@@ -35,9 +35,8 @@ struct TextBoxWithFocus: View
                     .fontWeight(.bold)
                     .offset(x: text.isEmpty ? 0 : 5, y: text.isEmpty ? 0 : -30)
                     .scaleEffect(text.isEmpty ? 1 : 1, anchor: .leading)
-                
-                
-                
+
+
                 RoundedRectangle(cornerRadius: 5).fill(NM_MAIN)
                     .softInnerShadow(RoundedRectangle(cornerRadius: 5))
                     .frame(maxWidth: .infinity, maxHeight: 35)

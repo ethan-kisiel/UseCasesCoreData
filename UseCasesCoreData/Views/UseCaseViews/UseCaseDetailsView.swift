@@ -45,25 +45,34 @@ struct UseCaseDetailsView: View
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }
+
                 Spacer()
-                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                    .onTapGesture
-                {
-                    showAddFields.toggle()
-                }
+
             }.padding()
             
-            if showAddFields
-            {
-                AddStepView(useCase: useCase)
-            }
             Spacer()
+            
             StepListView(useCase: useCase)
+            
             Spacer()
-                .navigationTitle("Steps")
-                .navigationBarTitleDisplayMode(.inline)
+
             ReturnToTopButton()
+
         }.background(NM_MAIN)
+            .navigationTitle("Steps")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar
+            {
+                ToolbarItemGroup(placement: .navigationBarTrailing)
+                {
+                    useCase.wrappedSteps.count > 0 ? EditButton() : nil
+                    
+                    NavigationLink(value: Route.addStep(useCase))
+                    {
+                        Image(systemName: ADD_ICON)
+                    }
+                }
+            }
     }
 }
 
