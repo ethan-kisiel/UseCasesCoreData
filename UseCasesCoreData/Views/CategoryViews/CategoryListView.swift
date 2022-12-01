@@ -76,7 +76,10 @@ struct CategoryListView: View
 
     private func deleteCategory(_ category: CategoryEntity)
     {
-        moc.delete(category)
+        withAnimation
+        {
+            moc.delete(category)
+        }
         
         do
         {

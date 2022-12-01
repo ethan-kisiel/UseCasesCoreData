@@ -13,22 +13,19 @@ struct ReturnToTopButton: View {
     
     var body: some View
     {
-        Image(systemName: "arrow.counterclockwise")
-            .onTapGesture
-            {
-                displayAlert = true
-            }
-            .alert(isPresented: $displayAlert, content:
-            {
-                Alert(
-                    title: Text("Do you wish to return to the projects view?"),
-                    primaryButton: .default(Text("Yes"), action:
+        VStack
+        {
+            Button(action:
                     {
-                        router.reset()
-                    }),
-                    secondaryButton: .cancel()
-                )
+                router.reset()
             })
+            {
+                Text("Return to Projects").foregroundColor(.primary)
+                    .fontWeight(.bold).frame(maxWidth: .infinity)
+            }
+            .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+            .padding(8)
+        }.padding(8)
     }
 }
 

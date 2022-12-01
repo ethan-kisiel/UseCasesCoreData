@@ -55,7 +55,7 @@ struct UseCaseListView: View
                                 title: Text("Do you wish to delete this use case?"),
                                 message: Text("Doing so will delete this use case and all of its children."),
                                 primaryButton: .destructive(Text(ALERT_DEL), action: {
-                                    deleteUseCase(indexSet: indexSet)
+                                    deleteUseCase(useCase)
                                 }),
                                 secondaryButton: .cancel()
                             )
@@ -81,11 +81,11 @@ struct UseCaseListView: View
         }.padding(8)
     }
     
-    private func deleteUseCase(indexSet: IndexSet)
+    private func deleteUseCase(_ useCase: UseCaseEntity)
     {
         withAnimation
         {
-            indexSet.map { category.wrappedUseCases[$0] }.forEach(moc.delete)
+            moc.delete(useCase)
         }
         do
         {
