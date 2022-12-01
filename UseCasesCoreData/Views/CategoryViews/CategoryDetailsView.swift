@@ -9,12 +9,14 @@ import SwiftUI
 
 struct CategoryDetailsView: View {
     @Environment(\.managedObjectContext) var moc
+    
     @EnvironmentObject var router: Router
     
     @State var category: CategoryEntity
+
     @State var showAddFields: Bool = false
 
-    private var filteredCategories: [CategoryEntity]
+    private var projectCategories: [CategoryEntity]
     {
         return category.project?.wrappedCategories ?? []
     }
@@ -31,7 +33,7 @@ struct CategoryDetailsView: View {
                            label: EmptyView(),
                            content:
                             {
-                        ForEach(filteredCategories, id: \.self)
+                        ForEach(projectCategories, id: \.self)
                         { category in
                             Text(category.wrappedTitle)
                         }
@@ -42,26 +44,37 @@ struct CategoryDetailsView: View {
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }
+
                 Spacer()
-                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                    .onTapGesture
-                {
-                    showAddFields.toggle()
-                }
+
             }.padding()
-            
-            if showAddFields
-            {
-                AddUseCaseView(category: category)
-            }
         
             Spacer()
+            
             UseCaseListView(category: category)
+            
             Spacer()
-                .navigationTitle("Use Cases")
-                .navigationBarTitleDisplayMode(.inline)
+
             ReturnToTopButton()
+
         }.background(NM_MAIN)
+            .navigationTitle("Use Cases")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar
+            {
+                ToolbarItemGroup(placement: .navigationBarTrailing)
+                {
+                    HStack
+                    {
+                        category.wrappedUseCases.count > 0 ? EditButton() : nil
+                        
+                        NavigationLink(value: Route.addUseCase(category))
+                        {
+                            Image(systemName: ADD_ICON)
+                        }
+                    }
+                }
+            }
     }
 }
 

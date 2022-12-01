@@ -47,7 +47,7 @@ struct StepDetailsView: View {
             Spacer()
             VStack
             {
-                Text(step.body!)
+                Text(step.desc ?? "")
             }
             Spacer()
                 .navigationTitle("Step Details")

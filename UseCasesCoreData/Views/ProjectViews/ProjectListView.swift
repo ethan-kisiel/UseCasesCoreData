@@ -13,7 +13,7 @@ struct ProjectListView: View
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<ProjectEntity>
-    @State private var alertIsPresented: Bool = false
+    @State private var isDeletePresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
     
     var body: some View
@@ -33,27 +33,38 @@ struct ProjectListView: View
                     {
                         project in
                         ProjectCellView(project: project)
-                            .swipeActions(edge: .leading)
+                            .swipeActions(edge: .trailing)
+                            {
+                                Button("Delete")
+                                {
+                                    isDeletePresented = true
+                                }
+                            }.tint(.red)
+                            .alert(isPresented: $isDeletePresented)
+                            {
+                                Alert(
+                                    title: Text("Do you wish to delete this project?"),
+                                    message: Text("Doing so will delete this project and all of its children."),
+                                    primaryButton: .destructive(Text(ALERT_DEL), action: {
+                                        deleteProject(project)
+                                    }),
+                                    secondaryButton: .cancel()
+                                )
+                            }
+                            .swipeActions(edge: .trailing)
                             {
                                 NavigationLink(value: Route.editProject(project))
                                 {
                                     Text("Edit")
                                 }
+                                
                             }.tint(.indigo)
-                    }.onDelete(perform: { indexSet in
-                        self.indexSet = indexSet
-                        alertIsPresented = true
-                    })
-                    .alert(isPresented: $alertIsPresented)
-                    {
-                        Alert(
-                            title: Text("Do you wish to delete this project?"),
-                            message: Text("Doing so will delete this project and all of its children."),
-                            primaryButton: .destructive(Text("DELETE"), action: {
-                                deleteProject(indexSet: indexSet)
-                            }),
-                            secondaryButton: .cancel()
-                        )
+                        
+                    }
+                    .onDelete
+                    { indexSet in
+                        // This is here so that the EditButton()
+                        // functionality still works.
                     }
                         .listRowBackground(NM_MAIN)
                 }.listStyle(.plain)
@@ -63,11 +74,11 @@ struct ProjectListView: View
         }
     }
     
-    private func deleteProject(indexSet: IndexSet)
+    private func deleteProject(_ project: ProjectEntity)
     {
         withAnimation
         {
-            indexSet.map{ projects[$0] }.forEach(moc.delete)
+            moc.delete(project)
         }
         do
         {

@@ -30,14 +30,24 @@ struct StepListView: View
                 {
                     step in
                     StepCellView(step: step)
-                        .swipeActions(edge: .leading)
+                        .swipeActions(edge: .trailing)
+                    {
+                        Button(ALERT_DEL)
+                        {
+                            deleteStep(step)
+                        }
+                    }.tint(.red)
+                        .swipeActions(edge: .trailing)
                     {
                         NavigationLink(value: Route.editStep(step))
                         {
                             Text("Edit")
                         }
                     }.tint(.indigo)
-                }.onDelete(perform: deleteStep)
+                }.onDelete
+                { indexSet in
+                    
+                }
                     .listRowBackground(NM_MAIN)
             }
             .listStyle(.plain)
@@ -46,20 +56,20 @@ struct StepListView: View
         }
     }
     
-    private func deleteStep(indexSet: IndexSet)
+    private func deleteStep(_ step: StepEntity)
     {
         withAnimation
         {
-            indexSet.map
-            { useCase.wrappedSteps[$0] }.forEach(moc.delete)
+            moc.delete(step)
         }
+        
         do
         {
             try moc.save()
         }
         catch
         {
-            print(error.localizedDescription)
+            
         }
     }
 }

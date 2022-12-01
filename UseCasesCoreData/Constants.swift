@@ -18,7 +18,7 @@ let UNCHECKED_ICON: String = "square"
 let CHECKED_ICON: String = "square.inset.filled"
 let MORE_ICON: String = "ellipsis.circle"
 let LESS_ICON: String = "minus.circle"
-
+let ADD_ICON: String = "plus.circle"
 // neumorphic UI main color
 let NM_MAIN = Color.Neumorphic.main
 let NM_LIGHT_SHADOW = Color.Neumorphic.lightShadow
@@ -29,7 +29,8 @@ let NM_DARK_SHADOW = Color.Neumorphic.darkShadow
 // character amount to shorten display title to if display title > DT_SHORT
 let DISP_SHORT: Int = 10
 
-
+// alert texts:
+let ALERT_DEL = "Delete"
 
 // These are the default values for the entity ids
 // based off int64 maximum size

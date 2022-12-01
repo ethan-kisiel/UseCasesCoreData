@@ -48,18 +48,10 @@ struct ProjectDetailsView: View
                         .background(NM_MAIN)
                         .foregroundColor(NM_SEC)
                 }
+                
                 Spacer()
-                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                    .onTapGesture
-                {
-                    showAddFields.toggle()
-                }
+                
             }.padding()
-            
-            if showAddFields
-            {
-                AddCategoryView(project: project)
-            }
             
             Spacer()
             
@@ -73,6 +65,21 @@ struct ProjectDetailsView: View
         .background(NM_MAIN)
         .navigationTitle("Categories")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar
+        {
+            ToolbarItemGroup(placement: .navigationBarTrailing)
+            {
+                HStack
+                {
+                    categories.count > 0 ? EditButton() : nil
+                    
+                    NavigationLink(value: Route.addCategory(project))
+                    {
+                        Image(systemName: ADD_ICON)
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -21,7 +21,7 @@ struct UseCaseListView: View
     // takes category for filter query purposes
     let category: CategoryEntity
     
-    @State private var alertIsPresented: Bool = false
+    @State private var isDeletePresented: Bool = false
     @State private var indexSet: IndexSet = IndexSet()
 
     var body: some View
@@ -42,7 +42,26 @@ struct UseCaseListView: View
                     ForEach(category.wrappedUseCases, id: \.self)
                     { useCase in
                         UseCaseCellView(useCase: useCase)
-                            .swipeActions(edge: .leading)
+                            .swipeActions(edge: .trailing)
+                        {
+                            Button(ALERT_DEL)
+                            {
+                                isDeletePresented = true
+                            }
+                        }.tint(.red)
+                        .alert(isPresented: $isDeletePresented)
+                        {
+                            Alert(
+                                title: Text("Do you wish to delete this use case?"),
+                                message: Text("Doing so will delete this use case and all of its children."),
+                                primaryButton: .destructive(Text(ALERT_DEL), action: {
+                                    deleteUseCase(indexSet: indexSet)
+                                }),
+                                secondaryButton: .cancel()
+                            )
+                        }
+
+                            .swipeActions(edge: .trailing)
                         {
                             NavigationLink(value: Route.editUseCase(useCase))
                             {
@@ -52,19 +71,6 @@ struct UseCaseListView: View
                     }
                     .onDelete
                     { indexSet in
-                        self.indexSet = indexSet
-                        alertIsPresented = true
-                    }
-                    .alert(isPresented: $alertIsPresented)
-                    {
-                        Alert(
-                            title: Text("Do you wish to delete this use case?"),
-                            message: Text("Doing so will delete this use case and all of its children."),
-                            primaryButton: .destructive(Text("Delete"), action: {
-                                deleteUseCase(indexSet: indexSet)
-                            }),
-                            secondaryButton: .cancel()
-                        )
                     }
                     .listRowBackground(NM_MAIN)
                 }
