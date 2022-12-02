@@ -8,7 +8,7 @@
 import Neumorphic
 import SwiftUI
 
-struct UseCaseDetailsView: View
+struct UseCaseStepsView: View
 {
     @Environment(\.managedObjectContext) var moc
 

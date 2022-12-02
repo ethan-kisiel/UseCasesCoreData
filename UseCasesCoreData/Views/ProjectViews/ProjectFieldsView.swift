@@ -124,7 +124,7 @@ struct ProjectFieldsView: View
 
             project.dateCreated = Date()
             project.lastUpdated = project.dateCreated
-
+            
             project.title = title
             project.desc = description
 
