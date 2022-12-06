@@ -8,7 +8,7 @@
 import Neumorphic
 import SwiftUI
 
-struct ProjectDetailsView: View
+struct ProjectCategoriesView: View
 {
     @Environment(\.managedObjectContext) var moc
     
@@ -87,6 +87,6 @@ struct ProjectDetailsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ProjectDetailsView(project: ProjectEntity())
+        ProjectCategoriesView(project: ProjectEntity())
     }
 }

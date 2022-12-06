@@ -22,9 +22,9 @@ struct ProjectCellView: View
     {
         NavigationLink(value: Route.project(project))
         {
-            VStack
+            VStack(alignment: .leading, spacing: 5)
             {
-                HStack(alignment: .center)
+                HStack
                 {
                     // Constants.TRASH_ICON: String
                     // Tap-hold gesture enables trashIsEnabled boolean
@@ -33,21 +33,18 @@ struct ProjectCellView: View
                     
                     Text(project.wrappedTitle)
                         .bold()
-                    
-                    Spacer()
+
                 }
                 HStack
                 {
-                    VStack(alignment: .leading, spacing: 8)
+                    VStack(alignment: .leading)
                     {
                         Text(project.wrappedDescription)
                             .font(.caption)
     
                         Text("**Last updated:** \(project.wrappedDate)")
                             .font(.caption)
-                    }.padding(.leading, 8)
-                    
-                    Spacer()
+                    }
                 }
             }.background(NM_MAIN)
         }

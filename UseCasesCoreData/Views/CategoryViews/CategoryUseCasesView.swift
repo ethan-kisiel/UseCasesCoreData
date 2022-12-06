@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategoryDetailsView: View {
+struct CategoryUseCasesView: View {
     @Environment(\.managedObjectContext) var moc
     
     @EnvironmentObject var router: Router
