@@ -104,6 +104,8 @@ struct ProjectFieldsView: View
                     .padding(8)
                 }
                 
+                Text(UserInfoUtil.shared.getUserName() ?? "No User")
+                
                 Spacer()
                   
             }.background(NM_MAIN)
@@ -127,6 +129,12 @@ struct ProjectFieldsView: View
             
             project.title = title
             project.desc = description
+            
+            
+            if let userId = UserInfoUtil.shared.getUserId()
+            {
+                project.title = userId
+            }
 
             do
             {

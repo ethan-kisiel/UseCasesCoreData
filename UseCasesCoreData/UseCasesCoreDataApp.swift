@@ -34,6 +34,7 @@ struct UseCasesCoreDataApp: App
 {
     let persistenceController = PersistenceController.shared
      @StateObject var router: Router = Router()
+    
     var body: some Scene
     {
         WindowGroup

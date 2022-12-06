@@ -19,26 +19,22 @@ struct StepCellView: View
     {
         NavigationLink(value: Route.step(step))
         {
-            VStack
+            VStack(alignment: .leading, spacing: 5)
             {
-                HStack(alignment: .center)
+                HStack
                 {
                     Text(step.wrappedTitle)
                         .bold()
-                    
-                    Spacer()
                 }
                 HStack
                 {
-                    VStack(alignment: .leading, spacing: 8)
+                    VStack(alignment: .leading)
                     {
                         Text(step.wrappedDescription)
                             .font(.caption)
                         Text("**Last updated:** \(step.wrappedDate)")
                             .font(.caption)
-                    }.padding(.leading, 8)
-                    
-                    Spacer()
+                    }
                 }
             }
         }
