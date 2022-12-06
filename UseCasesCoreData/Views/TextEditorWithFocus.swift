@@ -42,6 +42,9 @@ struct TextEditorWithFocus: View {
                     .overlay(
                         ZStack(alignment: .leading)
                         {
+                            // offset matches cursor start location
+                            // opacity ~matches TextField label opacity
+                            
                             Text(title)
                                 .foregroundColor(text.isEmpty ? .secondary : .clear)
                                 .opacity(0.5)
