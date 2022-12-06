@@ -55,7 +55,7 @@ struct CategoryUseCasesView: View {
             
             Spacer()
 
-            ReturnToTopButton()
+            ReturnToButtons()
 
         }.background(NM_MAIN)
             .navigationTitle("Use Cases")

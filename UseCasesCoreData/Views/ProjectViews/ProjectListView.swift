@@ -11,9 +11,13 @@ struct ProjectListView: View
 {
     @Environment(\.managedObjectContext) var moc
     
+    @EnvironmentObject var router: Router
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<ProjectEntity>
+    
     @State private var isDeletePresented: Bool = false
+    
     @State private var indexSet: IndexSet = IndexSet()
     
     var body: some View

@@ -56,7 +56,7 @@ struct UseCaseStepsView: View
             
             Spacer()
 
-            ReturnToTopButton()
+            ReturnToButtons()
 
         }.background(NM_MAIN)
             .navigationTitle("Steps")

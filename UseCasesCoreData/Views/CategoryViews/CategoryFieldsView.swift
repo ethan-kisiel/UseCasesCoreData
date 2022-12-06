@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryFieldsView: View {
     @Environment(\.managedObjectContext) var moc
+
     @Environment(\.dismiss) var dismiss
     
     @State var title: String = EMPTY_STRING

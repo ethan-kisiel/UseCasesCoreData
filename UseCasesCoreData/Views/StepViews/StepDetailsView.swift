@@ -45,14 +45,18 @@ struct StepDetailsView: View {
                 Spacer()
             }.padding()
             Spacer()
+            
             VStack
             {
-                Text(step.desc ?? "")
+                Text(step.wrappedDescription)
             }
+            
             Spacer()
-                .navigationTitle("Step Details")
-            ReturnToTopButton()
-        }.background(NM_MAIN)
+            
+            ReturnToButtons()
+        }
+        .background(NM_MAIN)
+        .navigationTitle("Step Details")
     }
 }
 

@@ -12,6 +12,8 @@ struct ProjectCategoriesView: View
 {
     @Environment(\.managedObjectContext) var moc
     
+    @EnvironmentObject var router: Router
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)], animation: .default)
     private var categories: FetchedResults<CategoryEntity>
     
@@ -23,6 +25,7 @@ struct ProjectCategoriesView: View
     @State var project: ProjectEntity
  
     @State var showAddFields: Bool = false
+    
     @State var refresh: Bool = false
     
     var body: some View
@@ -59,8 +62,10 @@ struct ProjectCategoriesView: View
             
             Spacer()
         
-            ReturnToTopButton()
-            
+            NavigationButton(text: "Return to Projects List")
+            {
+                router.reset()
+            }
         }
         .background(NM_MAIN)
         .navigationTitle("Categories")
