@@ -28,6 +28,8 @@ struct ProjectCategoriesView: View
     
     @State var refresh: Bool = false
     
+    @State var searchText: String = ""
+
     var body: some View
     {
         VStack
@@ -70,6 +72,7 @@ struct ProjectCategoriesView: View
         .background(NM_MAIN)
         .navigationTitle("Categories")
         .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText)
         .toolbar
         {
             ToolbarItemGroup(placement: .navigationBarTrailing)
