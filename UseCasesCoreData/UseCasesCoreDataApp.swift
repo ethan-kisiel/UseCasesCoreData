@@ -69,13 +69,13 @@ struct UseCasesCoreDataApp: App
 
 
                             case let .project(project):
-                                ProjectCategoriesView(project: project)
+                                CategoriesView(project: project)
 
                             case let .category(category):
-                                CategoryUseCasesView(category: category)
+                                UseCasesView(category: category)
 
                             case let .useCase(useCase):
-                                UseCaseStepsView(useCase: useCase)
+                                StepsView(useCase: useCase)
 
                             case let .step(step):
                                 StepDetailsView(step: step)
