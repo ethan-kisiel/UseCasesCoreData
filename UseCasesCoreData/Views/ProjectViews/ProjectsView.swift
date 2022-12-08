@@ -9,6 +9,12 @@ import CoreData
 import Neumorphic
 import SwiftUI
 
+enum SortType: String, CaseIterable, Hashable
+{
+    case name = "Name"
+    case lastUpdated = "Last Updated"
+}
+
 struct ProjectsView: View
 {
     // this view contains a list of all projects, as well as the
@@ -22,16 +28,20 @@ struct ProjectsView: View
     @State var isDeletePresented: Bool = false
     @State var projectToDelete: ProjectEntity? = nil
     
+    @State var sortKey: SortType = .name
     
     var sortedProjects: [ProjectEntity]
     {
+        // This is for sorting listed Projects
         []
     }
     
     var body: some View
     {
+      
         VStack
         {
+            DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
             if projects.isEmpty
             {
                 Text("No projects to display.")

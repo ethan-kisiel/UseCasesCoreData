@@ -49,6 +49,7 @@
 		88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */; };
 		88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */; };
 		88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D251FB293FC4C50045828D /* ReturnToButtons.swift */; };
+		88EAB2C32942563A008F72FF /* DiscretePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2C22942563A008F72FF /* DiscretePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -110,6 +111,7 @@
 		88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88D251FB293FC4C50045828D /* ReturnToButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToButtons.swift; sourceTree = "<group>"; };
+		88EAB2C22942563A008F72FF /* DiscretePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscretePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				887B1B342937E0FF00203CB2 /* TextEditorWithFocus.swift */,
 				88374099292557A800492A07 /* NavigationButton.swift */,
 				88D251FB293FC4C50045828D /* ReturnToButtons.swift */,
+				88EAB2C22942563A008F72FF /* DiscretePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88EAB2C32942563A008F72FF /* DiscretePicker.swift in Sources */,
 				883F44B32912B76C00284B2F /* Step+CoreDataProperties.swift in Sources */,
 				885289DB293A769C00C115B9 /* UserInfoUtil.swift in Sources */,
 				88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */,

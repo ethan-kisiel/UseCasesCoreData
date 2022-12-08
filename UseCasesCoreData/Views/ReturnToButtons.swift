@@ -13,7 +13,7 @@ struct ReturnToButtons: View
 
     var body: some View
     {
-        VStack
+        HStack
         {
             NavigationButton(text: "Return to Project Categories")
             {

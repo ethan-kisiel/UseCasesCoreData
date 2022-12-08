@@ -25,30 +25,11 @@ struct CategoryUseCasesView: View {
     {
         VStack
         {
-            HStack(alignment: .top)
-            {
-                Menu
-                {
-                    Picker(selection: $category,
-                           label: EmptyView(),
-                           content:
-                            {
-                        ForEach(projectCategories, id: \.self)
-                        { category in
-                            Text(category.wrappedTitle)
-                        }
-                    })
-                } label:
-                {
-                    Text("Category: **\(category.wrappedTitle)**")
-                        .background(NM_MAIN)
-                        .foregroundColor(NM_SEC)
-                }
+            DiscretePicker(displayText: "Category: ",
+                           selection: $category,
+                           selectables: projectCategories,
+                           keyPath: \CategoryEntity.wrappedTitle)
 
-                Spacer()
-
-            }.padding()
-        
             Spacer()
             
             UseCaseListView(category: category)

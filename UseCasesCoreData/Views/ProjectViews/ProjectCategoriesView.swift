@@ -29,42 +29,75 @@ struct ProjectCategoriesView: View
     @State var refresh: Bool = false
     
     @State var searchText: String = ""
-
+    
+    @State var isDeletePresented: Bool = false
+    
+    var sortedProjects: [ProjectEntity]
+    {
+        projects.sorted
+        {
+            $0.wrappedTitle < $1.wrappedTitle
+        }
+    }
+    
+    
     var body: some View
     {
         VStack
         {
-            HStack(alignment: .top)
+            DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+            
+            Spacer()
+            
+            if project.wrappedCategories.isEmpty
             {
-                Menu
+                Text("No categories to show.")
+            }
+            else
+            {
+                List
                 {
-                    Picker(selection: $project,
-                           label: EmptyView(),
-                           content:
+                    ForEach(project.wrappedCategories, id: \.id)
+                    { category in
+                        CategoryCellView(category: category)
+                            .swipeActions(edge: .trailing)
                             {
-                        ForEach(projects, id: \.self)
-                            { project in
-                                Text(project.wrappedTitle)
+                                Button(ALERT_DEL)
+                                {
+                                    isDeletePresented = true
+                                    print("DELETED")
+                                }
+                            }.tint(.red)
+                            .alert(isPresented: $isDeletePresented)
+                            {
+                                Alert(
+                                    title: Text("Do you wish to delete this category?"),
+                                    message: Text("Doing so will delete this category and all of its children."),
+                                    primaryButton: .destructive(Text(ALERT_DEL), action:
+                                    {
+                                        deleteCategory(category)
+                                    }),
+                                    secondaryButton: .cancel()
+                                )
                             }
-                    })
-                } label:
-                {
-                    Text("Project: **\(project.wrappedTitle)**")
-                        .background(NM_MAIN)
-                        .foregroundColor(NM_SEC)
-                }
-                
-                Spacer()
-                
-            }.padding()
-            
-            Spacer()
-            
-            CategoryListView(project: project)
-            
-            Spacer()
-        
-            NavigationButton(text: "Return to Projects List")
+                            .swipeActions(edge: .trailing)
+                            {
+                                NavigationLink(value: Route.editCategory(category))
+                                {
+                                    Text("Edit")
+                                }
+                            }.tint(.indigo)
+                    }
+                    .onDelete
+                    { indexSet in
+                    }
+
+                    .listRowBackground(NM_MAIN)
+                }.listStyle(.plain)
+                .padding()
+                .scrollContentBackground(.hidden)
+            }
+            NavigationButton(text: "Return to Projects")
             {
                 router.reset()
             }
@@ -87,6 +120,23 @@ struct ProjectCategoriesView: View
                     }
                 }
             }
+        }
+    }
+    
+    private func deleteCategory(_ category: CategoryEntity)
+    {
+        withAnimation
+        {
+            moc.delete(category)
+        }
+        
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error.localizedDescription)
         }
     }
 }
