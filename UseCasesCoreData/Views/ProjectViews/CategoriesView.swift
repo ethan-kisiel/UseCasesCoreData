@@ -1,28 +1,54 @@
 //
-//  CategoryListView.swift
+//  ProjectDetailsView.swift
 //  UseCasesLocalRealm
 //
-//  Created by Ethan Kisiel on 8/7/22.
+//  Created by Ethan Kisiel on 7/8/22.
 //
 
-import CoreData
+import Neumorphic
 import SwiftUI
 
-struct CategoryListView: View
+struct CategoriesView: View
 {
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(sortDescriptors: [])
+    @EnvironmentObject var router: Router
+    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CategoryEntity.title, ascending: true)], animation: .default)
     private var categories: FetchedResults<CategoryEntity>
     
-    @State private var isDeletePresented: Bool = false
+    // this fetch request is used for the display of the
+    // current project selector
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
+    private var projects: FetchedResults<ProjectEntity>
     
     @State var project: ProjectEntity
+ 
+    @State var showAddFields: Bool = false
+    
+    @State var refresh: Bool = false
+    
+    @State var searchText: String = ""
+    
+    @State var isDeletePresented: Bool = false
+    
+    var sortedProjects: [ProjectEntity]
+    {
+        projects.sorted
+        {
+            $0.wrappedTitle < $1.wrappedTitle
+        }
+    }
+    
     
     var body: some View
     {
         VStack
         {
+            DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+            
+            Spacer()
+            
             if project.wrappedCategories.isEmpty
             {
                 Text("No categories to show.")
@@ -71,9 +97,32 @@ struct CategoryListView: View
                 .padding()
                 .scrollContentBackground(.hidden)
             }
-        }.background(NM_MAIN)
+            NavigationButton(text: "Return to Projects")
+            {
+                router.reset()
+            }
+        }
+        .background(NM_MAIN)
+        .navigationTitle("Categories")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText)
+        .toolbar
+        {
+            ToolbarItemGroup(placement: .navigationBarTrailing)
+            {
+                HStack
+                {
+                    categories.count > 0 ? EditButton() : nil
+                    
+                    NavigationLink(value: Route.addCategory(project))
+                    {
+                        Image(systemName: ADD_ICON)
+                    }
+                }
+            }
+        }
     }
-
+    
     private func deleteCategory(_ category: CategoryEntity)
     {
         withAnimation
@@ -92,10 +141,10 @@ struct CategoryListView: View
     }
 }
 
-struct CategoryListView_Previews: PreviewProvider
+struct ProjectDetailsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        CategoryListView(project: ProjectEntity())
+        CategoriesView(project: ProjectEntity())
     }
 }

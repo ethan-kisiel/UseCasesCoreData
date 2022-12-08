@@ -133,7 +133,7 @@ struct ProjectFieldsView: View
             
             if let userId = UserInfoUtil.shared.getUserId()
             {
-                project.title = userId
+                project.createdBy = userId
             }
 
             do

@@ -8,7 +8,7 @@
 import Neumorphic
 import SwiftUI
 
-struct UseCaseStepsView: View
+struct StepsView: View
 {
     @Environment(\.managedObjectContext) var moc
 
@@ -56,7 +56,7 @@ struct UseCaseStepsView: View
             
             Spacer()
 
-            ReturnToTopButton()
+            ReturnToButtons()
 
         }.background(NM_MAIN)
             .navigationTitle("Steps")

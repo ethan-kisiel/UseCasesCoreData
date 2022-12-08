@@ -8,9 +8,9 @@
 import Foundation
 import CoreData
 
-struct EntityIdUtil
+class EntityIdUtil
 {
-    // this is a singleton struct, which is responsible
+    // this is a singleton class, which is responsible
     // for the handling of object id distribution.
     // if the database is fresh; there are no objects of the
     // the specified type, a fresh 64 bit integer is
