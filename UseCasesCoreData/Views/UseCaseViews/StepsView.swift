@@ -52,7 +52,42 @@ struct StepsView: View
             
             Spacer()
             
-            StepListView(useCase: useCase)
+            if useCase.wrappedSteps.isEmpty
+            {
+                Text("No steps to display.")
+            }
+            else
+            {
+                List
+                {
+                    ForEach(useCase.wrappedSteps, id: \.id)
+                    {
+                        step in
+                        StepCellView(step: step)
+                            .swipeActions(edge: .trailing)
+                        {
+                            Button(ALERT_DEL)
+                            {
+                                deleteStep(step)
+                            }
+                        }.tint(.red)
+                            .swipeActions(edge: .trailing)
+                        {
+                            NavigationLink(value: Route.editStep(step))
+                            {
+                                Text("Edit")
+                            }
+                        }.tint(.indigo)
+                    }.onDelete
+                    { indexSet in
+                        
+                    }
+                        .listRowBackground(NM_MAIN)
+                }
+                .listStyle(.plain)
+                .padding()
+                .scrollContentBackground(.hidden)
+            }
             
             Spacer()
 
@@ -73,6 +108,23 @@ struct StepsView: View
                     }
                 }
             }
+    }
+    
+    private func deleteStep(_ step: StepEntity)
+    {
+        withAnimation
+        {
+            moc.delete(step)
+        }
+        
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            
+        }
     }
 }
 
