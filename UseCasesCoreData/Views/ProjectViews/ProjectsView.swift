@@ -28,21 +28,49 @@ struct ProjectsView: View
     @State var isDeletePresented: Bool = false
     @State var projectToDelete: ProjectEntity? = nil
     
+    @State var searchText: String = EMPTY_STRING
     @State var sortKey: SortType = .name
     
     var sortedProjects: [ProjectEntity]
     {
         // This is for sorting listed Projects
-        []
+        let sortedProjects = projects.sorted
+        {
+            $0.wrappedTitle < $1.wrappedTitle
+        }
+        
+        if searchText.isEmpty
+        {
+            return sortedProjects
+        }
+        switch sortKey
+        {
+        case .lastUpdated:
+            return sortedProjects.filter
+            {
+                $0.wrappedDate.lowercased()
+                    .contains(searchText.lowercased())
+            }
+        case .name:
+            return sortedProjects.filter
+            {
+                $0.wrappedTitle.lowercased()
+                    .contains(searchText.lowercased())
+            }
+        }
     }
     
     var body: some View
     {
-      
+        
         VStack
         {
+            
             DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
-            if projects.isEmpty
+            
+            Spacer()
+            
+            if sortedProjects.isEmpty
             {
                 Text("No projects to display.")
             }
@@ -51,7 +79,7 @@ struct ProjectsView: View
                 List
                 {
                     // sort by category
-                    ForEach(projects, id: \.id)
+                    ForEach(sortedProjects, id: \.id)
                     {
                         project in
                         ProjectCellView(project: project)
@@ -100,9 +128,13 @@ struct ProjectsView: View
                     .padding()
                     .scrollContentBackground(.hidden)
             }
+            
+            Spacer()
+            
         }
         .navigationTitle("Projects")
         .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText)
         .toolbar
         {
             ToolbarItemGroup(placement: .navigationBarTrailing)

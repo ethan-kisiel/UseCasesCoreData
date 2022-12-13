@@ -49,6 +49,7 @@
 		88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */; };
 		88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D251FB293FC4C50045828D /* ReturnToButtons.swift */; };
 		88EAB2C32942563A008F72FF /* DiscretePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2C22942563A008F72FF /* DiscretePicker.swift */; };
+		88EAB2C52948F9A0008F72FF /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2C42948F9A0008F72FF /* FilteredList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -110,6 +111,7 @@
 		88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88D251FB293FC4C50045828D /* ReturnToButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToButtons.swift; sourceTree = "<group>"; };
 		88EAB2C22942563A008F72FF /* DiscretePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscretePicker.swift; sourceTree = "<group>"; };
+		88EAB2C42948F9A0008F72FF /* FilteredList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		8831B0D029310E9F009B7EEF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				88EAB2C42948F9A0008F72FF /* FilteredList.swift */,
 				8831B0D129310ED0009B7EEF /* EntityIdUtil.swift */,
 				885289DA293A769C00C115B9 /* UserInfoUtil.swift */,
 			);
@@ -371,6 +374,7 @@
 				88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
 				883F44CB2912D38B00284B2F /* UseCaseListView.swift in Sources */,
+				88EAB2C52948F9A0008F72FF /* FilteredList.swift in Sources */,
 				88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */,
 				883F44CE2912D38B00284B2F /* StepsView.swift in Sources */,
 				883F44CC2912D38B00284B2F /* CategoriesView.swift in Sources */,
