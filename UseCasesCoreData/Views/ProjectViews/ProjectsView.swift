@@ -26,9 +26,11 @@ struct ProjectsView: View
     private var projects: FetchedResults<ProjectEntity>
     
     @State var isDeletePresented: Bool = false
+    
     @State var projectToDelete: ProjectEntity? = nil
     
     @State var searchText: String = EMPTY_STRING
+    
     @State var sortKey: SortType = .name
     
     var sortedProjects: [ProjectEntity]
@@ -43,20 +45,21 @@ struct ProjectsView: View
         {
             return sortedProjects
         }
+        
         switch sortKey
         {
-        case .lastUpdated:
-            return sortedProjects.filter
-            {
-                $0.wrappedDate.lowercased()
-                    .contains(searchText.lowercased())
-            }
-        case .name:
-            return sortedProjects.filter
-            {
-                $0.wrappedTitle.lowercased()
-                    .contains(searchText.lowercased())
-            }
+            case .lastUpdated:
+                return sortedProjects.filter
+                {
+                    $0.wrappedDate.lowercased()
+                        .contains(searchText.lowercased())
+                }
+            case .name:
+                return sortedProjects.filter
+                {
+                    $0.wrappedTitle.lowercased()
+                        .contains(searchText.lowercased())
+                }
         }
     }
     
@@ -65,14 +68,17 @@ struct ProjectsView: View
         
         VStack
         {
-            
             DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
             
             Spacer()
-            
+    
             if sortedProjects.isEmpty
             {
                 Text("No projects to display.")
+                    .foregroundColor(.secondary)
+                    .opacity(0.5)
+    
+                Spacer()
             }
             else
             {

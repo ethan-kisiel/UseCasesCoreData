@@ -23,7 +23,6 @@
 		883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44AC2912B76C00284B2F /* Project+CoreDataClass.swift */; };
 		883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44AD2912B76C00284B2F /* Project+CoreDataProperties.swift */; };
 		883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44B92912D38A00284B2F /* ProjectCellView.swift */; };
-		883F44C62912D38B00284B2F /* StepListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44BA2912D38A00284B2F /* StepListView.swift */; };
 		883F44C82912D38B00284B2F /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44BC2912D38A00284B2F /* CategoryCellView.swift */; };
 		883F44C92912D38B00284B2F /* UseCaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44BD2912D38A00284B2F /* UseCaseCellView.swift */; };
 		883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F44BE2912D38B00284B2F /* ProjectsView.swift */; };
@@ -84,7 +83,6 @@
 		883F44AC2912B76C00284B2F /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
 		883F44AD2912B76C00284B2F /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		883F44B92912D38A00284B2F /* ProjectCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCellView.swift; sourceTree = "<group>"; };
-		883F44BA2912D38A00284B2F /* StepListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepListView.swift; sourceTree = "<group>"; };
 		883F44BC2912D38A00284B2F /* CategoryCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
 		883F44BD2912D38A00284B2F /* UseCaseCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseCellView.swift; sourceTree = "<group>"; };
 		883F44BE2912D38B00284B2F /* ProjectsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				883F44B92912D38A00284B2F /* ProjectCellView.swift */,
-				883F44C02912D38B00284B2F /* CategoriesView.swift */,
 				883F44BE2912D38B00284B2F /* ProjectsView.swift */,
 				88951D1F291C1620007081D3 /* ProjectFieldsView.swift */,
 			);
@@ -229,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				883F44BC2912D38A00284B2F /* CategoryCellView.swift */,
-				883F44C12912D38B00284B2F /* UseCasesView.swift */,
+				883F44C02912D38B00284B2F /* CategoriesView.swift */,
 				887B1B36293803F900203CB2 /* CategoryFieldsView.swift */,
 			);
 			path = CategoryViews;
@@ -239,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				883F44BD2912D38A00284B2F /* UseCaseCellView.swift */,
-				883F44C22912D38B00284B2F /* StepsView.swift */,
+				883F44C12912D38B00284B2F /* UseCasesView.swift */,
 				883F44BF2912D38B00284B2F /* UseCaseListView.swift */,
 				887B1B382938EBF600203CB2 /* UseCaseFieldsView.swift */,
 			);
@@ -250,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				883F44C32912D38B00284B2F /* StepCellView.swift */,
-				883F44BA2912D38A00284B2F /* StepListView.swift */,
+				883F44C22912D38B00284B2F /* StepsView.swift */,
 				88951CFA2916AD6A007081D3 /* StepDetailsView.swift */,
 				887B1B3A2939055D00203CB2 /* StepFieldsView.swift */,
 			);
@@ -365,7 +362,6 @@
 				887B1B392938EBF600203CB2 /* UseCaseFieldsView.swift in Sources */,
 				88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */,
 				883F44982912A5C600284B2F /* Persistence.swift in Sources */,
-				883F44C62912D38B00284B2F /* StepListView.swift in Sources */,
 				883F44C92912D38B00284B2F /* UseCaseCellView.swift in Sources */,
 				88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */,
 				887B1B352937E0FF00203CB2 /* TextEditorWithFocus.swift in Sources */,

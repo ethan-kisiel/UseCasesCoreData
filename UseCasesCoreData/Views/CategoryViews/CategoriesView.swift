@@ -45,13 +45,24 @@ struct CategoriesView: View
     {
         VStack
         {
-            DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+            HStack
+            {
+                DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+                
+                Spacer()
+                
+                DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+            }
             
             Spacer()
             
             if project.wrappedCategories.isEmpty
             {
                 Text("No categories to show.")
+                    .foregroundColor(.secondary)
+                    .opacity(0.5)
+                
+                Spacer()
             }
             else
             {
