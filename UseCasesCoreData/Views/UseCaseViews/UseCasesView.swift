@@ -14,6 +14,10 @@ struct UseCasesView: View {
     
     @State var category: CategoryEntity
     
+    @State var searchText: String = EMPTY_STRING
+    
+    @State var sortKey: SortType = .title
+    
     @State var isDeletePresented: Bool = false
     
     private var sortedCategories: [CategoryEntity]
@@ -24,26 +28,74 @@ struct UseCasesView: View {
         } ?? []
     }
     
+    private var filteredUseCases: [UseCaseEntity]
+    {
+        let sortedUseCases = category.wrappedUseCases.sorted
+        {
+            switch sortKey
+            {
+            case .title:
+                return $0.wrappedTitle < $1.wrappedTitle
+            case .lastUpdated:
+                return $0.wrappedDate > $1.wrappedDate
+            }
+        }
+        
+        if searchText.isEmpty
+        {
+            return sortedUseCases
+        }
+        
+        switch sortKey
+        {
+        case .title:
+            return sortedUseCases.filter
+            {
+                $0.wrappedTitle.lowercased()
+                    .contains(searchText.lowercased())
+            }
+        case .lastUpdated:
+            return sortedUseCases.filter
+            {
+                $0.wrappedDate.lowercased()
+                    .contains(searchText.lowercased())
+            }
+        }
+    }
+    
     var body: some View
     {
         VStack
         {
-            DiscretePicker(displayText: "Category: ", selection: $category, selectables: sortedCategories, keyPath: \CategoryEntity.wrappedTitle)
+            HStack
+            {
+                VStack(alignment: .leading)
+                {
+                    DiscretePicker(displayText: "Sort by: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+    
+                    DiscretePicker(displayText: "Category: ", selection: $category, selectables: sortedCategories, keyPath: \CategoryEntity.wrappedTitle)
+                }
+                .padding(.leading)
+                
+                Spacer()
+            }
             
             Spacer()
             
-            if category.wrappedUseCases.isEmpty
+            if filteredUseCases.isEmpty
             {
                 
                 Text("No use cases to display.")
                     .foregroundColor(.secondary)
                     .opacity(0.5)
+                
+                Spacer()
             }
             else
             {
                 List
                 {
-                    ForEach(category.wrappedUseCases, id: \.self)
+                    ForEach(filteredUseCases, id: \.self)
                     { useCase in
                         UseCaseCellView(useCase: useCase)
                             .swipeActions(edge: .trailing)
@@ -86,6 +138,7 @@ struct UseCasesView: View {
             .background(NM_MAIN)
             .navigationTitle("Use Cases")
             .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText)
             .toolbar
         {
             ToolbarItemGroup(placement: .navigationBarTrailing)

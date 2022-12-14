@@ -33,12 +33,18 @@ struct ProjectsView: View
     
     @State var sortKey: SortType = .title
     
-    var filteredCategories: [ProjectEntity]
+    private var filteredCategories: [ProjectEntity]
     {
         // This is for sorting listed Projects
         let sortedProjects = projects.sorted
         {
-            $0.wrappedTitle < $1.wrappedTitle
+            switch sortKey
+            {
+            case .title:
+                return $0.wrappedTitle < $1.wrappedTitle
+            case .lastUpdated:
+                return $0.wrappedDate > $1.wrappedDate
+            }
         }
         
         if searchText.isEmpty

@@ -36,7 +36,7 @@ extension BaseModelEntity {
     
     var wrappedDate: String
     {
-        dateCreated?.formatted(date: .numeric, time: .omitted) ?? MISSING_DATA
+        lastUpdated?.formatted(date: .numeric, time: .omitted) ?? MISSING_DATA
     }
 
 }

@@ -141,7 +141,12 @@ struct UseCaseFieldsView: View
             useCase.title = title
             useCase.desc = description
 
-            useCase.category = category
+            if let userId = UserInfoUtil.shared.getUserId()
+            {
+                useCase.createdBy = userId
+            }
+
+            category?.addToUseCases(useCase)
 
             do
             {

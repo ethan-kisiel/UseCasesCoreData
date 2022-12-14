@@ -29,10 +29,10 @@ struct CategoriesView: View
     @State var refresh: Bool = false
     
     @State var searchText: String = ""
-    @State var sortType: SortType = .title
+    @State var sortKey: SortType = .title
     @State var isDeletePresented: Bool = false
     
-    var sortedProjects: [ProjectEntity]
+    private var sortedProjects: [ProjectEntity]
     {
         projects.sorted
         {
@@ -41,11 +41,17 @@ struct CategoriesView: View
     }
     
     
-    var filteredCategories: [CategoryEntity]
+    private var filteredCategories: [CategoryEntity]
     {
         let sortedCategories = project.wrappedCategories.sorted
         {
-            $0.wrappedTitle < $1.wrappedTitle
+            switch sortKey
+            {
+            case .title:
+                return $0.wrappedTitle < $1.wrappedTitle
+            case .lastUpdated:
+                return $0.wrappedDate > $1.wrappedDate
+            }
         }
         
         if searchText.isEmpty
@@ -53,7 +59,7 @@ struct CategoriesView: View
             return sortedCategories
         }
         
-        switch sortType
+        switch sortKey
         {
             case .title:
                 return sortedCategories.filter
@@ -78,7 +84,7 @@ struct CategoriesView: View
             {
                 VStack(alignment: .leading)
                 {
-                    DiscretePicker(displayText: "Sort by: ", selection: $sortType, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+                    DiscretePicker(displayText: "Sort by: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
                     
                     DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
                 }
