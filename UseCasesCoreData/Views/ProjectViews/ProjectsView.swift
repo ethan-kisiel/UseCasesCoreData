@@ -33,7 +33,7 @@ struct ProjectsView: View
     
     @State var sortKey: SortType = .title
     
-    var sortedProjects: [ProjectEntity]
+    var filteredCategories: [ProjectEntity]
     {
         // This is for sorting listed Projects
         let sortedProjects = projects.sorted
@@ -78,7 +78,7 @@ struct ProjectsView: View
             
             Spacer()
     
-            if sortedProjects.isEmpty
+            if filteredCategories.isEmpty
             {
                 Text("No projects to display.")
                     .foregroundColor(.secondary)
@@ -91,7 +91,7 @@ struct ProjectsView: View
                 List
                 {
                     // sort by category
-                    ForEach(sortedProjects, id: \.id)
+                    ForEach(filteredCategories, id: \.id)
                     {
                         project in
                         ProjectCellView(project: project)

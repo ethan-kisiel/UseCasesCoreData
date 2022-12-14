@@ -41,17 +41,55 @@ struct CategoriesView: View
     }
     
     
+    var filteredCategories: [CategoryEntity]
+    {
+        let sortedCategories = project.wrappedCategories.sorted
+        {
+            $0.wrappedTitle < $1.wrappedTitle
+        }
+        
+        if searchText.isEmpty
+        {
+            return sortedCategories
+        }
+        
+        switch sortType
+        {
+            case .title:
+                return sortedCategories.filter
+                {
+                    $0.wrappedTitle.lowercased()
+                        .contains(searchText.lowercased())
+                }
+            case .lastUpdated:
+                return sortedCategories.filter
+                {
+                    $0.wrappedDate.lowercased()
+                        .contains(searchText.lowercased())
+            }
+        }
+    }
+    
     var body: some View
     {
         VStack
         {
-            DiscretePicker(displayText: "Sort by: ", selection: $sortType, selectables: SortType.allCases, keyPath: \SortType.rawValue)
-
-            DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+            HStack
+            {
+                VStack(alignment: .leading)
+                {
+                    DiscretePicker(displayText: "Sort by: ", selection: $sortType, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+                    
+                    DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+                }
+                
+                Spacer()
+            }
+            .padding(.leading)
             
             Spacer()
             
-            if project.wrappedCategories.isEmpty
+            if filteredCategories.isEmpty
             {
                 Text("No categories to show.")
                     .foregroundColor(.secondary)
@@ -63,7 +101,7 @@ struct CategoriesView: View
             {
                 List
                 {
-                    ForEach(project.wrappedCategories, id: \.id)
+                    ForEach(filteredCategories, id: \.id)
                     { category in
                         CategoryCellView(category: category)
                             .swipeActions(edge: .trailing)
