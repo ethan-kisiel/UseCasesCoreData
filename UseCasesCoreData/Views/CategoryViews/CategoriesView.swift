@@ -29,7 +29,7 @@ struct CategoriesView: View
     @State var refresh: Bool = false
     
     @State var searchText: String = ""
-    
+    @State var sortType: SortType = .title
     @State var isDeletePresented: Bool = false
     
     var sortedProjects: [ProjectEntity]
@@ -45,14 +45,9 @@ struct CategoriesView: View
     {
         VStack
         {
-            HStack
-            {
-                DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
-                
-                Spacer()
-                
-                DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
-            }
+            DiscretePicker(displayText: "Sort by: ", selection: $sortType, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+
+            DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
             
             Spacer()
             

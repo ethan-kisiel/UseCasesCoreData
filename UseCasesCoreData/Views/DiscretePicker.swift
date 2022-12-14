@@ -57,9 +57,9 @@ struct DiscretePicker<T: Hashable>: View
                     .foregroundColor(NM_SEC)
             }
 
-            Spacer()
+            //Spacer()
 
-        }.padding()
+        }
     }
 }
 

@@ -103,9 +103,7 @@ struct ProjectFieldsView: View
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .padding(8)
                 }
-                
-                Text(UserInfoUtil.shared.getUserName() ?? "No User")
-                
+
                 Spacer()
                   
             }.background(NM_MAIN)

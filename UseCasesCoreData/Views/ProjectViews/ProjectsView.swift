@@ -11,7 +11,7 @@ import SwiftUI
 
 enum SortType: String, CaseIterable, Hashable
 {
-    case name = "Name"
+    case title = "Title"
     case lastUpdated = "Last Updated"
 }
 
@@ -31,7 +31,7 @@ struct ProjectsView: View
     
     @State var searchText: String = EMPTY_STRING
     
-    @State var sortKey: SortType = .name
+    @State var sortKey: SortType = .title
     
     var sortedProjects: [ProjectEntity]
     {
@@ -54,7 +54,7 @@ struct ProjectsView: View
                     $0.wrappedDate.lowercased()
                         .contains(searchText.lowercased())
                 }
-            case .name:
+            case .title:
                 return sortedProjects.filter
                 {
                     $0.wrappedTitle.lowercased()
@@ -68,7 +68,13 @@ struct ProjectsView: View
         
         VStack
         {
-            DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+            HStack
+            {
+                DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+                
+                Spacer()
+            }
+            .padding(.leading)
             
             Spacer()
     
