@@ -147,10 +147,6 @@ struct CategoriesView: View
                 .padding()
                 .scrollContentBackground(.hidden)
             }
-            NavigationButton(text: "Return to Projects")
-            {
-                router.reset()
-            }
         }
         .background(NM_MAIN)
         .navigationTitle("Categories")
@@ -169,6 +165,15 @@ struct CategoriesView: View
                         Image(systemName: ADD_ICON)
                     }
                 }
+            }
+            
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                NavigationButton(text: "Return to Projects")
+                {
+                    router.reset()
+                }
+                .padding(.bottom)
             }
         }
     }

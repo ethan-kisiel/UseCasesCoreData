@@ -12,47 +12,83 @@ struct StepsView: View
 {
     @Environment(\.managedObjectContext) var moc
 
-    @State var useCase: UseCaseEntity
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UseCaseEntity.title, ascending: true)], animation: .default)
     private var useCases: FetchedResults<UseCaseEntity>
-    private var filteredUseCases: [UseCaseEntity]
-    {
-        return useCases.filter({ $0.category == useCase.category })
-    }
+
+    @State var useCase: UseCaseEntity
+    
+    @State var sortKey: SortType = .title
+    
+    @State var searchText: String = EMPTY_STRING
     
     @State var showAddFields: Bool = false
     
+    private var sortedUseCases: [UseCaseEntity]
+    {
+        let useCases = useCases.filter({ $0.category == useCase.category })
+        
+        return useCases.sorted
+        {
+            $0.wrappedTitle < $1.wrappedTitle
+        }
+    }
+    
+    private var filteredSteps: [StepEntity]
+    {
+        let sortedSteps = useCase.wrappedSteps.sorted
+        {
+            switch sortKey
+            {
+            case .title:
+                return $0.wrappedTitle < $1.wrappedTitle
+            case .lastUpdated:
+                return $0.wrappedDate > $1.wrappedDate
+            }
+        }
+        
+        if searchText.isEmpty
+        {
+            return sortedSteps
+        }
+        
+        switch sortKey
+        {
+        case .title:
+            return sortedSteps.filter
+            {
+                $0.wrappedTitle.lowercased()
+                    .contains(searchText.lowercased())
+            }
+        case .lastUpdated:
+            return sortedSteps.filter
+            {
+                $0.wrappedDate.lowercased()
+                    .contains(searchText.lowercased())
+            }
+        }
+    }
+
     var body: some View
     {
         VStack
         {
-            HStack(alignment: .top)
+            HStack
             {
-                Menu
+                VStack(alignment: .leading)
                 {
-                    Picker(selection: $useCase,
-                           label: EmptyView(),
-                           content:
-                            {
-                        ForEach(filteredUseCases, id: \.self)
-                        { useCase in
-                            Text(useCase.wrappedTitle)
-                        }
-                    })
-                } label:
-                {
-                    Text("Use Case: **\(useCase.wrappedTitle)**")
-                        .background(NM_MAIN)
-                        .foregroundColor(NM_SEC)
+
+                    DiscretePicker(displayText: "Sort by: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+                    
+                    DiscretePicker(displayText: "Use Case: ", selection: $useCase, selectables: sortedUseCases, keyPath: \UseCaseEntity.wrappedTitle)
                 }
-
+                .padding(.leading)
+                
                 Spacer()
-
-            }.padding()
+            }
             
             Spacer()
             
-            if useCase.wrappedSteps.isEmpty
+            if filteredSteps.isEmpty
             {
                 Text("No steps to display.")
             }
@@ -60,7 +96,7 @@ struct StepsView: View
             {
                 List
                 {
-                    ForEach(useCase.wrappedSteps, id: \.id)
+                    ForEach(filteredSteps, id: \.id)
                     {
                         step in
                         StepCellView(step: step)
@@ -82,7 +118,7 @@ struct StepsView: View
                     { indexSet in
                         
                     }
-                        .listRowBackground(NM_MAIN)
+                    .listRowBackground(NM_MAIN)
                 }
                 .listStyle(.plain)
                 .padding()
@@ -91,11 +127,10 @@ struct StepsView: View
             
             Spacer()
 
-            ReturnToButtons()
-
         }.background(NM_MAIN)
             .navigationTitle("Steps")
             .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText)
             .toolbar
             {
                 ToolbarItemGroup(placement: .navigationBarTrailing)
@@ -106,6 +141,12 @@ struct StepsView: View
                     {
                         Image(systemName: ADD_ICON)
                     }
+                }
+                
+                ToolbarItemGroup(placement: .bottomBar)
+                {
+                    ReturnToButtons()
+                        .padding(.bottom)
                 }
             }
     }

@@ -29,7 +29,7 @@ struct NavigationButton: View
             {
                 Text(text).foregroundColor(.primary)
                     .fontWeight(.bold).frame(maxWidth: .infinity)
-                    .font(.subheadline)
+                    .font(.caption)
             }
             .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
             .padding(8)

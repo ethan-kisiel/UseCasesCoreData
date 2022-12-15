@@ -153,6 +153,12 @@ struct UseCasesView: View {
                     }
                 }
             }
+            
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                ReturnToButtons()
+                    .padding(.bottom)
+            }
         }
     }
     
