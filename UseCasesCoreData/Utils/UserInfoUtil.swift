@@ -101,6 +101,24 @@ class UserInfoUtil
         return nil
     }
     
+    public func getUserFullName() -> String?
+    {
+        if !hasPermission
+        {
+            requestPermission()
+        }
+        else
+        {
+            if let userName = userIdentity?.nameComponents?.givenName,
+               let lastName = userIdentity?.nameComponents?.familyName
+            {
+                return userName + " " + lastName
+            }
+            
+            return nil
+        }
+        return nil
+    }
    /* public func getUserStatus()
     {
         userIdentity.

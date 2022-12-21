@@ -128,7 +128,6 @@ struct ProjectFieldsView: View
             project.title = title
             project.desc = description
             
-            
             if let userId = UserInfoUtil.shared.getUserId()
             {
                 project.createdBy = userId

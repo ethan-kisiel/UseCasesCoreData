@@ -36,29 +36,29 @@ struct DiscretePicker<T: Hashable>: View
     {
         HStack(alignment: .top)
         {
-            Menu
+            withAnimation
             {
-                Picker(selection: $selection,
-                       label: EmptyView(),
-                       content:
-                       {
-                           ForEach(selectables, id: \.self)
-                           { obj in
-                               Text(obj[keyPath: keyPath])
-                           }
-                       })
-            } label:
-            {
-                Text(displayText)
-                    .background(NM_MAIN)
-                    .foregroundColor(NM_SEC)
-                Text("**\(selection[keyPath: keyPath])**")
-                    .background(NM_MAIN)
-                    .foregroundColor(NM_SEC)
+                Menu
+                {
+                    Picker(selection: $selection,
+                           label: EmptyView(),
+                           content:
+                            {
+                        ForEach(selectables, id: \.self)
+                        { obj in
+                            Text(obj[keyPath: keyPath])
+                        }
+                    })
+                } label:
+                {
+                    Text(displayText)
+                        .background(NM_MAIN)
+                        .foregroundColor(NM_SEC)
+                    Text("**\(selection[keyPath: keyPath])**")
+                        .background(NM_MAIN)
+                        .foregroundColor(NM_SEC)
+                }
             }
-
-            //Spacer()
-
         }
     }
 }

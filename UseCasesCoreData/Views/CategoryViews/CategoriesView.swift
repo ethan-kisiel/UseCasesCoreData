@@ -29,7 +29,9 @@ struct CategoriesView: View
     @State var refresh: Bool = false
     
     @State var searchText: String = ""
+    
     @State var sortKey: SortType = .title
+    
     @State var isDeletePresented: Bool = false
     
     private var sortedProjects: [ProjectEntity]

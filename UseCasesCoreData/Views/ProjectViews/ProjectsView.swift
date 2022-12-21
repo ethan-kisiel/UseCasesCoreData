@@ -134,6 +134,14 @@ struct ProjectsView: View
                             }
                             
                         }.tint(.indigo)
+                            .swipeActions(edge: .trailing)
+                        {
+                            NavigationLink(value: Route.projectDetails(project))
+                            {
+                                Text("Details")
+                            }
+                        }
+                        .tint(.gray)
                         
                     }
                     .onDelete
