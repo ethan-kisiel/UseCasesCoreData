@@ -34,7 +34,7 @@ struct ProjectDetailsView: View
             }
             .padding(.leading, 8)
             
-            VStack
+            VStack(alignment: .leading)
             {
                 HStack
                 {
@@ -85,12 +85,18 @@ struct ProjectDetailsView: View
                 
             HStack
             {
-                NeumorphicButton("Test", color: .blue)
+                NeumorphicButton("Edit", buttonColor: .blue, fontColor: NM_MAIN)
                 {
-                    print("Test Pressed")
+                    print("Edit Pressed")
                 }
                 
+                NeumorphicButton("Delete", buttonColor: .red, fontColor: NM_MAIN)
+                {
+                    print("Delete Pressed")
+                }
             }
+            
+            Spacer()
         }
         .background(NM_MAIN)
         .navigationTitle("Project Details")
