@@ -27,11 +27,16 @@ enum Route: Hashable
     case editCategory(CategoryEntity)
     case editUseCase(UseCaseEntity)
     case editStep(StepEntity)
+    
+    case projectDetails(ProjectEntity)
 }
 
 @main
 struct UseCasesCoreDataApp: App
 {
+    // hack for getting permission when app loads
+    @State private var hasLoaded = false
+    
     let persistenceController = PersistenceController.shared
      @StateObject var router: Router = Router()
     
@@ -92,12 +97,26 @@ struct UseCasesCoreDataApp: App
 
                             case let .editStep(step):
                                 StepFieldsView(step)
+                            
+                            case let .projectDetails(project):
+                                ProjectDetailsView(project: project)
                             }
                         }
                 }
             }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(router)
+            .onAppear
+            {
+                // This will request iCloud permissions on
+                // startup
+                if hasLoaded == false
+                {
+                    hasLoaded = true
+                    
+                    UserInfoUtil.shared.requestPermission()
+                }
+            }
             .onOpenURL
             { url in
                 router.reset()

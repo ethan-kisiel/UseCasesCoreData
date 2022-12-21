@@ -11,7 +11,7 @@ import SwiftUI
 
 enum SortType: String, CaseIterable, Hashable
 {
-    case name = "Name"
+    case title = "Title"
     case lastUpdated = "Last Updated"
 }
 
@@ -26,37 +26,46 @@ struct ProjectsView: View
     private var projects: FetchedResults<ProjectEntity>
     
     @State var isDeletePresented: Bool = false
+    
     @State var projectToDelete: ProjectEntity? = nil
     
     @State var searchText: String = EMPTY_STRING
-    @State var sortKey: SortType = .name
     
-    var sortedProjects: [ProjectEntity]
+    @State var sortKey: SortType = .title
+    
+    private var filteredCategories: [ProjectEntity]
     {
         // This is for sorting listed Projects
         let sortedProjects = projects.sorted
         {
-            $0.wrappedTitle < $1.wrappedTitle
+            switch sortKey
+            {
+            case .title:
+                return $0.wrappedTitle < $1.wrappedTitle
+            case .lastUpdated:
+                return $0.wrappedDate > $1.wrappedDate
+            }
         }
         
         if searchText.isEmpty
         {
             return sortedProjects
         }
+        
         switch sortKey
         {
-        case .lastUpdated:
-            return sortedProjects.filter
-            {
-                $0.wrappedDate.lowercased()
-                    .contains(searchText.lowercased())
-            }
-        case .name:
-            return sortedProjects.filter
-            {
-                $0.wrappedTitle.lowercased()
-                    .contains(searchText.lowercased())
-            }
+            case .lastUpdated:
+                return sortedProjects.filter
+                {
+                    $0.wrappedDate.lowercased()
+                        .contains(searchText.lowercased())
+                }
+            case .title:
+                return sortedProjects.filter
+                {
+                    $0.wrappedTitle.lowercased()
+                        .contains(searchText.lowercased())
+                }
         }
     }
     
@@ -65,21 +74,30 @@ struct ProjectsView: View
         
         VStack
         {
-            
-            DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+            HStack
+            {
+                DiscretePicker(displayText: "Sort By: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+                
+                Spacer()
+            }
+            .padding(.leading)
             
             Spacer()
-            
-            if sortedProjects.isEmpty
+    
+            if filteredCategories.isEmpty
             {
                 Text("No projects to display.")
+                    .foregroundColor(.secondary)
+                    .opacity(0.5)
+    
+                Spacer()
             }
             else
             {
                 List
                 {
                     // sort by category
-                    ForEach(sortedProjects, id: \.id)
+                    ForEach(filteredCategories, id: \.id)
                     {
                         project in
                         ProjectCellView(project: project)
@@ -116,6 +134,14 @@ struct ProjectsView: View
                             }
                             
                         }.tint(.indigo)
+                            .swipeActions(edge: .trailing)
+                        {
+                            NavigationLink(value: Route.projectDetails(project))
+                            {
+                                Text("Details")
+                            }
+                        }
+                        .tint(.gray)
                         
                     }
                     .onDelete

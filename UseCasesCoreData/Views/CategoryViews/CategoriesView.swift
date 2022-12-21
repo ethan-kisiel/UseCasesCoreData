@@ -30,9 +30,11 @@ struct CategoriesView: View
     
     @State var searchText: String = ""
     
+    @State var sortKey: SortType = .title
+    
     @State var isDeletePresented: Bool = false
     
-    var sortedProjects: [ProjectEntity]
+    private var sortedProjects: [ProjectEntity]
     {
         projects.sorted
         {
@@ -41,23 +43,73 @@ struct CategoriesView: View
     }
     
     
+    private var filteredCategories: [CategoryEntity]
+    {
+        let sortedCategories = project.wrappedCategories.sorted
+        {
+            switch sortKey
+            {
+            case .title:
+                return $0.wrappedTitle < $1.wrappedTitle
+            case .lastUpdated:
+                return $0.wrappedDate > $1.wrappedDate
+            }
+        }
+        
+        if searchText.isEmpty
+        {
+            return sortedCategories
+        }
+        
+        switch sortKey
+        {
+            case .title:
+                return sortedCategories.filter
+                {
+                    $0.wrappedTitle.lowercased()
+                        .contains(searchText.lowercased())
+                }
+            case .lastUpdated:
+                return sortedCategories.filter
+                {
+                    $0.wrappedDate.lowercased()
+                        .contains(searchText.lowercased())
+            }
+        }
+    }
+    
     var body: some View
     {
         VStack
         {
-            DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+            HStack
+            {
+                VStack(alignment: .leading)
+                {
+                    DiscretePicker(displayText: "Sort by: ", selection: $sortKey, selectables: SortType.allCases, keyPath: \SortType.rawValue)
+                    
+                    DiscretePicker(displayText: "Project: ", selection: $project, selectables: sortedProjects, keyPath: \ProjectEntity.wrappedTitle)
+                }
+                
+                Spacer()
+            }
+            .padding(.leading)
             
             Spacer()
             
-            if project.wrappedCategories.isEmpty
+            if filteredCategories.isEmpty
             {
                 Text("No categories to show.")
+                    .foregroundColor(.secondary)
+                    .opacity(0.5)
+                
+                Spacer()
             }
             else
             {
                 List
                 {
-                    ForEach(project.wrappedCategories, id: \.id)
+                    ForEach(filteredCategories, id: \.id)
                     { category in
                         CategoryCellView(category: category)
                             .swipeActions(edge: .trailing)
@@ -97,10 +149,6 @@ struct CategoriesView: View
                 .padding()
                 .scrollContentBackground(.hidden)
             }
-            NavigationButton(text: "Return to Projects")
-            {
-                router.reset()
-            }
         }
         .background(NM_MAIN)
         .navigationTitle("Categories")
@@ -119,6 +167,15 @@ struct CategoriesView: View
                         Image(systemName: ADD_ICON)
                     }
                 }
+            }
+            
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                NeumorphicButton("Return to Projects")
+                {
+                    router.reset()
+                }
+                .padding(.bottom)
             }
         }
     }

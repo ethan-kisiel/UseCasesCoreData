@@ -41,9 +41,11 @@ struct ProjectCellView: View
                     {
                         Text(project.wrappedDescription)
                             .font(.caption)
+                            .foregroundColor(NM_SEC)
     
                         Text("**Last updated:** \(project.wrappedDate)")
                             .font(.caption)
+                            .foregroundColor(NM_SEC)
                     }
                 }
             }.background(NM_MAIN)

@@ -138,7 +138,12 @@ struct CategoryFieldsView: View {
         category.title = title
         category.desc = description
 
-        project!.addToCategories(category)
+        if let userId = UserInfoUtil.shared.getUserId()
+        {
+            category.createdBy = userId
+        }
+
+        project?.addToCategories(category)
 
         do
         {

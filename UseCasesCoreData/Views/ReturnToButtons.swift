@@ -15,14 +15,14 @@ struct ReturnToButtons: View
     {
         HStack
         {
-            NavigationButton(text: "Return to Project Categories")
-            {
-                router.goToCategories()
-            }
-
-            NavigationButton(text: "Return to Project List")
+            NeumorphicButton("Return to Projects")
             {
                 router.reset()
+            }
+
+            NeumorphicButton("Return to Categories")
+            {
+                router.goToCategories()
             }
         }
     }
