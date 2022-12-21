@@ -171,7 +171,7 @@ struct CategoriesView: View
             
             ToolbarItemGroup(placement: .bottomBar)
             {
-                NavigationButton(text: "Return to Projects")
+                NeumorphicButton("Return to Projects")
                 {
                     router.reset()
                 }

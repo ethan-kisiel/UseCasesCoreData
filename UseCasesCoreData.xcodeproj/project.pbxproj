@@ -10,7 +10,7 @@
 		882E2F1929280F6400109091 /* UseCasePriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882E2F1829280F6400109091 /* UseCasePriority.swift */; };
 		8831B0D229310ED0009B7EEF /* EntityIdUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831B0D129310ED0009B7EEF /* EntityIdUtil.swift */; };
 		883740982925541700492A07 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883740972925541700492A07 /* Router.swift */; };
-		8837409A292557A800492A07 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88374099292557A800492A07 /* NavigationButton.swift */; };
+		8837409A292557A800492A07 /* NeumorphicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88374099292557A800492A07 /* NeumorphicButton.swift */; };
 		883F448F2912A5C600284B2F /* UseCasesCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */; };
 		883F44932912A5C600284B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44922912A5C600284B2F /* Assets.xcassets */; };
 		883F44962912A5C600284B2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883F44952912A5C600284B2F /* Preview Assets.xcassets */; };
@@ -70,7 +70,7 @@
 		882E2F1829280F6400109091 /* UseCasePriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasePriority.swift; sourceTree = "<group>"; };
 		8831B0D129310ED0009B7EEF /* EntityIdUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIdUtil.swift; sourceTree = "<group>"; };
 		883740972925541700492A07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		88374099292557A800492A07 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
+		88374099292557A800492A07 /* NeumorphicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicButton.swift; sourceTree = "<group>"; };
 		883F448B2912A5C600284B2F /* UseCasesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883F448E2912A5C600284B2F /* UseCasesCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesCoreDataApp.swift; sourceTree = "<group>"; };
 		883F44922912A5C600284B2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 				883F44D62912D42800284B2F /* StepViews */,
 				88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */,
 				887B1B342937E0FF00203CB2 /* TextEditorWithFocus.swift */,
-				88374099292557A800492A07 /* NavigationButton.swift */,
+				88374099292557A800492A07 /* NeumorphicButton.swift */,
 				88D251FB293FC4C50045828D /* ReturnToButtons.swift */,
 				88EAB2C22942563A008F72FF /* DiscretePicker.swift */,
 			);
@@ -354,7 +354,7 @@
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
 				88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */,
-				8837409A292557A800492A07 /* NavigationButton.swift in Sources */,
+				8837409A292557A800492A07 /* NeumorphicButton.swift in Sources */,
 				88951D20291C1620007081D3 /* ProjectFieldsView.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,

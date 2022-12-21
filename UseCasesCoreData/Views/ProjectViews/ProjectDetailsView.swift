@@ -81,8 +81,16 @@ struct ProjectDetailsView: View
             }
             .padding()
 
-        Spacer()
-
+            Spacer()
+                
+            HStack
+            {
+                NeumorphicButton("Test", color: .blue)
+                {
+                    print("Test Pressed")
+                }
+                
+            }
         }
         .background(NM_MAIN)
         .navigationTitle("Project Details")
