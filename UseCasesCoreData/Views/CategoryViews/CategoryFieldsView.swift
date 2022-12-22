@@ -142,6 +142,10 @@ struct CategoryFieldsView: View {
         {
             category.createdBy = userId
         }
+        else
+        {
+            Log.warning("Failed to assign userId to Entity.createdBy field.")
+        }
 
         project?.addToCategories(category)
 
@@ -151,8 +155,7 @@ struct CategoryFieldsView: View {
         }
         catch
         {
-            print("UNABLE TO SAVE")
-            print(error.localizedDescription)
+            Log.error("Error raised trying to save new entity")
         }
     }
 
@@ -168,7 +171,7 @@ struct CategoryFieldsView: View {
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Error raised trying to update existing entity.")
         }
     }
 }

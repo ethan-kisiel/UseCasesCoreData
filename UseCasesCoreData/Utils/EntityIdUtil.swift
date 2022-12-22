@@ -41,7 +41,7 @@ class EntityIdUtil
         }
         catch
         {
-            print("failed to fetch \(T) ")
+            Log.error("Error raised trying to fetch \(T)")
         }
         
         switch T
