@@ -145,10 +145,6 @@ struct UseCaseFieldsView: View
             {
                 useCase.createdBy = userId
             }
-            else
-            {
-                Log.warning("Failed to assign userId to Entity.createdBy field.")
-            }
 
             category?.addToUseCases(useCase)
 
@@ -158,7 +154,7 @@ struct UseCaseFieldsView: View
             }
             catch
             {
-                Log.error("Error raised trying to save new entity")
+                print(error.localizedDescription)
             }
         }
     }
@@ -176,7 +172,7 @@ struct UseCaseFieldsView: View
         }
         catch
         {
-            Log.error("Error raised trying to update existing entity.")
+            print(error.localizedDescription)
         }
     }
 }

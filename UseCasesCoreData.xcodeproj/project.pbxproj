@@ -50,7 +50,6 @@
 		88EAB2C52948F9A0008F72FF /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2C42948F9A0008F72FF /* FilteredList.swift */; };
 		88EAB2C7294BC2D8008F72FF /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2C6294BC2D8008F72FF /* ProjectDetailsView.swift */; };
 		88EAB2CB294CF4B0008F72FF /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2CA294CF4B0008F72FF /* View+Extensions.swift */; };
-		88EAB2CF2954C2C1008F72FF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAB2CE2954C2C1008F72FF /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -113,7 +112,6 @@
 		88EAB2C42948F9A0008F72FF /* FilteredList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		88EAB2C6294BC2D8008F72FF /* ProjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsView.swift; sourceTree = "<group>"; };
 		88EAB2CA294CF4B0008F72FF /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		88EAB2CE2954C2C1008F72FF /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +167,6 @@
 				883F44A12912A60000284B2F /* DatabaseModels */,
 				8831B0D029310E9F009B7EEF /* Utils */,
 				88815D2F2914074B00B0CF40 /* Extensions */,
-				88EAB2CD2954C2AA008F72FF /* Logs */,
 				883F44942912A5C600284B2F /* Preview Content */,
 				882E2F1829280F6400109091 /* UseCasePriority.swift */,
 			);
@@ -222,8 +219,8 @@
 			children = (
 				883F44B92912D38A00284B2F /* ProjectCellView.swift */,
 				883F44BE2912D38B00284B2F /* ProjectsView.swift */,
-				88EAB2C6294BC2D8008F72FF /* ProjectDetailsView.swift */,
 				88951D1F291C1620007081D3 /* ProjectFieldsView.swift */,
+				88EAB2C6294BC2D8008F72FF /* ProjectDetailsView.swift */,
 			);
 			path = ProjectViews;
 			sourceTree = "<group>";
@@ -266,14 +263,6 @@
 				88EAB2CA294CF4B0008F72FF /* View+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		88EAB2CD2954C2AA008F72FF /* Logs */ = {
-			isa = PBXGroup;
-			children = (
-				88EAB2CE2954C2C1008F72FF /* Log.swift */,
-			);
-			path = Logs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,7 +364,6 @@
 				88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */,
 				883F44CD2912D38B00284B2F /* UseCasesView.swift in Sources */,
 				887B1B392938EBF600203CB2 /* UseCaseFieldsView.swift in Sources */,
-				88EAB2CF2954C2C1008F72FF /* Log.swift in Sources */,
 				88951CF4291587D3007081D3 /* UseCase+CoreDataClass.swift in Sources */,
 				883F44982912A5C600284B2F /* Persistence.swift in Sources */,
 				883F44C92912D38B00284B2F /* UseCaseCellView.swift in Sources */,

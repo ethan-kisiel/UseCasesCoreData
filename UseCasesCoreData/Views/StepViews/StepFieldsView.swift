@@ -130,37 +130,25 @@ struct StepFieldsView: View {
         withAnimation
         {
             let step = StepEntity(context: moc)
-            
             step.id = EntityIdUtil.shared
                 .getNewObjectId(StepEntity.self)
             
             step.dateCreated = Date()
-            
             step.lastUpdated = step.dateCreated
-            
-            step.title = title
-            
-            step.desc = description
-            
-            step.useCase = useCase
-            
-            if let userId = UserInfoUtil.shared.getUserId()
-            {
-                step.createdBy = userId
-            }
-            else
-            {
-                Log.warning("Failed to assign userId to Entity.createdBy field.")
-            }
 
-            do
-            {
-                try moc.save()
-            }
-            catch
-            {
-                Log.error("Error raised trying to save new entity")
-            }
+            step.title = title
+            step.desc = description
+       
+            step.useCase = useCase
+        }
+        
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error.localizedDescription)
         }
     }
     
@@ -177,7 +165,7 @@ struct StepFieldsView: View {
         }
         catch
         {
-            Log.error("Error raised trying to update existing entity.")
+            print(error.localizedDescription)
         }
     }
     

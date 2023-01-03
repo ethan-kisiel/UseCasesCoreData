@@ -33,11 +33,11 @@ class UserInfoUtil
                 if requestStatus == .granted
                 {
                     self?.hasPermission = true
-                    Log.info("Successfully granted iCloud permissions.")
+                    print("PERMISSION GRANTED")
                 }
                 else
                 {
-                    Log.error("Failed to grant iCloud permissions.")
+                    print("PERMISSION DENIED")
                 }
             }
         }
@@ -51,10 +51,6 @@ class UserInfoUtil
             {
                 self?.discoveriCloudUser(id)
             }
-            else
-            {
-                Log.warning("Failed to fetch User Record ID")
-            }
         }
     }
     
@@ -67,10 +63,6 @@ class UserInfoUtil
                 if let identity = requestIdentity
                 {
                     self?.userIdentity = identity
-                }
-                else
-                {
-                    Log.error("Failed to discover iCloud user.")
                 }
             }
         }
@@ -86,11 +78,10 @@ class UserInfoUtil
 
         if let userId = userIdentity?.userRecordID?.recordName
         {
+            print(userId)
             return userId
         }
-        
-        Log.error("Failed to retrieve user record ID")
-        
+        print("COULDN'T GET USER ID")
         return nil
     }
     
@@ -103,11 +94,10 @@ class UserInfoUtil
 
         if let userName = userIdentity?.nameComponents?.givenName
         {
+            print(userName)
             return userName
         }
-        
-        Log.warning("Failed to retrieve user given name.")
-        
+        print("COULDN'T GET USER NAME")
         return nil
     }
     
@@ -117,15 +107,20 @@ class UserInfoUtil
         {
             requestPermission()
         }
-        
-        if let userName = userIdentity?.nameComponents?.givenName,
-           let lastName = userIdentity?.nameComponents?.familyName
+        else
         {
-            return userName + " " + lastName
+            if let userName = userIdentity?.nameComponents?.givenName,
+               let lastName = userIdentity?.nameComponents?.familyName
+            {
+                return userName + " " + lastName
+            }
+            
+            return nil
         }
-        
-        Log.warning("Failed to retrieve user given or family name.")
-        
         return nil
     }
+   /* public func getUserStatus()
+    {
+        userIdentity.
+    }*/
 }

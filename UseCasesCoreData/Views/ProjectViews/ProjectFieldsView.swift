@@ -132,10 +132,6 @@ struct ProjectFieldsView: View
             {
                 project.createdBy = userId
             }
-            else
-            {
-                Log.warning("Failed to assign userId to Entity.createdBy field.")
-            }
 
             do
             {
@@ -143,7 +139,7 @@ struct ProjectFieldsView: View
             }
             catch
             {
-                Log.error("Error raised trying to save new entity")
+                print(error.localizedDescription)
             }
         }
     }
@@ -160,7 +156,7 @@ struct ProjectFieldsView: View
         }
         catch
         {
-            Log.error("Error raised trying to update existing entity.")
+            print(error.localizedDescription)
         }
     }
 }
