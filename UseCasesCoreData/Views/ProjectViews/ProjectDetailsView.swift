@@ -102,6 +102,7 @@ struct ProjectDetailsView: View
         .navigationTitle("Project Details")
     }
 }
+
 /*
 struct ProjectDetailsView_Previews: PreviewProvider {
     static var previews: some View {
