@@ -5,7 +5,7 @@ This app allows for the creation, reading, updating, organization, and deletion 
 
 ## Todo
 
-- ~~Add logging utility and logging statements~~
+- Add logging utility and logging statements
 
 - Add details views for all items
 
@@ -14,7 +14,3 @@ This app allows for the creation, reading, updating, organization, and deletion 
 - Add reactions to Comments
 
 - Add shared databases/project sharing functionality
-
-- Add launch screen
-
-- Convert main views to NavigationSplitView
