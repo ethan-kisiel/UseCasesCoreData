@@ -151,8 +151,7 @@ struct CategoryFieldsView: View {
         }
         catch
         {
-            print("UNABLE TO SAVE")
-            print(error.localizedDescription)
+            Log.error("Failed to save managed object context.")
         }
     }
 
@@ -168,7 +167,7 @@ struct CategoryFieldsView: View {
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Failed to save managed object context.")
         }
     }
 }

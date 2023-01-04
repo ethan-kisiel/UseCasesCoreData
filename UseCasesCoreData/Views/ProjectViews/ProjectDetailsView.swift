@@ -42,7 +42,8 @@ struct ProjectDetailsView: View
                     Text(project.wrappedTitle)
                         .bold()
                 }
-                .padding()
+                .padding(.leading)
+                .padding(.bottom, 5)
                 .font(.title)
                 .foregroundColor(NM_SEC)
                 
@@ -53,7 +54,7 @@ struct ProjectDetailsView: View
                         .bold()
                 }
                 .font(.headline)
-                .padding([.leading, .top])
+                .padding(.leading)
                 .foregroundColor(NM_SEC)
                 
                 if let userName = UserInfoUtil.shared.getUserFullName()
@@ -65,7 +66,7 @@ struct ProjectDetailsView: View
                             .bold()
                     }
                     .font(.headline)
-                    .padding([.leading, .top])
+                    .padding(.leading)
                     .foregroundColor(NM_SEC)
                 }
                 
@@ -76,26 +77,23 @@ struct ProjectDetailsView: View
                         .bold()
                 }
                 .font(.headline)
-                .padding([.leading, .top])
+                .padding(.leading)
                 .foregroundColor(NM_SEC)
             }
             .padding()
-
-            Spacer()
                 
             HStack
             {
                 NeumorphicButton("Edit", buttonColor: .blue, fontColor: NM_MAIN)
                 {
-                    print("Edit Pressed")
+                    Log.info("Edit button pressed.")
                 }
                 
                 NeumorphicButton("Delete", buttonColor: .red, fontColor: NM_MAIN)
                 {
-                    print("Delete Pressed")
+                    Log.info("Delete button pressed.")
                 }
             }
-            
             Spacer()
         }
         .background(NM_MAIN)

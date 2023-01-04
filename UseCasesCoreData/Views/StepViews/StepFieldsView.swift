@@ -148,7 +148,7 @@ struct StepFieldsView: View {
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Failed to save managed object context.")
         }
     }
     
@@ -165,7 +165,7 @@ struct StepFieldsView: View {
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Failed to save managed object context.")
         }
     }
     

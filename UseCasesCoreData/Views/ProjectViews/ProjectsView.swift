@@ -71,7 +71,6 @@ struct ProjectsView: View
     
     var body: some View
     {
-        
         VStack
         {
             HStack
@@ -101,15 +100,15 @@ struct ProjectsView: View
                     {
                         project in
                         ProjectCellView(project: project)
-                            .swipeActions(edge: .trailing)
+                        .swipeActions(edge: .trailing)
                         {
-                            Button("Delete")
+                            Button("Delete", role: .destructive)
                             {
                                 isDeletePresented = true
                                 projectToDelete = project
                             }
                         }.tint(.red)
-                        .alert(isPresented: $isDeletePresented)
+                            .alert(isPresented: $isDeletePresented)
                         {
                             Alert(
                                 title: Text("Do you wish to delete this project?"),

@@ -154,7 +154,7 @@ struct UseCaseFieldsView: View
             }
             catch
             {
-                print(error.localizedDescription)
+                Log.error("Failed to save managed object context.")
             }
         }
     }
@@ -172,7 +172,7 @@ struct UseCaseFieldsView: View
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Failed to save managed object context.")
         }
     }
 }
