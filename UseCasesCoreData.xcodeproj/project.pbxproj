@@ -45,6 +45,11 @@
 		88951D20291C1620007081D3 /* ProjectFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1F291C1620007081D3 /* ProjectFieldsView.swift */; };
 		88B089122964AE78007A1912 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B089112964AE78007A1912 /* Launch Screen.storyboard */; };
 		88B089152965DE18007A1912 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B089142965DE18007A1912 /* Log.swift */; };
+		88B08918296884A4007A1912 /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B08917296884A4007A1912 /* CommentCellView.swift */; };
+		88B0891A296884B9007A1912 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B08919296884B9007A1912 /* CommentsView.swift */; };
+		88B0891C296884CF007A1912 /* CommentsCollapsedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0891B296884CF007A1912 /* CommentsCollapsedView.swift */; };
+		88B0891E29688A8F007A1912 /* CommentTextBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0891D29688A8F007A1912 /* CommentTextBoxView.swift */; };
+		88B089202968A890007A1912 /* NeumorphicTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */; };
 		88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */; };
 		88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */; };
 		88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D251FB293FC4C50045828D /* ReturnToButtons.swift */; };
@@ -109,6 +114,11 @@
 		889794532926DC3E0026A196 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88B089112964AE78007A1912 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		88B089142965DE18007A1912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		88B08917296884A4007A1912 /* CommentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellView.swift; sourceTree = "<group>"; };
+		88B08919296884B9007A1912 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		88B0891B296884CF007A1912 /* CommentsCollapsedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsCollapsedView.swift; sourceTree = "<group>"; };
+		88B0891D29688A8F007A1912 /* CommentTextBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextBoxView.swift; sourceTree = "<group>"; };
+		88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicTextBox.swift; sourceTree = "<group>"; };
 		88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88D251FB293FC4C50045828D /* ReturnToButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToButtons.swift; sourceTree = "<group>"; };
@@ -207,6 +217,7 @@
 		883F44B82912C1D100284B2F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88B0891629688048007A1912 /* CommentViews */,
 				883F44D12912D3A100284B2F /* ProjectViews */,
 				883F44D22912D3DB00284B2F /* CategoryViews */,
 				883F44D32912D3F600284B2F /* UseCaseViews */,
@@ -216,6 +227,7 @@
 				88374099292557A800492A07 /* NeumorphicButton.swift */,
 				88D251FB293FC4C50045828D /* ReturnToButtons.swift */,
 				88EAB2C22942563A008F72FF /* DiscretePicker.swift */,
+				88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,6 +289,17 @@
 				88B089142965DE18007A1912 /* Log.swift */,
 			);
 			path = Logs;
+			sourceTree = "<group>";
+		};
+		88B0891629688048007A1912 /* CommentViews */ = {
+			isa = PBXGroup;
+			children = (
+				88B08917296884A4007A1912 /* CommentCellView.swift */,
+				88B08919296884B9007A1912 /* CommentsView.swift */,
+				88B0891D29688A8F007A1912 /* CommentTextBoxView.swift */,
+				88B0891B296884CF007A1912 /* CommentsCollapsedView.swift */,
+			);
+			path = CommentViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +386,7 @@
 				88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */,
 				883F44B52912B76C00284B2F /* Category+CoreDataProperties.swift in Sources */,
 				883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */,
+				88B089202968A890007A1912 /* NeumorphicTextBox.swift in Sources */,
 				883740982925541700492A07 /* Router.swift in Sources */,
 				887B1B3B2939055D00203CB2 /* StepFieldsView.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
@@ -371,6 +395,7 @@
 				88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */,
 				8837409A292557A800492A07 /* NeumorphicButton.swift in Sources */,
 				88951D20291C1620007081D3 /* ProjectFieldsView.swift in Sources */,
+				88B0891C296884CF007A1912 /* CommentsCollapsedView.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,
 				883F44C82912D38B00284B2F /* CategoryCellView.swift in Sources */,
@@ -385,10 +410,13 @@
 				883F44C92912D38B00284B2F /* UseCaseCellView.swift in Sources */,
 				88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */,
 				887B1B352937E0FF00203CB2 /* TextEditorWithFocus.swift in Sources */,
+				88B0891A296884B9007A1912 /* CommentsView.swift in Sources */,
 				887B1B37293803F900203CB2 /* CategoryFieldsView.swift in Sources */,
+				88B0891E29688A8F007A1912 /* CommentTextBoxView.swift in Sources */,
 				88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */,
 				88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,
+				88B08918296884A4007A1912 /* CommentCellView.swift in Sources */,
 				88EAB2C52948F9A0008F72FF /* FilteredList.swift in Sources */,
 				88815D312914077E00B0CF40 /* String+Extensions.swift in Sources */,
 				883F44CE2912D38B00284B2F /* StepsView.swift in Sources */,

@@ -22,6 +22,8 @@ struct ProjectDetailsView: View
         }
     }
     
+    @FocusState var isFocused: Bool
+    @State var commentText: String = EMPTY_STRING
     var body: some View
     {
         VStack(alignment: .leading)
@@ -81,7 +83,7 @@ struct ProjectDetailsView: View
                 .foregroundColor(NM_SEC)
             }
             .padding()
-                
+
             HStack
             {
                 NeumorphicButton("Edit", buttonColor: .blue, fontColor: NM_MAIN)
@@ -98,6 +100,26 @@ struct ProjectDetailsView: View
         }
         .background(NM_MAIN)
         .navigationTitle("Project Details")
+        .toolbar
+        {
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                NeumorphicTextBox("Add a comment",
+                                 text: $commentText,
+                                 isFocused: $isFocused)
+            }
+            ToolbarItemGroup(placement: .keyboard)
+            {
+                NeumorphicTextBox("Add a comment",
+                                 text: $commentText,
+                                 isFocused: $isFocused)
+                .frame(height: 50)
+            }
+        }
+        .onTapGesture
+        {
+            isFocused = false
+        }
     }
 }
 /*
