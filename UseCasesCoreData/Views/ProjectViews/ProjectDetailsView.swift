@@ -108,10 +108,13 @@ struct ProjectDetailsView: View
         }
         .sheet(isPresented: $areCommentsExpanded)
         {
-            NM_MAIN.edgesIgnoringSafeArea(.all)
             NavigationView
             {
-                CommentsView(isExpanded: $areCommentsExpanded, isFocused: $isCommentBoxFocused)
+                ZStack
+                {
+                    NM_MAIN.edgesIgnoringSafeArea(.all)
+                    CommentsView(isExpanded: $areCommentsExpanded, isFocused: $isCommentBoxFocused)
+                }
             }
             .presentationDetents([.medium])
         }
