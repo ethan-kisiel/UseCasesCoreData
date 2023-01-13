@@ -155,7 +155,6 @@ struct ProjectsView: View
             }
             
             Spacer()
-            
         }
         .navigationTitle("Projects")
         .navigationBarTitleDisplayMode(.inline)

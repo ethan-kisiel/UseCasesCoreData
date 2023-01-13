@@ -22,8 +22,9 @@ struct ProjectDetailsView: View
         }
     }
     
-    @FocusState var isFocused: Bool
-    @State var commentText: String = EMPTY_STRING
+    @FocusState var isCommentBoxFocused: Bool
+    @State var areCommentsExpanded: Bool = false
+    
     var body: some View
     {
         VStack(alignment: .leading)
@@ -96,29 +97,30 @@ struct ProjectDetailsView: View
                     Log.info("Delete button pressed.")
                 }
             }
+            
             Spacer()
+            
+            NeumorphicButton("Add a comment...")
+            {
+                areCommentsExpanded = true
+                $isCommentBoxFocused.wrappedValue = true
+            }
+        }
+        .sheet(isPresented: $areCommentsExpanded)
+        {
+            NM_MAIN.edgesIgnoringSafeArea(.all)
+            NavigationView
+            {
+                CommentsView(isExpanded: $areCommentsExpanded, isFocused: $isCommentBoxFocused)
+            }
+            .presentationDetents([.medium])
         }
         .background(NM_MAIN)
         .navigationTitle("Project Details")
-        .toolbar
-        {
-            ToolbarItemGroup(placement: .bottomBar)
-            {
-                NeumorphicTextBox("Add a comment",
-                                 text: $commentText,
-                                 isFocused: $isFocused)
-            }
-            ToolbarItemGroup(placement: .keyboard)
-            {
-                NeumorphicTextBox("Add a comment",
-                                 text: $commentText,
-                                 isFocused: $isFocused)
-                .frame(height: 50)
-            }
-        }
         .onTapGesture
         {
-            isFocused = false
+            isCommentBoxFocused = false
+            areCommentsExpanded = false
         }
     }
 }

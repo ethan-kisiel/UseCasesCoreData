@@ -23,6 +23,8 @@ extension BaseModelEntity {
     @NSManaged public var desc: String?
     @NSManaged public var createdBy: String?
     
+    @NSManaged public var comments: NSSet?
+    
     
     var wrappedTitle: String
     {

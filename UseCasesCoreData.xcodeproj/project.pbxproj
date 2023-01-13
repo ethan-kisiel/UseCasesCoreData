@@ -47,9 +47,10 @@
 		88B089152965DE18007A1912 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B089142965DE18007A1912 /* Log.swift */; };
 		88B08918296884A4007A1912 /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B08917296884A4007A1912 /* CommentCellView.swift */; };
 		88B0891A296884B9007A1912 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B08919296884B9007A1912 /* CommentsView.swift */; };
-		88B0891C296884CF007A1912 /* CommentsCollapsedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0891B296884CF007A1912 /* CommentsCollapsedView.swift */; };
-		88B0891E29688A8F007A1912 /* CommentTextBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0891D29688A8F007A1912 /* CommentTextBoxView.swift */; };
 		88B089202968A890007A1912 /* NeumorphicTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */; };
+		88B0892B296DDA79007A1912 /* CommentEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B08929296DDA79007A1912 /* CommentEntity+CoreDataClass.swift */; };
+		88B0892C296DDA79007A1912 /* CommentEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0892A296DDA79007A1912 /* CommentEntity+CoreDataProperties.swift */; };
+		88B0892E296DDD82007A1912 /* CommentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0892D296DDD82007A1912 /* CommentsListView.swift */; };
 		88B9FD40292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */; };
 		88B9FD41292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */; };
 		88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D251FB293FC4C50045828D /* ReturnToButtons.swift */; };
@@ -116,9 +117,10 @@
 		88B089142965DE18007A1912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		88B08917296884A4007A1912 /* CommentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellView.swift; sourceTree = "<group>"; };
 		88B08919296884B9007A1912 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
-		88B0891B296884CF007A1912 /* CommentsCollapsedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsCollapsedView.swift; sourceTree = "<group>"; };
-		88B0891D29688A8F007A1912 /* CommentTextBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextBoxView.swift; sourceTree = "<group>"; };
 		88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicTextBox.swift; sourceTree = "<group>"; };
+		88B08929296DDA79007A1912 /* CommentEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		88B0892A296DDA79007A1912 /* CommentEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		88B0892D296DDD82007A1912 /* CommentsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsListView.swift; sourceTree = "<group>"; };
 		88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88D251FB293FC4C50045828D /* ReturnToButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToButtons.swift; sourceTree = "<group>"; };
@@ -200,6 +202,8 @@
 		883F44A12912A60000284B2F /* DatabaseModels */ = {
 			isa = PBXGroup;
 			children = (
+				88B08929296DDA79007A1912 /* CommentEntity+CoreDataClass.swift */,
+				88B0892A296DDA79007A1912 /* CommentEntity+CoreDataProperties.swift */,
 				88B9FD3E292E7A6100A4EA9E /* BaseModelEntity+CoreDataClass.swift */,
 				88B9FD3F292E7A6100A4EA9E /* BaseModelEntity+CoreDataProperties.swift */,
 				88951CF2291587D3007081D3 /* UseCase+CoreDataClass.swift */,
@@ -296,8 +300,7 @@
 			children = (
 				88B08917296884A4007A1912 /* CommentCellView.swift */,
 				88B08919296884B9007A1912 /* CommentsView.swift */,
-				88B0891D29688A8F007A1912 /* CommentTextBoxView.swift */,
-				88B0891B296884CF007A1912 /* CommentsCollapsedView.swift */,
+				88B0892D296DDD82007A1912 /* CommentsListView.swift */,
 			);
 			path = CommentViews;
 			sourceTree = "<group>";
@@ -384,18 +387,20 @@
 				883F44B32912B76C00284B2F /* Step+CoreDataProperties.swift in Sources */,
 				885289DB293A769C00C115B9 /* UserInfoUtil.swift in Sources */,
 				88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */,
+				88B0892E296DDD82007A1912 /* CommentsListView.swift in Sources */,
 				883F44B52912B76C00284B2F /* Category+CoreDataProperties.swift in Sources */,
 				883F44C52912D38B00284B2F /* ProjectCellView.swift in Sources */,
 				88B089202968A890007A1912 /* NeumorphicTextBox.swift in Sources */,
 				883740982925541700492A07 /* Router.swift in Sources */,
 				887B1B3B2939055D00203CB2 /* StepFieldsView.swift in Sources */,
+				88B0892B296DDA79007A1912 /* CommentEntity+CoreDataClass.swift in Sources */,
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
 				88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */,
+				88B0892C296DDA79007A1912 /* CommentEntity+CoreDataProperties.swift in Sources */,
 				8837409A292557A800492A07 /* NeumorphicButton.swift in Sources */,
 				88951D20291C1620007081D3 /* ProjectFieldsView.swift in Sources */,
-				88B0891C296884CF007A1912 /* CommentsCollapsedView.swift in Sources */,
 				883F44B22912B76C00284B2F /* Step+CoreDataClass.swift in Sources */,
 				883F44B72912B76C00284B2F /* Project+CoreDataProperties.swift in Sources */,
 				883F44C82912D38B00284B2F /* CategoryCellView.swift in Sources */,
@@ -412,7 +417,6 @@
 				887B1B352937E0FF00203CB2 /* TextEditorWithFocus.swift in Sources */,
 				88B0891A296884B9007A1912 /* CommentsView.swift in Sources */,
 				887B1B37293803F900203CB2 /* CategoryFieldsView.swift in Sources */,
-				88B0891E29688A8F007A1912 /* CommentTextBoxView.swift in Sources */,
 				88951CF5291587D3007081D3 /* UseCase+CoreDataProperties.swift in Sources */,
 				88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */,
 				883F44CA2912D38B00284B2F /* ProjectsView.swift in Sources */,

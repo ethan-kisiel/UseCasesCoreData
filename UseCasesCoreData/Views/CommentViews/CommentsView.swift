@@ -9,24 +9,51 @@ import SwiftUI
 
 struct CommentsView: View
 {
-    @FocusState var isFocused: Bool
+    @Binding var isExpanded: Bool
+    var isFocused: FocusState<Bool>.Binding
     @State var commentText: String = EMPTY_STRING
     
     var body: some View
     {
         VStack
         {
-            // List of comments for the given item
-            
-            // Toolbar keyboard item text box
+            Text("List View")
         }
-        /*.toolbar
+        .onTapGesture
         {
-            ToolbarItemGroup(placement: isFocused ? .keyboard : .bottomBar)
+            isFocused.wrappedValue = false
+        }
+        .background(NM_MAIN)
+        .toolbar
+        {
+            if isExpanded
             {
-                CommentTextBoxView(isFocused: $isFocused)
+                if !isFocused.wrappedValue
+                {
+                    ToolbarItemGroup(placement: .bottomBar)
+                    {
+                        NeumorphicTextBox("Add a comment",
+                                          text: $commentText,
+                                          isFocused: isFocused)
+                        .frame(height: 50)
+                    }
+                }
+                
+                ToolbarItemGroup(placement: .keyboard)
+                {
+                    HStack
+                    {
+                        NeumorphicTextBox("Add a comment",
+                                          text: $commentText,
+                                          isFocused: isFocused)
+                        .frame(height: 50)
+                        
+                        Image(systemName: "paperplane")
+                            .foregroundColor(commentText.isEmpty ? .gray : .white)
+                    }
+                }
             }
-        }*/
+        }
     }
 }
 
@@ -34,6 +61,7 @@ struct CommentsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        CommentsView()
+        Text("Comments Preview")
+        //CommentsView()
     }
 }

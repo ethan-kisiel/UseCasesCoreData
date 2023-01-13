@@ -9,9 +9,17 @@ import SwiftUI
 
 struct CommentCellView: View
 {
+    let comment: CommentEntity
     var body: some View
     {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack
+        {
+            // display username
+            HStack
+            {
+                Text("\(comment.wrappedCreatedBy)")
+            }
+        }
     }
 }
 
@@ -19,6 +27,6 @@ struct CommentCellView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        CommentCellView()
+        CommentCellView(comment: CommentEntity())
     }
 }
