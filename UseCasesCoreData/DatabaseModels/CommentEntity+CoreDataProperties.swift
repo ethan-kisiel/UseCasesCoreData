@@ -25,6 +25,11 @@ extension CommentEntity {
     {
         createdBy ?? "No User"
     }
+    
+    var wrappedText: String
+    {
+        commentText ?? EMPTY_STRING
+    }
 }
 
 extension CommentEntity : Identifiable {

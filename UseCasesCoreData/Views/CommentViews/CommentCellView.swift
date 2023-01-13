@@ -12,13 +12,16 @@ struct CommentCellView: View
     let comment: CommentEntity
     var body: some View
     {
-        VStack
+        VStack(alignment: .leading)
         {
             // display username
             HStack
             {
-                Text("\(comment.wrappedCreatedBy)")
+                Text(comment.wrappedCreatedBy)
+                    .font(.caption)
             }
+            
+            Text(comment.wrappedText)
         }
     }
 }

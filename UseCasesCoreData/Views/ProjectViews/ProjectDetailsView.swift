@@ -113,7 +113,11 @@ struct ProjectDetailsView: View
                 ZStack
                 {
                     NM_MAIN.edgesIgnoringSafeArea(.all)
-                    CommentsView(isExpanded: $areCommentsExpanded, isFocused: $isCommentBoxFocused)
+                    CommentsView(
+                        isExpanded: $areCommentsExpanded,
+                        parentObject: project,
+                        isFocused: $isCommentBoxFocused
+                    )
                 }
             }
             .presentationDetents([.medium])

@@ -6,18 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CommentsView: View
 {
+    @Environment(\.managedObjectContext) var moc
+    
     @Binding var isExpanded: Bool
-    var isFocused: FocusState<Bool>.Binding
+    
     @State var commentText: String = EMPTY_STRING
+    
+    let parentObject: BaseModelEntity
+    
+    var isFocused: FocusState<Bool>.Binding
     
     var body: some View
     {
         VStack
         {
-            Text("List View")
+            CommentsListView(parentObject: parentObject)
         }
         .onTapGesture
         {
@@ -50,10 +57,43 @@ struct CommentsView: View
                         
                         Image(systemName: "paperplane")
                             .foregroundColor(commentText.isEmpty ? .gray : .white)
+                            .onTapGesture
+                            {
+                                if !commentText.isEmpty
+                                {
+                                    if saveComment()
+                                    {
+                                        commentText = EMPTY_STRING
+                                        isFocused.wrappedValue = false
+                                    }
+                                }
+                            }
                     }
                 }
             }
         }
+    }
+    
+    private func saveComment() -> Bool
+    {
+        let comment = CommentEntity(context: moc)
+        
+        comment.createdBy = UserInfoUtil.shared.getUserFullName()
+        comment.commentText = commentText
+        
+        parentObject.addToComments(comment)
+        
+        do
+        {
+            try moc.save()
+            return true
+        }
+        catch
+        {
+            Log.error("Failed to save new comment.")
+        }
+        
+        return false
     }
 }
 
