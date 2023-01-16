@@ -38,7 +38,8 @@ struct UseCasesCoreDataApp: App
     @State private var hasLoaded = false
     
     let persistenceController = PersistenceController.shared
-     @StateObject var router: Router = Router()
+    
+    @StateObject var router: Router = Router()
     
     var body: some Scene
     {
@@ -120,55 +121,7 @@ struct UseCasesCoreDataApp: App
             .onOpenURL
             { url in
                 router.reset()
-                handleUrl(url)
-            }
-        }
-    }
-
-    private func handleUrl(_ url: URL)
-    {
-        // This function takes a url comprised of UUID Strings
-        // it parses the url.host first, which will be a project (subject to change)
-        // it then parses any element left.
-        // The order of these elements is as follows: CategoryID/UseCaseID/StepID.
-        // in parsing each element, the function attempts to retrieve
-        // a CoreData object Model using the given uuidString and will either
-        // return if no object is able to be retrieved, or appends the Route.option(object)
-        // where option is one of the members of the Route Enum and object is the retrieved object
-
-        let moc = persistenceController.container.viewContext
-        if let project = ModelGetter<ProjectEntity>(moc: moc)
-            .getModelById(url.host!)
-        {
-            router.path.append(Route.project(project))
-        }
-        else { return }
-        let pathCount = url.pathComponents.count
-        if pathCount != 0
-        {
-            for index in 1 ..< pathCount
-            {
-                let currentItem = url.pathComponents[index]
-                switch index
-                {
-                case 1:
-                    guard let category = ModelGetter<CategoryEntity>(moc: moc)
-                        .getModelById(currentItem)
-                    else { return }
-                    router.path.append(Route.category(category))
-                case 2:
-                    guard let useCase = ModelGetter<UseCaseEntity>(moc: moc)
-                        .getModelById(currentItem)
-                    else { return }
-                    router.path.append(Route.useCase(useCase))
-                case 3:
-                    guard let step = ModelGetter<StepEntity>(moc: moc)
-                        .getModelById(currentItem)
-                    else { return }
-                    router.path.append(Route.step(step))
-                default:
-                    return
-                }
+                router.handleUrl(url)
             }
         }
     }
