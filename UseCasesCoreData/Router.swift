@@ -32,12 +32,18 @@ class Router: ObservableObject
      object. Cascading up will always be the parent entity, while
      cascading down will alawys result in the first element of each
      object's children.
-    
+     
      Project will always cascade down and Step will always cascade
      down.
-    */
-
+     */
+    
     // conversion of target path to url
+    
+    public func updateTargetPath(object: BaseModelEntity)
+    {
+        
+    }
+    
     private func convertTargetPathToURL() -> URL?
     {
         var components = URLComponents()
@@ -136,6 +142,28 @@ class Router: ObservableObject
                     return
                 }
             }
+        }
+    }
+    
+    private func populateDown<Model: BaseModelEntity>
+    (object: Model)
+    {
+    }
+    private func populateUp<Model: BaseModelEntity>
+    (object: Model)
+    {
+        switch type(of: object)
+        {
+        case is ProjectEntity.Type:
+            Log.info("Project")
+        case is CategoryEntity.Type:
+            Log.info("Category")
+        case is UseCaseEntity.Type:
+            Log.info("UseCase")
+        case is StepEntity.Type:
+            Log.info("Step")
+        default:
+            Log.info("Default")
         }
     }
 }

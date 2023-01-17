@@ -226,12 +226,7 @@
 				883F44D22912D3DB00284B2F /* CategoryViews */,
 				883F44D32912D3F600284B2F /* UseCaseViews */,
 				883F44D62912D42800284B2F /* StepViews */,
-				88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */,
-				887B1B342937E0FF00203CB2 /* TextEditorWithFocus.swift */,
-				88374099292557A800492A07 /* NeumorphicButton.swift */,
-				88D251FB293FC4C50045828D /* ReturnToButtons.swift */,
-				88EAB2C22942563A008F72FF /* DiscretePicker.swift */,
-				88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */,
+				88E86EA729772C2500CD2387 /* Miscellaneous */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +298,19 @@
 				88B0892D296DDD82007A1912 /* CommentsListView.swift */,
 			);
 			path = CommentViews;
+			sourceTree = "<group>";
+		};
+		88E86EA729772C2500CD2387 /* Miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */,
+				887B1B342937E0FF00203CB2 /* TextEditorWithFocus.swift */,
+				88374099292557A800492A07 /* NeumorphicButton.swift */,
+				88D251FB293FC4C50045828D /* ReturnToButtons.swift */,
+				88EAB2C22942563A008F72FF /* DiscretePicker.swift */,
+				88B0891F2968A890007A1912 /* NeumorphicTextBox.swift */,
+			);
+			path = Miscellaneous;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
