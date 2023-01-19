@@ -117,11 +117,13 @@ struct UseCasesCoreDataApp: App
                     
                     UserInfoUtil.shared.requestPermission()
                 }
+                
+                
             }
             .onOpenURL
             { url in
                 router.reset()
-                router.handleUrl(url)
+                router.routeByUrl(url)
             }
         }
     }

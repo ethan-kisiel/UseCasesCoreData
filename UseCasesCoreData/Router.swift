@@ -20,7 +20,13 @@ class Router: ObservableObject
     
     @Published var path: [Route] = []
     
-    private var targetPath: [Int64] = []
+    // target path is a dictionary, whose values are the
+    // id's of the object each key represents. Initialize to -1
+    // to make sure it initializes as "empty"
+    
+    private var targetPath: [String: Int64] =
+    ["project" : -1, "category" : -1,
+     "useCase" : -1, "step" : -1]
     
     // initialize target path to use the first item in every
     // category
@@ -39,32 +45,30 @@ class Router: ObservableObject
     
     // conversion of target path to url
     
-    public func updateTargetPath(object: BaseModelEntity)
+    public func updateTargetPath(_ object: BaseModelEntity)
     {
-        
+        populateUp(object)
+        populateDown(object)
     }
     
-    private func convertTargetPathToURL() -> URL?
+    // MARK: This needs to take some kind of information about
+    // the current level user wishes to navigate to...
+    // ie Project, Category, Use Case, Step
+    private func routeByTargetPath()
     {
         var components = URLComponents()
-        // return empty url i
-        if targetPath.count < 1
-        {
-            return nil
-        }
-        // since targetPath.count is > 0, there is a project
-        components.host = String(targetPath[0])
+        // return the URL for the current targetPath
         
-        if targetPath.count > 1
+        if let url = components.url
         {
-            for i in 1..<targetPath.count
-            {
-                components.path.append("/\(targetPath[i])")
-            }
+            self.routeByUrl(url)
         }
-        
-        return components.url
+        else
+        {
+            Log.warning("Failed to produce valid url.")
+        }
     }
+    
     
     func lastPage()
     {
@@ -93,7 +97,7 @@ class Router: ObservableObject
         }
     }
     
-    public func handleUrl(_ url: URL)
+    public func routeByUrl(_ url: URL)
     {
         // This function takes a url comprised of UUID Strings
         // it parses the url.host first, which will be a project (subject to change)
@@ -145,25 +149,82 @@ class Router: ObservableObject
         }
     }
     
+    // recursive functions for setting the
+    // targetPath
+
     private func populateDown<Model: BaseModelEntity>
-    (object: Model)
-    {
-    }
-    private func populateUp<Model: BaseModelEntity>
-    (object: Model)
+    (_ object: Model)
     {
         switch type(of: object)
         {
         case is ProjectEntity.Type:
-            Log.info("Project")
+            targetPath["project"] = object.id
+            let project = object as? ProjectEntity
+            if let category = project?.wrappedCategories[0]
+            {
+                populateDown(category)
+            }
+
         case is CategoryEntity.Type:
-            Log.info("Category")
+            targetPath["category"] = object.id
+            let category = object as? CategoryEntity
+            if let useCase = category?.wrappedUseCases[0]
+            {
+                populateDown(useCase)
+            }
+
         case is UseCaseEntity.Type:
-            Log.info("UseCase")
+            targetPath["useCase"] = object.id
+            let useCase = object as? UseCaseEntity
+            if let step = useCase?.wrappedSteps[0]
+            {
+                populateDown(step)
+            }
         case is StepEntity.Type:
-            Log.info("Step")
+            // exit case for recursion
+            targetPath["step"] = object.id
+
         default:
-            Log.info("Default")
+            Log.warning("Reached end of Switch.")
+        }
+    }
+    
+    private func populateUp<Model: BaseModelEntity>
+    (_ object: Model)
+    {
+        switch type(of: object)
+        {
+        case is ProjectEntity.Type:
+            // Base case, end of recursion
+            targetPath["project"] = object.id
+
+        case is CategoryEntity.Type:
+            targetPath["category"] = object.id
+            let category = object as? CategoryEntity
+            if let project = category?.project
+            {
+                populateUp(project)
+            }
+
+        case is UseCaseEntity.Type:
+            targetPath["useCase"] = object.id
+            let useCase = object as? UseCaseEntity
+            if let category = useCase?.category
+            {
+                populateUp(category)
+            }
+
+        case is StepEntity.Type:
+            targetPath["step"] = object.id
+            let step = object as? StepEntity
+            if let useCase = step?.useCase
+            {
+                populateUp(useCase)
+            }
+            
+
+        default:
+            Log.warning("Reached end of Switch.")
         }
     }
 }
