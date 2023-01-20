@@ -8,6 +8,15 @@
 import Foundation
 import SwiftUI
 
+enum ObjectIndex: Int
+{
+    case Project = 0
+    case Category = 1
+    case UseCase = 2
+    case Step = 3
+}
+
+
 class Router: ObservableObject
 {
     // this class houses the navigation path
@@ -54,10 +63,29 @@ class Router: ObservableObject
     // MARK: This needs to take some kind of information about
     // the current level user wishes to navigate to...
     // ie Project, Category, Use Case, Step
-    private func routeByTargetPath()
+    private func routeByTargetPath(toObject: ObjectIndex)
     {
         var components = URLComponents()
         // return the URL for the current targetPath
+        components.host = String(describing: targetPath["project"])
+        
+        for index in 0...toObject.rawValue
+        {
+            switch index
+            {
+            case ObjectIndex.Category.rawValue:
+                components.path.append("/\(String(describing: targetPath["category"]))")
+
+            case ObjectIndex.UseCase.rawValue:
+                components.path.append("/\(String(describing: targetPath["useCase"]))")
+
+            case ObjectIndex.Step.rawValue:
+                components.path.append("/\(String(describing: targetPath["step"]))")
+            
+            default:
+                Log.warning("Reached end of switch.")
+            }
+        }
         
         if let url = components.url
         {
