@@ -60,27 +60,31 @@ class Router: ObservableObject
         populateDown(object)
     }
     
-    // MARK: This needs to take some kind of information about
-    // the current level user wishes to navigate to...
-    // ie Project, Category, Use Case, Step
-    private func routeByTargetPath(toObject: ObjectIndex)
+    // Takes an enum that represents the index
+    // which the for loop will end on.
+    // the enum is purely to make the input value
+    // easier to read/understand
+    public func routeByTargetPath(_ toObject: ObjectIndex)
     {
         var components = URLComponents()
         // return the URL for the current targetPath
         components.host = String(describing: targetPath["project"])
         
-        for index in 0...toObject.rawValue
+        for index in 1...toObject.rawValue
         {
             switch index
             {
             case ObjectIndex.Category.rawValue:
                 components.path.append("/\(String(describing: targetPath["category"]))")
+                Log.info("AddedCategoryToPath")
 
             case ObjectIndex.UseCase.rawValue:
                 components.path.append("/\(String(describing: targetPath["useCase"]))")
+                Log.info("AddedUseCaseToPath")
 
             case ObjectIndex.Step.rawValue:
                 components.path.append("/\(String(describing: targetPath["step"]))")
+                Log.info("AddedStepToPath")
             
             default:
                 Log.warning("Reached end of switch.")
@@ -143,7 +147,11 @@ class Router: ObservableObject
         {
             path.append(Route.project(project))
         }
-        else { return }
+        else
+        {
+            Log.warning("Failed to route url Project")
+            return
+        }
         let pathCount = url.pathComponents.count
         if pathCount != 0
         {
@@ -155,21 +163,40 @@ class Router: ObservableObject
                 // if the id at the current index corresponds
                 // to a valid object, add it to path
                 // else, return.
+                    
+                // CASE: Route to Category
                 case 1:
                     guard let category = ModelGetter<CategoryEntity>(moc: moc)
                         .getModelById(currentItem)
-                    else { return }
+                    else
+                    {
+                        Log.warning("Failed to route url Category")
+                        return
+                    }
                     path.append(Route.category(category))
+
+                // CASE: Route to UseCase
                 case 2:
                     guard let useCase = ModelGetter<UseCaseEntity>(moc: moc)
                         .getModelById(currentItem)
-                    else { return }
+                    else
+                    {
+                        Log.warning("Failed to route url Use Case")
+                        return
+                    }
                     path.append(Route.useCase(useCase))
+                    
+                // CASE: Route to Step
                 case 3:
                     guard let step = ModelGetter<StepEntity>(moc: moc)
                         .getModelById(currentItem)
-                    else { return }
+                    else
+                    {
+                        Log.warning("Failed to route url Step")
+                        return
+                    }
                     path.append(Route.step(step))
+
                 default:
                     return
                 }

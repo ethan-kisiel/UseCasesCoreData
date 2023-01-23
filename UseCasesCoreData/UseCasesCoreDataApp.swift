@@ -37,9 +37,9 @@ struct UseCasesCoreDataApp: App
     // hack for getting permission when app loads
     @State private var hasLoaded = false
     
-    let persistenceController = PersistenceController.shared
-    
     @StateObject var router: Router = Router()
+    
+    let persistenceController = PersistenceController.shared
     
     var body: some Scene
     {
@@ -116,9 +116,36 @@ struct UseCasesCoreDataApp: App
                     hasLoaded = true
                     
                     UserInfoUtil.shared.requestPermission()
+                    
+                    // This creates a fetch request for projects,
+                    // then sends the first instance of the returned
+                    // [ProjectEntity] and uses that object to
+                    // populate the router's targetPath variable
+                    
+                    let request: NSFetchRequest<ProjectEntity> = ProjectEntity.fetchRequest()
+                    
+                    do
+                    {
+                        let result =  try persistenceController
+                            .container.viewContext
+                            .fetch(request)
+                        
+                        
+                        if let firstProject = result.first
+                        {
+                            router.updateTargetPath(firstProject)
+                        }
+                        else
+                        {
+                            Log.warning("Fetch request returned zero projects.")
+                        }
+                    }
+                    catch
+                    {
+                        Log.error("Failed to fetch projects")
+                    }
+                    router.routeByTargetPath(.UseCase)
                 }
-                
-                
             }
             .onOpenURL
             { url in
