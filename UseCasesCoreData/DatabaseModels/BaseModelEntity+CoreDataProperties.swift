@@ -25,6 +25,10 @@ extension BaseModelEntity {
     
     @NSManaged public var comments: NSSet?
     
+    var stringId: String
+    {
+        return String(id)
+    }
     
     var wrappedTitle: String
     {

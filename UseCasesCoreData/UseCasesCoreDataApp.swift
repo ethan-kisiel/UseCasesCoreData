@@ -144,7 +144,7 @@ struct UseCasesCoreDataApp: App
                     {
                         Log.error("Failed to fetch projects")
                     }
-                    router.routeByTargetPath(.UseCase)
+                    router.routeByTargetPath(.Step)
                 }
             }
             .onOpenURL
@@ -169,15 +169,22 @@ struct ModelGetter<Model: BaseModelEntity>
     func getModelById(_ modelId: String) -> Model?
     {
         let fetchRequest = Model.fetchRequest()
-
+        
         do
         {
-            let model = try moc.fetch(fetchRequest).first(where: { String($0.id) == modelId })
+            for m in try moc.fetch(fetchRequest)
+            {
+                Log.info("id for \(Model.description()): \(m.stringId), \(modelId) : \(modelId == m.stringId)")
+            }
+            
+            let model = try moc.fetch(fetchRequest)
+                .first(where: { $0.stringId == modelId })
+            
             return model as? Model
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Failed to retrieve model with id: \(modelId)")
         }
         return nil
     }

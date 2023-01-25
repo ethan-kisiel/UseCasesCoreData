@@ -68,23 +68,34 @@ class Router: ObservableObject
     {
         var components = URLComponents()
         // return the URL for the current targetPath
-        components.host = String(describing: targetPath["project"])
+
+        components.host = String(targetPath["project"]!)
         
         for index in 1...toObject.rawValue
         {
             switch index
             {
             case ObjectIndex.Category.rawValue:
-                components.path.append("/\(String(describing: targetPath["category"]))")
-                Log.info("AddedCategoryToPath")
+                if let category = targetPath["category"]
+                {
+                    components.path.append("/\(category)")
+                    Log.info("added category with id: \(category)")
+                }
+                
 
             case ObjectIndex.UseCase.rawValue:
-                components.path.append("/\(String(describing: targetPath["useCase"]))")
-                Log.info("AddedUseCaseToPath")
+                if let useCase = targetPath["useCase"]
+                {
+                    components.path.append("/\(useCase)")
+                    Log.info("added useCase with id: \(useCase)")
+                }
 
             case ObjectIndex.Step.rawValue:
-                components.path.append("/\(String(describing: targetPath["step"]))")
-                Log.info("AddedStepToPath")
+                if let step = targetPath["step"]
+                {
+                    components.path.append("/\(step)")
+                    Log.info("added step with id: \(step)")
+                }
             
             default:
                 Log.warning("Reached end of switch.")
@@ -141,15 +152,16 @@ class Router: ObservableObject
         // where option is one of the members of the Route Enum and object is the retrieved object
 
         let moc = PersistenceController.shared.container.viewContext
+        Log.info(url.absoluteString)
         
         if let project = ModelGetter<ProjectEntity>(moc: moc)
-            .getModelById(url.host!)
+            .getModelById(url.host(percentEncoded: true)!)
         {
             path.append(Route.project(project))
         }
         else
         {
-            Log.warning("Failed to route url Project")
+            Log.warning("Failed to route url Project: \(url.host!)")
             return
         }
         let pathCount = url.pathComponents.count
@@ -173,6 +185,7 @@ class Router: ObservableObject
                         Log.warning("Failed to route url Category")
                         return
                     }
+                    Log.info("Successfully routed to category")
                     path.append(Route.category(category))
 
                 // CASE: Route to UseCase
@@ -215,7 +228,7 @@ class Router: ObservableObject
         case is ProjectEntity.Type:
             targetPath["project"] = object.id
             let project = object as? ProjectEntity
-            if let category = project?.wrappedCategories[0]
+            if let category = project?.wrappedCategories.first
             {
                 populateDown(category)
             }
@@ -223,7 +236,7 @@ class Router: ObservableObject
         case is CategoryEntity.Type:
             targetPath["category"] = object.id
             let category = object as? CategoryEntity
-            if let useCase = category?.wrappedUseCases[0]
+            if let useCase = category?.wrappedUseCases.first
             {
                 populateDown(useCase)
             }
@@ -231,7 +244,7 @@ class Router: ObservableObject
         case is UseCaseEntity.Type:
             targetPath["useCase"] = object.id
             let useCase = object as? UseCaseEntity
-            if let step = useCase?.wrappedSteps[0]
+            if let step = useCase?.wrappedSteps.first
             {
                 populateDown(step)
             }
