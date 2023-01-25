@@ -144,7 +144,6 @@ struct UseCasesCoreDataApp: App
                     {
                         Log.error("Failed to fetch projects")
                     }
-                    router.routeByTargetPath(.Step)
                 }
             }
             .onOpenURL

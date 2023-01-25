@@ -141,6 +141,13 @@ struct UseCasesView: View {
             .searchable(text: $searchText)
             .toolbar
         {
+            // Navigation tabs
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                NavigationBottomBar()
+            }
+            
+            // Add button
             ToolbarItemGroup(placement: .navigationBarTrailing)
             {
                 HStack
@@ -154,11 +161,6 @@ struct UseCasesView: View {
                 }
             }
             
-            ToolbarItemGroup(placement: .bottomBar)
-            {
-                ReturnToButtons()
-                    .padding(.bottom)
-            }
         }
     }
     

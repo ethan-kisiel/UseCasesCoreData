@@ -161,6 +161,12 @@ struct ProjectsView: View
         .searchable(text: $searchText)
         .toolbar
         {
+            // Navigation tabs
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                NavigationBottomBar()
+            }
+            // Search bar
             ToolbarItemGroup(placement: .navigationBarTrailing)
             {
                 HStack

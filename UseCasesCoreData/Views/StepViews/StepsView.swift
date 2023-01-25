@@ -133,6 +133,13 @@ struct StepsView: View
             .searchable(text: $searchText)
             .toolbar
             {
+                // Navigation tabs
+                ToolbarItemGroup(placement: .bottomBar)
+                {
+                    NavigationBottomBar()
+                }
+                
+                // Add button
                 ToolbarItemGroup(placement: .navigationBarTrailing)
                 {
                     useCase.wrappedSteps.count > 0 ? EditButton() : nil
@@ -143,11 +150,6 @@ struct StepsView: View
                     }
                 }
                 
-                ToolbarItemGroup(placement: .bottomBar)
-                {
-                    ReturnToButtons()
-                        .padding(.bottom)
-                }
             }
     }
     

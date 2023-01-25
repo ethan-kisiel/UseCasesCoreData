@@ -43,6 +43,7 @@
 		88951CFB2916AD6A007081D3 /* StepDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951CFA2916AD6A007081D3 /* StepDetailsView.swift */; };
 		88951D1E291AFE80007081D3 /* TextBoxWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */; };
 		88951D20291C1620007081D3 /* ProjectFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88951D1F291C1620007081D3 /* ProjectFieldsView.swift */; };
+		88B027E32981815D008C5F31 /* NavigationBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B027E22981815D008C5F31 /* NavigationBottomBar.swift */; };
 		88B089122964AE78007A1912 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B089112964AE78007A1912 /* Launch Screen.storyboard */; };
 		88B089152965DE18007A1912 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B089142965DE18007A1912 /* Log.swift */; };
 		88B08918296884A4007A1912 /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B08917296884A4007A1912 /* CommentCellView.swift */; };
@@ -113,6 +114,7 @@
 		88951D1D291AFE80007081D3 /* TextBoxWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxWithFocus.swift; sourceTree = "<group>"; };
 		88951D1F291C1620007081D3 /* ProjectFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFieldsView.swift; sourceTree = "<group>"; };
 		889794532926DC3E0026A196 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88B027E22981815D008C5F31 /* NavigationBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBottomBar.swift; sourceTree = "<group>"; };
 		88B089112964AE78007A1912 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		88B089142965DE18007A1912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		88B08917296884A4007A1912 /* CommentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		883F44B82912C1D100284B2F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88B027E12981813C008C5F31 /* NavigationBottomBar */,
 				88B0891629688048007A1912 /* CommentViews */,
 				883F44D12912D3A100284B2F /* ProjectViews */,
 				883F44D22912D3DB00284B2F /* CategoryViews */,
@@ -280,6 +283,14 @@
 				88EAB2CA294CF4B0008F72FF /* View+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		88B027E12981813C008C5F31 /* NavigationBottomBar */ = {
+			isa = PBXGroup;
+			children = (
+				88B027E22981815D008C5F31 /* NavigationBottomBar.swift */,
+			);
+			path = NavigationBottomBar;
 			sourceTree = "<group>";
 		};
 		88B089132965DE05007A1912 /* Logs */ = {
@@ -405,6 +416,7 @@
 				883F44B42912B76C00284B2F /* Category+CoreDataClass.swift in Sources */,
 				883F44B62912B76C00284B2F /* Project+CoreDataClass.swift in Sources */,
 				88951CF72915DE79007081D3 /* Constants.swift in Sources */,
+				88B027E32981815D008C5F31 /* NavigationBottomBar.swift in Sources */,
 				88D251FC293FC4C50045828D /* ReturnToButtons.swift in Sources */,
 				88B0892C296DDA79007A1912 /* CommentEntity+CoreDataProperties.swift in Sources */,
 				8837409A292557A800492A07 /* NeumorphicButton.swift in Sources */,

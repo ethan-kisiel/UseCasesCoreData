@@ -71,38 +71,36 @@ class Router: ObservableObject
 
         components.host = String(targetPath["project"]!)
         
-        for index in 1...toObject.rawValue
+        for index in 0...toObject.rawValue
         {
             switch index
             {
             case ObjectIndex.Category.rawValue:
+                //components.host = String(targetPath["project"]!)
+                continue
+
+            case ObjectIndex.UseCase.rawValue:
                 if let category = targetPath["category"]
                 {
                     components.path.append("/\(category)")
                     Log.info("added category with id: \(category)")
                 }
-                
 
-            case ObjectIndex.UseCase.rawValue:
+            case ObjectIndex.Step.rawValue:
                 if let useCase = targetPath["useCase"]
                 {
                     components.path.append("/\(useCase)")
                     Log.info("added useCase with id: \(useCase)")
                 }
-
-            case ObjectIndex.Step.rawValue:
-                if let step = targetPath["step"]
-                {
-                    components.path.append("/\(step)")
-                    Log.info("added step with id: \(step)")
-                }
             
             default:
                 Log.warning("Reached end of switch.")
+                self.reset()
             }
         }
         
-        if let url = components.url
+        if let url = components.url,
+           toObject != .Project
         {
             self.routeByUrl(url)
         }
