@@ -18,28 +18,28 @@ struct NavigationBottomBar: View
             HStack
             {
                 // Project icon
-                Image(systemName: "p.circle")
+                Image(systemName: "p.square")
                     .onTapGesture
                     {
                         router.routeByTargetPath(.Project)
                     }
                 
                 // Category icon
-                Image(systemName: "c.circle")
+                Image(systemName: "c.square")
                     .onTapGesture
                     {
                         router.routeByTargetPath(.Category)
                     }
                 
                 // Use Case icon
-                Image(systemName: "u.circle")
+                Image(systemName: "u.square")
                     .onTapGesture
                     {
                         router.routeByTargetPath(.UseCase)
                     }
                 
                 // Step icon
-                Image(systemName: "s.circle")
+                Image(systemName: "s.square")
                     .onTapGesture
                     {
                         router.routeByTargetPath(.Step)

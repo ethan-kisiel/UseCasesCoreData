@@ -5,23 +5,24 @@
 //  Created by Ethan Kisiel on 11/2/22.
 //
 
-import CoreData
 import CloudKit
+import CoreData
 
-struct PersistenceController {
+struct PersistenceController
+{
     static let shared = PersistenceController()
-    
+
     let container: NSPersistentCloudKitContainer
 
-    init() {
+    init()
+    {
         container = NSPersistentCloudKitContainer(name: "UseCasesCoreData")
-        
+
         container.loadPersistentStores
-        { storeDescription, error in
+        { _, error in
             if let error = error as NSError?
             {
-                print("ERROR LOADING PERSISTENT STORES")
-                print(error)
+                Log.error("Error loading persistent stores: \(error)")
             }
         }
         container.viewContext
@@ -29,5 +30,11 @@ struct PersistenceController {
 
         container.viewContext
             .mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    }
+    
+    // easy access to the managed object context
+    var moc: NSManagedObjectContext
+    {
+        container.viewContext
     }
 }

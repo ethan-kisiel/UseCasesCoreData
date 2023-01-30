@@ -33,9 +33,9 @@ class Router: ObservableObject
     // id's of the object each key represents. Initialize to -1
     // to make sure it initializes as "empty"
     
-    private var targetPath: [String: Int64] =
-    ["project" : -1, "category" : -1,
-     "useCase" : -1, "step" : -1]
+    private var targetPath: [String: BaseModelEntity?] =
+    ["project" : nil, "category" : nil,
+     "useCase" : nil, "step" : nil]
     
     // initialize target path to use the first item in every
     // category
@@ -66,47 +66,59 @@ class Router: ObservableObject
     // easier to read/understand
     public func routeByTargetPath(_ toObject: ObjectIndex)
     {
-        var components = URLComponents()
-        // return the URL for the current targetPath
-
-        components.host = String(targetPath["project"]!)
+        // First this function will reset the current path.
+        // This function will loop through to the index of
+        // the value of the given enum case.
+        // it will set each element at the current index to
+        // the corresponding object within the targetPath
         
-        for index in 0...toObject.rawValue
+        reset()
+        
+        for i in 0...toObject.rawValue
         {
-            switch index
+            switch i
             {
-            case ObjectIndex.Category.rawValue:
-                //components.host = String(targetPath["project"]!)
-                continue
 
+            // if the user wants to navigate to the
+            // Category tab, display the current
+            // project's categories
+            case ObjectIndex.Category.rawValue:
+                if let project = targetPath["project"]
+                    as? ProjectEntity
+                {
+                    path.append(Route.project(project))
+                    Log.info("Added Project: \(project) to path.")
+                }
+                
+            // if the user wants to navigate to the
+            // Use Case tab, display the current category's
+            // use cases
             case ObjectIndex.UseCase.rawValue:
                 if let category = targetPath["category"]
+                    as? CategoryEntity
                 {
-                    components.path.append("/\(category)")
-                    Log.info("added category with id: \(category)")
+                    path.append(Route.category(category))
+                    Log.info("Added Category: \(category) to path.")
                 }
-
+                
+            // if the user wants to navigate to the
+            // Step tab, display the current
+            // use case's steps
             case ObjectIndex.Step.rawValue:
                 if let useCase = targetPath["useCase"]
+                    as? UseCaseEntity
                 {
-                    components.path.append("/\(useCase)")
-                    Log.info("added useCase with id: \(useCase)")
+                    path.append(Route.useCase(useCase))
+                    Log.info("Added UseCase: \(useCase) to path.")
                 }
-            
+                
+            // if something goes wrong in the switch, or
+            // the user wants to navigate to the Project tab,
+            // return, since the path has already been reset
+            // at the beginning of this function
             default:
-                Log.warning("Reached end of switch.")
-                self.reset()
+                Log.warning("Reached end of switch statement")
             }
-        }
-        
-        if let url = components.url,
-           toObject != .Project
-        {
-            self.routeByUrl(url)
-        }
-        else
-        {
-            Log.warning("Failed to produce valid url.")
         }
     }
     
@@ -224,37 +236,45 @@ class Router: ObservableObject
         switch type(of: object)
         {
         case is ProjectEntity.Type:
-            targetPath["project"] = object.id
+            
             let project = object as? ProjectEntity
+
+            targetPath["project"] = project
+            
             if let category = project?.wrappedCategories.first
             {
                 populateDown(category)
             }
 
         case is CategoryEntity.Type:
-            targetPath["category"] = object.id
             let category = object as? CategoryEntity
+
+            targetPath["category"] = category
+        
             if let useCase = category?.wrappedUseCases.first
             {
                 populateDown(useCase)
             }
 
         case is UseCaseEntity.Type:
-            targetPath["useCase"] = object.id
             let useCase = object as? UseCaseEntity
+            
+            targetPath["useCase"] = useCase
+
             if let step = useCase?.wrappedSteps.first
             {
                 populateDown(step)
             }
         case is StepEntity.Type:
             // exit case for recursion
-            targetPath["step"] = object.id
+            let step = object as? StepEntity
+            targetPath["step"] = step
 
         default:
             Log.warning("Reached end of Switch.")
         }
     }
-    
+
     private func populateUp<Model: BaseModelEntity>
     (_ object: Model)
     {
@@ -262,32 +282,36 @@ class Router: ObservableObject
         {
         case is ProjectEntity.Type:
             // Base case, end of recursion
-            targetPath["project"] = object.id
+            targetPath["project"] = object as? ProjectEntity
 
         case is CategoryEntity.Type:
-            targetPath["category"] = object.id
             let category = object as? CategoryEntity
+            
+            targetPath["category"] = category
+            
             if let project = category?.project
             {
                 populateUp(project)
             }
 
         case is UseCaseEntity.Type:
-            targetPath["useCase"] = object.id
             let useCase = object as? UseCaseEntity
+            
+            targetPath["useCase"] = useCase
             if let category = useCase?.category
             {
                 populateUp(category)
             }
 
         case is StepEntity.Type:
-            targetPath["step"] = object.id
             let step = object as? StepEntity
+            
+            targetPath["step"] = step
+            
             if let useCase = step?.useCase
             {
                 populateUp(useCase)
             }
-            
 
         default:
             Log.warning("Reached end of Switch.")
