@@ -15,9 +15,13 @@ struct ProjectCellView: View
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ProjectEntity.title, ascending: true)], animation: .default)
     private var projects: FetchedResults<ProjectEntity>
     
-    @State var trashIsEnabled: Bool = false
     let project: ProjectEntity
     
+    var isSelectedPath: Bool
+    {
+        project.id == (Router.shared.targetPath["project"] as? ProjectEntity)?.id
+    }
+
     var body: some View
     {
         NavigationLink(value: Route.project(project))
@@ -26,6 +30,17 @@ struct ProjectCellView: View
             {
                 HStack
                 {
+
+                    Image(systemName: isSelectedPath ? "star.fill" : "star")
+                        .foregroundColor(isSelectedPath ? .yellow : .accentColor)
+                        .onTapGesture
+                        {
+                            if !isSelectedPath
+                            {
+                                Router.shared.updateTargetPath(project)
+                            }
+                        }
+                    
                     // Constants.TRASH_ICON: String
                     // Tap-hold gesture enables trashIsEnabled boolean
                     // when trashIsEnabled is true, a tap gesture on the Image
@@ -33,7 +48,6 @@ struct ProjectCellView: View
                     
                     Text(project.wrappedTitle)
                         .bold()
-
                 }
                 HStack
                 {

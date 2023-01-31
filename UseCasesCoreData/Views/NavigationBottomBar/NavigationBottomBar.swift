@@ -17,33 +17,63 @@ struct NavigationBottomBar: View
         {
             HStack
             {
+                
+                let isProjectValid = Router.shared
+                    .isTargetObjectValid(.Project)
                 // Project icon
                 Image(systemName: "p.square")
                     .onTapGesture
                     {
+                        
                         router.routeByTargetPath(.Project)
                     }
+                    .padding([.leading, .trailing], 8)
                 
+                
+                let isCategoryValid = Router.shared
+                    .isTargetObjectValid(.Category)
                 // Category icon
                 Image(systemName: "c.square")
                     .onTapGesture
                     {
-                        router.routeByTargetPath(.Category)
+                        if isProjectValid
+                        {
+                            router.routeByTargetPath(.Category)
+                        }
                     }
+                    .padding([.leading, .trailing], 8)
+                    .foregroundColor(isProjectValid ? .black : .gray)
                 
+                
+                let isUseCaseValid = Router.shared
+                    .isTargetObjectValid(.UseCase)
                 // Use Case icon
                 Image(systemName: "u.square")
                     .onTapGesture
                     {
-                        router.routeByTargetPath(.UseCase)
+                        if isCategoryValid
+                        {
+                            router.routeByTargetPath(.UseCase)
+                        }
                     }
+                    .padding([.leading, .trailing], 8)
+                    .foregroundColor(isCategoryValid ? .black : .gray)
                 
+                
+                
+                let isStepValid = Router.shared
+                    .isTargetObjectValid(.Step)
                 // Step icon
                 Image(systemName: "s.square")
                     .onTapGesture
                     {
-                        router.routeByTargetPath(.Step)
+                        if isUseCaseValid
+                        {
+                            router.routeByTargetPath(.Step)
+                        }
                     }
+                    .padding([.leading, .trailing], 8)
+                    .foregroundColor(isUseCaseValid ? .black : .gray)
             }
         }
     }

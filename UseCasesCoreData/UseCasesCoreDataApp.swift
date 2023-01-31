@@ -37,7 +37,7 @@ struct UseCasesCoreDataApp: App
     // hack for getting permission when app loads
     @State private var hasLoaded = false
     
-    @StateObject var router: Router = Router()
+    @StateObject var router: Router = Router.shared
     
     let persistenceController = PersistenceController.shared
     

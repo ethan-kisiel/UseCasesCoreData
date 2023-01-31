@@ -26,6 +26,7 @@ class Router: ObservableObject
     // the path is stored as an array rather than
     // a NavigationPath object, which allows for a
     // wider range of modification functions.
+    static var shared = Router()
     
     @Published var path: [Route] = []
     
@@ -33,7 +34,7 @@ class Router: ObservableObject
     // id's of the object each key represents. Initialize to -1
     // to make sure it initializes as "empty"
     
-    private var targetPath: [String: BaseModelEntity?] =
+    @Published var targetPath: [String: BaseModelEntity?] =
     ["project" : nil, "category" : nil,
      "useCase" : nil, "step" : nil]
     
@@ -122,6 +123,27 @@ class Router: ObservableObject
         }
     }
     
+    // This function takes an enum value for each item and
+    // returns a boolean which represents whether or not the
+    // object specified is valid in the targetPath
+    public func isTargetObjectValid
+    (_ objectIndex: ObjectIndex) -> Bool
+    {
+        switch objectIndex
+        {
+        case .Project:
+            return targetPath["project"] != nil && targetPath["project"]??.managedObjectContext != nil
+            
+        case .Category:
+            return targetPath["category"] != nil && targetPath["category"]??.managedObjectContext != nil
+            
+        case .UseCase:
+            return targetPath["useCase"] != nil && targetPath["useCase"]??.managedObjectContext != nil
+            
+        case .Step:
+            return targetPath["step"] != nil && targetPath["step"]??.managedObjectContext != nil
+        }
+    }
     
     func lastPage()
     {
@@ -245,6 +267,10 @@ class Router: ObservableObject
             {
                 populateDown(category)
             }
+            else
+            {
+                targetPath["category"] = nil
+            }
 
         case is CategoryEntity.Type:
             let category = object as? CategoryEntity
@@ -254,6 +280,10 @@ class Router: ObservableObject
             if let useCase = category?.wrappedUseCases.first
             {
                 populateDown(useCase)
+            }
+            else
+            {
+                targetPath["useCase"] = nil
             }
 
         case is UseCaseEntity.Type:
@@ -265,6 +295,11 @@ class Router: ObservableObject
             {
                 populateDown(step)
             }
+            else
+            {
+                targetPath["step"] = nil
+            }
+            
         case is StepEntity.Type:
             // exit case for recursion
             let step = object as? StepEntity
@@ -293,6 +328,10 @@ class Router: ObservableObject
             {
                 populateUp(project)
             }
+            else
+            {
+                targetPath["project"] = nil
+            }
 
         case is UseCaseEntity.Type:
             let useCase = object as? UseCaseEntity
@@ -301,6 +340,10 @@ class Router: ObservableObject
             if let category = useCase?.category
             {
                 populateUp(category)
+            }
+            else
+            {
+                targetPath["category"] = nil
             }
 
         case is StepEntity.Type:
@@ -311,6 +354,10 @@ class Router: ObservableObject
             if let useCase = step?.useCase
             {
                 populateUp(useCase)
+            }
+            else
+            {
+                targetPath["useCase"] = nil
             }
 
         default:
