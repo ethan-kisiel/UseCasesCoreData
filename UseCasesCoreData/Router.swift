@@ -38,6 +38,13 @@ class Router: ObservableObject
     ["project" : nil, "category" : nil,
      "useCase" : nil, "step" : nil]
     
+    private func resetTargetPath()
+    {
+        targetPath["project"] = nil
+        targetPath["category"] = nil
+        targetPath["useCase"] = nil
+        targetPath["step"] = nil
+    }
     // initialize target path to use the first item in every
     // category
     /*
@@ -57,6 +64,7 @@ class Router: ObservableObject
     
     public func updateTargetPath(_ object: BaseModelEntity)
     {
+        resetTargetPath()
         populateUp(object)
         populateDown(object)
     }
@@ -267,10 +275,6 @@ class Router: ObservableObject
             {
                 populateDown(category)
             }
-            else
-            {
-                targetPath["category"] = nil
-            }
 
         case is CategoryEntity.Type:
             let category = object as? CategoryEntity
@@ -281,10 +285,6 @@ class Router: ObservableObject
             {
                 populateDown(useCase)
             }
-            else
-            {
-                targetPath["useCase"] = nil
-            }
 
         case is UseCaseEntity.Type:
             let useCase = object as? UseCaseEntity
@@ -294,10 +294,6 @@ class Router: ObservableObject
             if let step = useCase?.wrappedSteps.first
             {
                 populateDown(step)
-            }
-            else
-            {
-                targetPath["step"] = nil
             }
             
         case is StepEntity.Type:
@@ -328,10 +324,6 @@ class Router: ObservableObject
             {
                 populateUp(project)
             }
-            else
-            {
-                targetPath["project"] = nil
-            }
 
         case is UseCaseEntity.Type:
             let useCase = object as? UseCaseEntity
@@ -340,10 +332,6 @@ class Router: ObservableObject
             if let category = useCase?.category
             {
                 populateUp(category)
-            }
-            else
-            {
-                targetPath["category"] = nil
             }
 
         case is StepEntity.Type:
@@ -354,10 +342,6 @@ class Router: ObservableObject
             if let useCase = step?.useCase
             {
                 populateUp(useCase)
-            }
-            else
-            {
-                targetPath["useCase"] = nil
             }
 
         default:

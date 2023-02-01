@@ -117,7 +117,6 @@ struct CategoriesView: View
                                 Button(ALERT_DEL)
                                 {
                                     isDeletePresented = true
-                                    print("DELETED")
                                 }
                             }.tint(.red)
                             .alert(isPresented: $isDeletePresented)

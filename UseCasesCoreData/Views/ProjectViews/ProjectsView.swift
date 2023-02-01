@@ -33,7 +33,7 @@ struct ProjectsView: View
     
     @State var sortKey: SortType = .title
     
-    private var filteredCategories: [ProjectEntity]
+    private var filteredProjects: [ProjectEntity]
     {
         // This is for sorting listed Projects
         let sortedProjects = projects.sorted
@@ -44,6 +44,18 @@ struct ProjectsView: View
                 return $0.wrappedTitle < $1.wrappedTitle
             case .lastUpdated:
                 return $0.wrappedDate > $1.wrappedDate
+            }
+        }
+        
+        // Checks whether there is only one item in the list
+        // in which case, that item should now be a part of the
+        // target path.
+        // MARK: This should probably be moved in future.
+        if sortedProjects.count == 1
+        {
+            if !Router.shared.isTargetObjectValid(.Project)
+            {
+                Router.shared.updateTargetPath(sortedProjects[0])
             }
         }
         
@@ -83,7 +95,7 @@ struct ProjectsView: View
             
             Spacer()
     
-            if filteredCategories.isEmpty
+            if filteredProjects.isEmpty
             {
                 Text("No projects to display.")
                     .foregroundColor(.secondary)
@@ -96,7 +108,7 @@ struct ProjectsView: View
                 List
                 {
                     // sort by category
-                    ForEach(filteredCategories, id: \.id)
+                    ForEach(filteredProjects, id: \.id)
                     {
                         project in
                         ProjectCellView(project: project)

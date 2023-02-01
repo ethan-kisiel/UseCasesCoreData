@@ -28,6 +28,7 @@ struct NavigationBottomBar: View
                         router.routeByTargetPath(.Project)
                     }
                     .padding([.leading, .trailing], 8)
+                    .foregroundColor(NM_SEC)
                 
                 
                 let isCategoryValid = Router.shared
@@ -42,7 +43,8 @@ struct NavigationBottomBar: View
                         }
                     }
                     .padding([.leading, .trailing], 8)
-                    .foregroundColor(isProjectValid ? .black : .gray)
+                    .foregroundColor(NM_SEC)
+                    .opacity(isProjectValid ? 1 : 0.5)
                 
                 
                 let isUseCaseValid = Router.shared
@@ -57,7 +59,8 @@ struct NavigationBottomBar: View
                         }
                     }
                     .padding([.leading, .trailing], 8)
-                    .foregroundColor(isCategoryValid ? .black : .gray)
+                    .foregroundColor(NM_SEC)
+                    .opacity(isCategoryValid ? 1 : 0.5)
                 
                 
                 
@@ -73,7 +76,8 @@ struct NavigationBottomBar: View
                         }
                     }
                     .padding([.leading, .trailing], 8)
-                    .foregroundColor(isUseCaseValid ? .black : .gray)
+                    .foregroundColor(NM_SEC)
+                    .opacity(isUseCaseValid ? 1 : 0.5)
             }
         }
     }
