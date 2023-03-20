@@ -22,6 +22,9 @@ struct ProjectDetailsView: View
         }
     }
     
+    @FocusState var isCommentBoxFocused: Bool
+    @State var areCommentsExpanded: Bool = false
+    
     var body: some View
     {
         VStack(alignment: .leading)
@@ -42,7 +45,8 @@ struct ProjectDetailsView: View
                     Text(project.wrappedTitle)
                         .bold()
                 }
-                .padding()
+                .padding(.leading)
+                .padding(.bottom, 5)
                 .font(.title)
                 .foregroundColor(NM_SEC)
                 
@@ -53,7 +57,7 @@ struct ProjectDetailsView: View
                         .bold()
                 }
                 .font(.headline)
-                .padding([.leading, .top])
+                .padding(.leading)
                 .foregroundColor(NM_SEC)
                 
                 if let userName = UserInfoUtil.shared.getUserFullName()
@@ -65,7 +69,7 @@ struct ProjectDetailsView: View
                             .bold()
                     }
                     .font(.headline)
-                    .padding([.leading, .top])
+                    .padding(.leading)
                     .foregroundColor(NM_SEC)
                 }
                 
@@ -76,30 +80,55 @@ struct ProjectDetailsView: View
                         .bold()
                 }
                 .font(.headline)
-                .padding([.leading, .top])
+                .padding(.leading)
                 .foregroundColor(NM_SEC)
             }
             .padding()
 
-            Spacer()
-                
             HStack
             {
                 NeumorphicButton("Edit", buttonColor: .blue, fontColor: NM_MAIN)
                 {
-                    print("Edit Pressed")
+                    Log.info("Edit button pressed.")
                 }
                 
                 NeumorphicButton("Delete", buttonColor: .red, fontColor: NM_MAIN)
                 {
-                    print("Delete Pressed")
+                    Log.info("Delete button pressed.")
                 }
             }
             
             Spacer()
+            
+            NeumorphicButton("Add a comment...")
+            {
+                areCommentsExpanded = true
+                $isCommentBoxFocused.wrappedValue = true
+            }
+        }
+        .sheet(isPresented: $areCommentsExpanded)
+        {
+            NavigationView
+            {
+                ZStack
+                {
+                    NM_MAIN.edgesIgnoringSafeArea(.all)
+                    CommentsView(
+                        isExpanded: $areCommentsExpanded,
+                        parentObject: project,
+                        isFocused: $isCommentBoxFocused
+                    )
+                }
+            }
+            .presentationDetents([.medium])
         }
         .background(NM_MAIN)
         .navigationTitle("Project Details")
+        .onTapGesture
+        {
+            isCommentBoxFocused = false
+            areCommentsExpanded = false
+        }
     }
 }
 /*

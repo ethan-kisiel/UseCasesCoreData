@@ -13,7 +13,7 @@ extension ProjectEntity
 {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ProjectEntity>
     {
-        return NSFetchRequest<ProjectEntity>(entityName: "Project")
+        return NSFetchRequest<ProjectEntity>(entityName: "ProjectEntity")
     }
     
     @NSManaged public var categories: NSSet?

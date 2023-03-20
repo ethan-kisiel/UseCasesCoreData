@@ -29,13 +29,16 @@ class EntityIdUtil
         let fetchRequest = T.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \BaseModelEntity.id, ascending: false)]
         
+        Log.info("\(T)")
+        // Attempt to find an object of the type T
+        // if found, return that entity's id + 1
         do
         {
             let entities = try context.fetch(fetchRequest)
                 .filter { type(of: $0) == T }
-            if entities.count > 0
+            if entities.count > 1
             {
-                print(entities[0].id)
+                Log.info("Found entity with the id: \(entities[0].id)")
                 return entities[0].id + 1
             }
         }

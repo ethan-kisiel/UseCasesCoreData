@@ -33,11 +33,11 @@ class UserInfoUtil
                 if requestStatus == .granted
                 {
                     self?.hasPermission = true
-                    print("PERMISSION GRANTED")
+                    Log.info("iCloud permission request granted.")
                 }
                 else
                 {
-                    print("PERMISSION DENIED")
+                    Log.warning("iCloud permission request denied.")
                 }
             }
         }
@@ -63,6 +63,10 @@ class UserInfoUtil
                 if let identity = requestIdentity
                 {
                     self?.userIdentity = identity
+                }
+                else
+                {
+                    Log.warning("Failed to discover iCloud user")
                 }
             }
         }
@@ -94,10 +98,9 @@ class UserInfoUtil
 
         if let userName = userIdentity?.nameComponents?.givenName
         {
-            print(userName)
             return userName
         }
-        print("COULDN'T GET USER NAME")
+        Log.warning("Failed to retrieve user name.")
         return nil
     }
     

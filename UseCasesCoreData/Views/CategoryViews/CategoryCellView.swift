@@ -15,7 +15,12 @@ struct CategoryCellView: View {
     private var categories: FetchedResults<CategoryEntity>
     
     let category: CategoryEntity
-    @State var trashIsEnabled: Bool = false
+    
+    var isSelectedPath: Bool
+    {
+        return category.id == (Router.shared.targetPath["category"] as? CategoryEntity)?.id
+    }
+    
     var body: some View
     {
         NavigationLink(value: Route.category(category))
@@ -24,6 +29,17 @@ struct CategoryCellView: View {
             {
                 HStack(alignment: .center)
                 {
+                    Image(systemName: isSelectedPath ? "star.fill" : "star")
+                        .foregroundColor(isSelectedPath ? .yellow : .accentColor)
+                        .onTapGesture
+                        {
+                            if !isSelectedPath
+                            {
+                                Router.shared.updateTargetPath(category)
+                            }
+                        }
+                    
+
                     Text(category.wrappedTitle)
                         .bold()
                     

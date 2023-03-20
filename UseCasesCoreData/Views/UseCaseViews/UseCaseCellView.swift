@@ -14,6 +14,11 @@ struct UseCaseCellView: View
     
     let useCase: UseCaseEntity
     
+    var isSelectedPath: Bool
+    {
+        return useCase.id == (Router.shared.targetPath["useCase"] as? UseCaseEntity)?.id
+    }
+    
     var body: some View
     {
         NavigationLink(value: Route.useCase(useCase))
@@ -22,6 +27,17 @@ struct UseCaseCellView: View
             {
                 HStack
                 {
+                    // Target path selector
+                    Image(systemName: isSelectedPath ? "star.fill" : "star")
+                        .foregroundColor(isSelectedPath ? .yellow : .accentColor)
+                        .onTapGesture
+                        {
+                            if !isSelectedPath
+                            {
+                                Router.shared.updateTargetPath(useCase)
+                            }
+                        }
+                    
                     Text(useCase.wrappedTitle)
                         .bold()
                 }

@@ -117,7 +117,6 @@ struct CategoriesView: View
                                 Button(ALERT_DEL)
                                 {
                                     isDeletePresented = true
-                                    print("DELETED")
                                 }
                             }.tint(.red)
                             .alert(isPresented: $isDeletePresented)
@@ -156,6 +155,13 @@ struct CategoriesView: View
         .searchable(text: $searchText)
         .toolbar
         {
+            // Navigation tabs
+            ToolbarItemGroup(placement: .bottomBar)
+            {
+                NavigationBottomBar()
+            }
+            
+            // Add button
             ToolbarItemGroup(placement: .navigationBarTrailing)
             {
                 HStack
@@ -169,14 +175,6 @@ struct CategoriesView: View
                 }
             }
             
-            ToolbarItemGroup(placement: .bottomBar)
-            {
-                NeumorphicButton("Return to Projects")
-                {
-                    router.reset()
-                }
-                .padding(.bottom)
-            }
         }
     }
     

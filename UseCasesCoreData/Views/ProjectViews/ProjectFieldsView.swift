@@ -139,7 +139,7 @@ struct ProjectFieldsView: View
             }
             catch
             {
-                print(error.localizedDescription)
+                Log.error("Failed to save managed object context.")
             }
         }
     }
@@ -156,7 +156,7 @@ struct ProjectFieldsView: View
         }
         catch
         {
-            print(error.localizedDescription)
+            Log.error("Failed to save managed object context.")
         }
     }
 }

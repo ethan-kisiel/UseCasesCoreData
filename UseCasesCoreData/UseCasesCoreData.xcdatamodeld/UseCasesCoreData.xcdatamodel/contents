@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A5295i" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22D5027d" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="BaseModelEntity" representedClassName="BaseModelEntity" syncable="YES">
         <attribute name="createdBy" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -7,12 +7,17 @@
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CommentEntity" inverseName="owningEntity" inverseEntity="CommentEntity"/>
     </entity>
     <entity name="CategoryEntity" representedClassName="CategoryEntity" parentEntity="BaseModelEntity" syncable="YES">
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProjectEntity" inverseName="categories" inverseEntity="ProjectEntity"/>
         <relationship name="useCases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UseCaseEntity" inverseName="category" inverseEntity="UseCaseEntity"/>
     </entity>
-    <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class"/>
+    <entity name="CommentEntity" representedClassName="CommentEntity" syncable="YES">
+        <attribute name="commentText" optional="YES" attributeType="String"/>
+        <attribute name="createdBy" optional="YES" attributeType="String"/>
+        <relationship name="owningEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BaseModelEntity" inverseName="comments" inverseEntity="BaseModelEntity"/>
+    </entity>
     <entity name="ProjectEntity" representedClassName="ProjectEntity" parentEntity="BaseModelEntity" syncable="YES">
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryEntity" inverseName="project" inverseEntity="CategoryEntity"/>
     </entity>
